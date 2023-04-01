@@ -2,21 +2,6 @@
 
 \startcomponent .
     \startuseMPgraphic{комплексный чертёж точки}
-    input mparrows;
-
-    u := 1mm;
-
-    base_line_thickness := .5u;  % толщина основной линии
-    thin_line_thickness := base_line_thickness / 2;  % толщина тонкой линии
-
-    % точка-кружочек
-    path point_circ;
-    point_circ := fullcircle scaled u;
-
-    ahangle := 20;  % угол раствора стрелки
-    ahlength := 10 * thin_line_thickness;  % длина стрелки
-    setarrows(open);
-
     % ширина -- единственный задаваемый параметр для данной картинки
     fig_width := 60u;  % ширина картинки
 
