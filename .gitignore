@@ -6,6 +6,5 @@
 .vscode
 
 !*.mkiv
-!*.pdf
 !*.mp
 !.gitignore

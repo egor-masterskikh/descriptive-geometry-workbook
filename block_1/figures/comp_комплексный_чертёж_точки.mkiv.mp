@@ -1,0 +1,113 @@
+\environment[env.mkiv]
+
+\startcomponent .
+    \startuseMPgraphic{комплексный чертёж точки}
+    input mparrows;
+
+    u := 1mm;
+
+    base_line_thickness := .5u;  % толщина основной линии
+    thin_line_thickness := base_line_thickness / 2;  % толщина тонкой линии
+
+    % точка-кружочек
+    path point_circ;
+    point_circ := fullcircle scaled u;
+
+    ahangle := 20;  % угол раствора стрелки
+    ahlength := 10 * thin_line_thickness;  % длина стрелки
+    setarrows(open);
+
+    % ширина -- единственный задаваемый параметр для данной картинки
+    fig_width := 60u;  % ширина картинки
+
+    fig_height := 1.1 * fig_width;  % высота картинки
+
+    x_max := .618 * fig_width;    % длина оси X
+    y3_max := fig_width - x_max;  % длина оси Y3
+
+    z_max := .618 * fig_height;    % длина оси Z
+    y1_max := fig_height - z_max;  % длина оси Y1
+
+    pair O, X, Z, Y[];
+
+    O := (0, 0);
+    X := (-x_max, 0);
+    Z := (0, z_max);
+    Y1 := (0, -y1_max);
+    Y3 := (y3_max, 0);
+
+    path hor_axis, vert_axis, k;
+
+    hor_axis := X--Y3;
+    vert_axis := Y1--Z;
+    k := O--(y3_max, -y3_max);  % постоянная прямая чертежа
+
+    pair A[];
+
+    A.x := .7 * x_max;
+    A.y := .6 * y3_max;
+    A.z := .7 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+    A3 := (A.y, A.z);
+
+    A12 = whatever[A1, A2] = whatever[O, X];
+    A23 = whatever[A2, A3] = whatever[O, Z];
+
+    % точка пересечения прямой, проходящей через A1 горизонтально, и постоянной прямой чертежа
+    A13 = whatever[O, (y3_max, -y3_max)];
+    (A13 - A1) dotprod (Y1 - O) = 0;
+
+    A131 = whatever[A1, A13] = whatever[O, Y1];  % точка пересечения прямой A1--A13 и оси OY1
+    A133 = whatever[A3, A13] = whatever[O, Y3];  % точка пересечения прямой A13--A3 и оси OY3
+
+
+    pickup pencircle scaled thin_line_thickness;
+
+    drawdblarrow hor_axis;
+    label.top(btex $X_{12}$ etex, X);
+    label.top(btex $Y_3$ etex, Y3);
+    drawdblarrow vert_axis;
+    label.rt(btex $Y_1$ etex, Y1);
+    label.rt(btex $Z_{23}$ etex, Z);
+    draw k;
+    label.bot(btex $k_0$ etex, (y3_max, -y3_max));
+    label.ulft("0", O);
+
+    draw A1--A2;
+    draw A1--A13;
+    draw A13--A3;
+    draw A2--A3;
+
+    for point_pos=A1, A2, A3, A12, A23:
+        fill point_circ shifted point_pos withcolor white;
+        draw point_circ shifted point_pos;
+    endfor
+
+    label.bot(btex $A_1$ etex, A1);
+    label.top(btex $A_2$ etex, A2);
+    label.top(btex $A_3$ etex, A3);
+    label.urt(btex $A_{12}$ etex, A12);
+    label.ulft(btex $A_{23}$ etex, A23);
+
+    label.top(btex $X_A$ etex, .45[A2, A23]);
+    label.top(btex $X_A$ etex, .55[A12, O]);
+    label.top(btex $X_A$ etex, .45[A1, A131]);
+
+    label.lft(btex $Z_A$ etex rotated 90, .55[A12, A2]);
+    label.lft(btex $Z_A$ etex rotated 90, .55[O, A23]);
+    label.lft(btex $Z_A$ etex rotated 90, .55[A133, A3]);
+
+    label.lft(btex $Y_A$ etex rotated 90, .55[A1, A12]);
+    label.lft(btex $Y_A$ etex rotated 90, .55[A131, O]);
+    label.lft(btex $Y_A$ etex rotated 90, .7[A13, A133]);
+    label.top(btex $Y_A$ etex, .45[A23, A3]);
+    label.top(btex $Y_A$ etex, .45[O, A133]);
+    label.top(btex $Y_A$ etex, .4[A131, A13]);
+    \stopuseMPgraphic
+
+    \starttext
+        \useMPgraphic{комплексный чертёж точки}
+    \stoptext
+\stopcomponent
