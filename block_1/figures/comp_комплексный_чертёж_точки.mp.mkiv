@@ -1,5 +1,3 @@
-\environment[env.mkiv]
-
 \startcomponent .
     \startuseMPgraphic{комплексный чертёж точки}
     % ширина -- единственный задаваемый параметр для данной картинки
@@ -58,7 +56,7 @@
     label.rt(btex $Z_{23}$ etex, Z);
     draw k;
     label.bot(btex $k_0$ etex, (y3_max, -y3_max));
-    label.ulft("0", O);
+    label.ulft(btex 0 etex, O);
 
     draw A1--A2;
     draw A1--A13;
@@ -91,8 +89,4 @@
     label.top(btex $Y_A$ etex, .45[O, A133]);
     label.top(btex $Y_A$ etex, .4[A131, A13]);
     \stopuseMPgraphic
-
-    \starttext
-        \useMPgraphic{комплексный чертёж точки}
-    \stoptext
 \stopcomponent

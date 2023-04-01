@@ -39,9 +39,23 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 
 \stopsubsection
 
-\placefigure[][fig:комплексный чертёж точки]{Комплексный чертёж точки}{
-    \component[figures/comp_комплексный_чертёж_точки.mp.mkiv]
-}
+\component[figures/comp_комплексный_чертёж_точки.mp.mkiv]
+\component[figures/comp_комплексный_чертёж_прямой.mp.mkiv]
+
+\startfloatcombination[nx=2, alternative=text, distance=0pt]
+    \startplacefigure[title={Комплексный чертёж точки}, reference={fig:комплексный чертёж точки}]
+        \switchtobodyfont[gost, 5mm]
+        \startframed[width=.5\textwidth, offset=none, frame=off]
+            \useMPgraphic{комплексный чертёж точки}
+        \stopframed
+    \stopplacefigure
+    \startplacefigure[title={Комплексный чертёж прямой}, reference={fig:комплексный чертёж прямой}]
+        \switchtobodyfont[gost, 5mm]
+        \startframed[width=.5\textwidth, offset=none, frame=off]
+            \useMPgraphic{комплексный чертёж прямой}
+        \stopframed
+    \stopplacefigure
+\stopfloatcombination
 
 \stopsection
 \stopchapter

@@ -1,0 +1,82 @@
+\startcomponent .
+    \startuseMPgraphic{комплексный чертёж прямой}
+    % ширина -- единственный задаваемый параметр для данной картинки
+    fig_width := 56u;  % ширина картинки
+
+    fig_height := 1.2 * fig_width;  % высота картинки
+
+    x_max := fig_width;    % длина оси X
+
+    z_max := .5 * fig_height;      % длина оси Z
+    y1_max := fig_height - z_max;  % длина оси Y1
+
+    pair O, X, Z, Y[];
+
+    O := (0, 0);
+    X := (-x_max, 0);
+    Z := (0, z_max);
+    Y1 := (0, -y1_max);
+
+    path hor_axis, vert_axis;
+
+    hor_axis := X--O;
+    vert_axis := Y1--Z;
+
+    pair A[], B[];
+
+    A.x := .2 * x_max;
+    A.y := .6 * y1_max;
+    A.z := .65 * z_max;
+
+    B.x := .7 * x_max;
+    B.y := .2 * y1_max;
+    B.z := .3 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    B1 := (-B.x, -B.y);
+    B2 := (-B.x, B.z);
+
+    A12 = whatever[A1, A2] = whatever[O, X];
+    B12 = whatever[B1, B2] = whatever[O, X];
+
+    path l[];
+    l1 := A1--B1;
+    l2 := A2--B2;
+
+
+    pickup pencircle scaled base_line_thickness;
+
+    % TODO: дорисовать отростки прямых
+    draw l1;
+    draw l2;
+
+    pickup pencircle scaled thin_line_thickness;
+
+    drawarrow reverse(hor_axis);
+    label.top(btex $X_{12}$ etex, X);
+    drawdblarrow vert_axis;
+    label.lft(btex $Y_1$ etex, Y1);
+    label.lft(btex $Z_2$ etex, Z);
+    label.rt(btex 0 etex, O);
+
+    draw A1--A2;
+    draw B1--B2;
+
+    for point_pos=A1, A2, A12, B1, B2, B12:
+        fill point_circ shifted point_pos withcolor white;
+        draw point_circ shifted point_pos;
+    endfor
+
+    label.bot(btex $A_1$ etex, A1);
+    label.top(btex $A_2$ etex, A2);
+    label.urt(btex $A_{12}$ etex, A12);
+    label.llft(btex $B_1$ etex, B1);
+    label.ulft(btex $B_2$ etex, B2);
+    label.urt(btex $B_{12}$ etex, B12);
+
+    label.top(btex $l_1$ etex, .5[A1, B1]);
+    label.ulft(btex $l_2$ etex, .5[A2, B2]);
+    \stopuseMPgraphic
+\stopcomponent
