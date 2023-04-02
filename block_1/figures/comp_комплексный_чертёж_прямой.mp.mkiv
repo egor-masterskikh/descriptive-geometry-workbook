@@ -42,13 +42,12 @@
     B12 = whatever[B1, B2] = whatever[O, X];
 
     path l[];
-    l1 := A1--B1;
-    l2 := A2--B2;
+    l1 := 1.2[A1, B1]--1.2[B1, A1];
+    l2 := 1.2[A2, B2]--1.2[B2, A2];
 
 
     pickup pencircle scaled base_line_thickness;
 
-    % TODO: дорисовать отростки прямых
     draw l1;
     draw l2;
 
