@@ -1,9 +1,9 @@
 \startcomponent .
     \startuseMPgraphic{комплексный чертёж точки}
     % ширина -- единственный задаваемый параметр для данной картинки
-    fig_width := 60u;  % ширина картинки
+    fig_width := \framedwidth;  % ширина картинки
 
-    fig_height := 1.1 * fig_width;  % высота картинки
+    fig_height := \framedheight;  % высота картинки
 
     x_max := .618 * fig_width;    % длина оси X
     y3_max := fig_width - x_max;  % длина оси Y3
