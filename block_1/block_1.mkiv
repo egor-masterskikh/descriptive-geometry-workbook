@@ -44,7 +44,11 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 \component[figures/комплексный_чертёж_точки.mp.mkiv]
 \component[figures/комплексный_чертёж_прямой.mp.mkiv]
 
-\startfloatcombination[nx=2, alternative=text, distance=0pt]
+\startfloatcombination[
+    nx=2,  % количество столбцов в комбинации
+    alternative=text,
+    distance=0pt  % горизонтальное расстояние между столбцами
+]
     \startplacefigure[title={Комплексный чертёж точки}, reference={fig:комплексный чертёж точки}]
         \switchtobodyfont[gost, 5mm]
         \startframed[width=.5\textwidth, height=.6\textwidth, offset=5mm, frame=off]
@@ -75,7 +79,9 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 
 \startsection[title={Контрольные вопросы}]
 
-\startitemize[n][inbetween={\blank[medium]}]
+\startitemize[n][
+    inbetween={\blank[medium]}
+]
     \item В чём состоит метод проецирования?
     \item Почему чертежи называются проекционными?
     \item Перечислите свойства ортогонального проецирования.
