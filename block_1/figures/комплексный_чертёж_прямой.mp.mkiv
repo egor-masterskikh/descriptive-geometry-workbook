@@ -1,12 +1,9 @@
 \startcomponent .
     \startuseMPgraphic{комплексный чертёж прямой}
-    % ширина -- единственный задаваемый параметр для данной картинки
-    fig_width := \framedwidth;  % ширина картинки
-
-    fig_height := \framedheight;  % высота картинки
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
 
     x_max := fig_width;    % длина оси X
-
     z_max := .5 * fig_height;      % длина оси Z
     y1_max := fig_height - z_max;  % длина оси Y1
 
@@ -68,8 +65,8 @@
         draw point_circ shifted point_pos;
     endfor
 
-    label.bot(btex $A_1$ etex, A1);
-    label.top(btex $A_2$ etex, A2);
+    label.llft(btex $A_1$ etex, A1);
+    label.ulft(btex $A_2$ etex, A2);
     label.urt(btex $A_{12}$ etex, A12);
     label.llft(btex $B_1$ etex, B1);
     label.ulft(btex $B_2$ etex, B2);

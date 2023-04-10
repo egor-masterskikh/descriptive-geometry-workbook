@@ -19,7 +19,7 @@ $\Pi_1$~--- горизонтальная, $\Pi_2$~--- фронтальная и 
 
 % TODO: добавить двухкартинный и трёхкартинный комплексные чертежи
 
-\startsubsection[title={Комплексный чертёж точки}]
+\startsubsubject[title={Комплексный чертёж точки}]
 
 Точку~$A$, расположенную в пространстве первого октанта, проецируем ортогонально на каждую из плоскостей проекций (\in{рис.}[fig:двухкартинный и трёхкартинный комплексные чертежи]):
 
@@ -31,39 +31,58 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 Они называются \italic{вертикальной и горизонтальной линиями связи}.
 Для графической трансляции координаты~$Y$ используют \italic{ломаную линию связи}, которая преломляется под прямым углом на \italic{постоянной прямой чертежа~$k_0$}, проведённой под углом 45$^\circ$ к оси~$Y$ (\in{рис.}[fig:комплексный чертёж точки]).
 
-\stopsubsection
+\stopsubsubject  % Комплексный чертёж точки
 
-\startsubsection[title={Комплексный чертёж прямой}]
+\startsubsubject[title={Комплексный чертёж прямой}]
 
 Прямая линия бесконечна.
 Две точки прямой определяют её положение в пространстве.
 Положение прямой можно задать также одной точкой и направлением (\in{рис.}[fig:комплексный чертёж прямой]).
 
-\stopsubsection
+\stopsubsubject  % Комплексный чертёж прямой
 
 \component[figures/комплексный_чертёж_точки.mp.mkiv]
 \component[figures/комплексный_чертёж_прямой.mp.mkiv]
 
+\newdimen\figureWidth
+\figureWidth=\dimexpr.5\textwidth-.5\columnSpacing\relax
+
 \startfloatcombination[
     nx=2,  % количество столбцов в комбинации
     alternative=text,
-    distance=0pt  % горизонтальное расстояние между столбцами
+    distance=\columnSpacing  % горизонтальное расстояние между столбцами
 ]
     \startplacefigure[title={Комплексный чертёж точки}, reference={fig:комплексный чертёж точки}]
-        \switchtobodyfont[gost, 5mm]
-        \startframed[width=.5\textwidth, height=.6\textwidth, offset=5mm, frame=off]
+        \techfont
+        \startframed[
+            width=\figureWidth,
+            height=.6\textwidth,
+            offset=none,
+            roffset=6mm,
+            toffset=2mm,
+            boffset=2mm,
+            frame=off
+        ]
             \useMPgraphic{комплексный чертёж точки}
         \stopframed
     \stopplacefigure
     \startplacefigure[title={Комплексный чертёж прямой}, reference={fig:комплексный чертёж прямой}]
-        \switchtobodyfont[gost, 5mm]
-        \startframed[width=.5\textwidth, height=.6\textwidth, offset=5mm, frame=off]
+        \techfont
+        \startframed[
+            width=\figureWidth,
+            height=.6\textwidth,
+            offset=none,
+            roffset=6mm,
+            toffset=2mm,
+            boffset=2mm,
+            frame=off
+        ]
             \useMPgraphic{комплексный чертёж прямой}
         \stopframed
     \stopplacefigure
 \stopfloatcombination
 
-\startsubsection[title={Комплексный чертёж плоскости}]
+\startsubsubject[title={Комплексный чертёж плоскости}]
 
 Плоскость в пространстве определяется тремя точками, не лежащими на одной прямой~--- $\Sigma(A, B, C)$.
 Ту же плоскость можно задать точкой и прямой~--- $\Sigma(a, C)$, двумя пересекающимися прямыми~--- $\Sigma(a \cap b)$, двумя параллельными прямыми~--- $\Sigma(a \parallel b)$.
@@ -73,9 +92,9 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 
 % TODO: добавить комплексный чертёж плоскости
 
-\stopsubsection
+\stopsubsubject  % Комплексный чертёж плоскости
 
-\stopsection
+\stopsection  % Теоретические положения
 
 \startsection[title={Контрольные вопросы}]
 
@@ -96,38 +115,55 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
     \item Перечислите варианты взаимного положения точки и прямой.
 \stopitemize
 
-\stopsection
+\stopsection  % Контрольные вопросы
 
 \startsection[title={Задачи}]
 
-% TODO: добавить рисунки к задачам
-
 \startitemize[n]
 
-\startitem
-    Построить комплексный чертёж точек $A(70,20,0)$ и $B(20,40,30)$.
-    Обозначить высоту и глубину точек.
-    Через точки $A$ и $B$ провести прямую $a(a_1,a_2)$ и представить её положение в пространстве.
+    \startitem
+        Построить комплексный чертёж точек $A(70,20,0)$ и $B(20,40,30)$.
+        Обозначить высоту и глубину точек.
+        Через точки $A$ и $B$ провести прямую $a(a_1,a_2)$ и представить её положение в пространстве.
 
-\stopitem
+        \component[figures/task_1.mp.mkiv]
+        \startmidaligned
+            \techfont
+            \startframed[
+                width=.9\textwidth,
+                height=.3\textheight,
+                offset=none,
+                roffset=6mm,
+                toffset=2mm,
+                boffset=2mm,
+                frame=off
+            ]
+                \useMPgraphic{block 1/task 1}
+            \stopframed
+        \stopmidaligned
+    \stopitem
 
-\startitem
-    Определить положение точек $A$, $B$, $C$, $D$, $E$ относительно прямой $l$.
-    Ответ записать в таблице.
+    % TODO: добавить рисунки к задачам
 
-\stopitem
+    \startitem
+        Определить положение точек $A$, $B$, $C$, $D$, $E$ относительно прямой $l$.
+        Ответ записать в таблице.
 
-\startitem
-    На комплексном чертеже задать плоскости общего положения:
+    \stopitem
 
-\stopitem
+    \startitem
+        На комплексном чертеже задать плоскости общего положения:
 
-\startitem
-    Определить взаимное положение двух прямых.
+    \stopitem
 
-\stopitem
+    \startitem
+        Определить взаимное положение двух прямых.
 
-\stopsection
+    \stopitem
+
+\stopitemize
+
+\stopsection  % Задачи
 
 \stopchapter
 

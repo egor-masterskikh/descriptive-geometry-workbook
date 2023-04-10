@@ -1,0 +1,31 @@
+\startcomponent .
+    \startuseMPgraphic{block 1/task 1}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    z_max := .5 * fig_height;
+    y1_max := fig_height - z_max;
+
+    pair O, X, Z, Y[];
+
+    O := (0, 0);
+    X := (-x_max, 0);
+    Z := (0, z_max);
+    Y1 := (0, -y1_max);
+
+    path hor_axis, vert_axis;
+
+    hor_axis := X--O;
+    vert_axis := Y1--Z;
+
+    pickup pencircle scaled thin_line_thickness;
+
+    drawarrow reverse(hor_axis);
+    label.top(btex $X_{12}$ etex, X);
+    drawdblarrow vert_axis;
+    label.lft(btex $Y_1$ etex, Y1);
+    label.lft(btex $Z_{23}$ etex, Z);
+    label.rt(btex 0 etex, O);
+    \stopuseMPgraphic
+\stopcomponent
