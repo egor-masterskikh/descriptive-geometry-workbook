@@ -1,0 +1,63 @@
+\startenvironment .
+    \startMPinclusions[+]
+    input mparrows;
+
+    u := 1mm;
+
+    base_line_thickness := .5u;  % толщина основной линии
+    thin_line_thickness := base_line_thickness / 2;  % толщина тонкой линии
+
+    ahangle := 20;  % угол раствора стрелки
+    ahlength := 4u;  % длина стрелки
+    setarrows(open);
+
+    % точка-кружочек
+    path point_circ;
+    point_circ := fullcircle scaled u;
+
+    def draw_point_circ(expr pos) =
+        if pair pos:
+            fill point_circ shifted pos withcolor white;
+            draw point_circ shifted pos;
+        fi
+    enddef;
+
+    def draw_axes(expr x_max, yi_max, z_max, yiii_max) =
+        pair O, X, Z, Y[];
+
+        O := (0, 0);
+        X := (-x_max, 0);
+        Z := (0, z_max);
+        Y1 := (0, -yi_max);
+        Y3 := (yiii_max, 0);
+
+        path hor_axis, vert_axis;
+
+        hor_axis := X--Y3;
+        vert_axis := Y1--Z;
+
+        pickup pencircle scaled thin_line_thickness;
+
+        drawdblarrow vert_axis;
+        label.lft("$Y_1$", Y1);
+        label.lft("$Z_{23}$", Z);
+        label.top("$X_{12}$", X);
+
+        if not (yiii_max = 0):
+            drawdblarrow hor_axis;
+            label.top("$Y_3$", Y3);
+            label.ulft("\tf 0", O);
+            
+            pair k_endpoint;
+            path k;
+            k_endpoint := (yiii_max, -yiii_max);
+            k := O--k_endpoint;  % постоянная прямая чертежа
+            draw k;
+            label.bot("$k_0$", k_endpoint);
+        else:
+            drawarrow reverse(hor_axis);
+            label.rt("\tf 0", O);
+        fi
+    enddef;
+    \stopMPinclusions
+\stopenvironment

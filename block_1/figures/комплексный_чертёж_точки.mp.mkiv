@@ -9,19 +9,7 @@
     z_max := .618 * fig_height;    % длина оси Z
     y1_max := fig_height - z_max;  % длина оси Y1
 
-    pair O, X, Z, Y[];
-
-    O := (0, 0);
-    X := (-x_max, 0);
-    Z := (0, z_max);
-    Y1 := (0, -y1_max);
-    Y3 := (y3_max, 0);
-
-    path hor_axis, vert_axis, k;
-
-    hor_axis := X--Y3;
-    vert_axis := Y1--Z;
-    k := O--(y3_max, -y3_max);  % постоянная прямая чертежа
+    draw_axes(x_max, y1_max, z_max, y3_max);
 
     pair A[];
 
@@ -43,27 +31,13 @@
     A131 = whatever[A1, A13] = whatever[O, Y1];  % точка пересечения прямой A1--A13 и оси OY1
     A133 = whatever[A3, A13] = whatever[O, Y3];  % точка пересечения прямой A13--A3 и оси OY3
 
-
-    pickup pencircle scaled thin_line_thickness;
-
-    drawdblarrow hor_axis;
-    label.top(btex $X_{12}$ etex, X);
-    label.top(btex $Y_3$ etex, Y3);
-    drawdblarrow vert_axis;
-    label.rt(btex $Y_1$ etex, Y1);
-    label.rt(btex $Z_{23}$ etex, Z);
-    draw k;
-    label.bot(btex $k_0$ etex, (y3_max, -y3_max));
-    label.ulft(btex 0 etex, O);
-
     draw A1--A2;
     draw A1--A13;
     draw A13--A3;
     draw A2--A3;
 
     for point_pos=A1, A2, A3, A12, A23:
-        fill point_circ shifted point_pos withcolor white;
-        draw point_circ shifted point_pos;
+        draw_point_circ(point_pos);
     endfor
 
     label.bot(btex $A_1$ etex, A1);

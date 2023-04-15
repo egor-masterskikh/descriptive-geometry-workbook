@@ -7,17 +7,7 @@
     z_max := .5 * fig_height;      % длина оси Z
     y1_max := fig_height - z_max;  % длина оси Y1
 
-    pair O, X, Z, Y[];
-
-    O := (0, 0);
-    X := (-x_max, 0);
-    Z := (0, z_max);
-    Y1 := (0, -y1_max);
-
-    path hor_axis, vert_axis;
-
-    hor_axis := X--O;
-    vert_axis := Y1--Z;
+    draw_axes(x_max, y1_max, z_max, 0);
 
     pair A[], B[];
 
@@ -50,19 +40,11 @@
 
     pickup pencircle scaled thin_line_thickness;
 
-    drawarrow reverse(hor_axis);
-    label.top(btex $X_{12}$ etex, X);
-    drawdblarrow vert_axis;
-    label.lft(btex $Y_1$ etex, Y1);
-    label.lft(btex $Z_2$ etex, Z);
-    label.rt(btex 0 etex, O);
-
     draw A1--A2;
     draw B1--B2;
 
     for point_pos=A1, A2, A12, B1, B2, B12:
-        fill point_circ shifted point_pos withcolor white;
-        draw point_circ shifted point_pos;
+        draw_point_circ(point_pos);
     endfor
 
     label.llft(btex $A_1$ etex, A1);
