@@ -38,25 +38,30 @@
 
         pickup pencircle scaled thin_line_thickness;
 
-        drawdblarrow vert_axis;
-        label.lft("$Y_1$", Y1);
-        label.lft("$Z_{23}$", Z);
         label.top("$X_{12}$", X);
 
-        if not (yiii_max = 0):
-            drawdblarrow hor_axis;
-            label.top("$Y_3$", Y3);
-            label.ulft("\tf 0", O);
-            
-            pair k_endpoint;
-            path k;
-            k_endpoint := (yiii_max, -yiii_max);
-            k := O--k_endpoint;  % постоянная прямая чертежа
-            draw k;
-            label.bot("$k_0$", k_endpoint);
-        else:
+        if (yi_max = 0) and (z_max = 0) and (yiii_max = 0):
             drawarrow reverse(hor_axis);
-            label.rt("\tf 0", O);
+        else:
+            drawdblarrow vert_axis;
+            label.lft("$Y_1$", Y1);
+            label.lft("$Z_{23}$", Z);
+
+            if not (yiii_max = 0):
+                drawdblarrow hor_axis;
+                label.top("$Y_3$", Y3);
+                label.ulft("\tf 0", O);
+                
+                pair k_endpoint;
+                path k;
+                k_endpoint := (yiii_max, -yiii_max);
+                k := O--k_endpoint;  % постоянная прямая чертежа
+                draw k;
+                label.bot("$k_0$", k_endpoint);
+            else:
+                drawarrow reverse(hor_axis);
+                label.rt("\tf 0", O);
+            fi
         fi
     enddef;
     \stopMPinclusions

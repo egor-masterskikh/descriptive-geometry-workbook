@@ -44,8 +44,14 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 \component[figures/комплексный_чертёж_точки.mp.mkiv]
 \component[figures/комплексный_чертёж_прямой.mp.mkiv]
 
-\newdimen\figureWidth
-\figureWidth=\dimexpr.5\textwidth-.5\columnSpacing\relax
+{
+\def\LocalDrawing#1{%
+    \Drawing[%
+        width=\figureWidth,
+        height=.6\textwidth,
+        roffset=6mm,
+    ]{#1}%
+}
 
 \startfloatcombination[
     nx=2,  % количество столбцов в комбинации
@@ -53,34 +59,13 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
     distance=\columnSpacing  % горизонтальное расстояние между столбцами
 ]
     \startplacefigure[title={Комплексный чертёж точки}, reference={fig:комплексный чертёж точки}]
-        \techfont
-        \startframed[
-            width=\figureWidth,
-            height=.6\textwidth,
-            offset=none,
-            roffset=6mm,
-            toffset=2mm,
-            boffset=2mm,
-            frame=off
-        ]
-            \useMPgraphic{комплексный чертёж точки}
-        \stopframed
+        \LocalDrawing{комплексный чертёж точки}
     \stopplacefigure
     \startplacefigure[title={Комплексный чертёж прямой}, reference={fig:комплексный чертёж прямой}]
-        \techfont
-        \startframed[
-            width=\figureWidth,
-            height=.6\textwidth,
-            offset=none,
-            roffset=6mm,
-            toffset=2mm,
-            boffset=2mm,
-            frame=off
-        ]
-            \useMPgraphic{комплексный чертёж прямой}
-        \stopframed
+        \LocalDrawing{комплексный чертёж прямой}
     \stopplacefigure
 \stopfloatcombination
+}
 
 \startsubsubject[title={Комплексный чертёж плоскости}]
 
@@ -98,8 +83,8 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 
 \startsection[title={Контрольные вопросы}]
 
-\startitemize[n][
-    inbetween={\blank[medium]}
+\startitemize[n][%
+    inbetween={\blank[medium]},
 ]
     \item В чём состоит метод проецирования?
     \item Почему чертежи называются проекционными?
@@ -128,18 +113,11 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 
         \component[figures/task_1.mp.mkiv]
         \startmidaligned
-            \techfont
-            \startframed[
+            \Drawing[%
                 width=.9\textwidth,
                 height=.3\textheight,
-                offset=none,
                 roffset=6mm,
-                toffset=2mm,
-                boffset=2mm,
-                frame=off
-            ]
-                \useMPgraphic{block 1/task 1}
-            \stopframed
+            ]{block 1/task 1}
         \stopmidaligned
     \stopitem
 
@@ -159,33 +137,45 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
                     roffset=1em,
                     frame=off,
                 ]
-                    \startframed[%
+                    \Drawing[%
                         width=\framedwidth,
                         height=.3\textheight,
-                        offset=none,
                         roffset=6mm,
-                        toffset=2mm,
-                        boffset=2mm,
-                        frame=off,
-                    ]
-                        \techfont
-                        \useMPgraphic{block 1/task 2}
-                    \stopframed
+                    ]{block 1/task 2}
                 \eTD
 
                 \bTD Точка \eTD \bTD Положение относительно~$l$ \eTD
             \eTR
-            \bTR \bTD A \eTD \bTD \eTD \eTR
-            \bTR \bTD B \eTD \bTD \eTD \eTR
-            \bTR \bTD C \eTD \bTD \eTD \eTR
-            \bTR \bTD D \eTD \bTD \eTD \eTR
-            \bTR \bTD E \eTD \bTD \eTD \eTR
+            \bTR \bTD $A$ \eTD \bTD \eTD \eTR
+            \bTR \bTD $B$ \eTD \bTD \eTD \eTR
+            \bTR \bTD $C$ \eTD \bTD \eTD \eTR
+            \bTR \bTD $D$ \eTD \bTD \eTD \eTR
+            \bTR \bTD $E$ \eTD \bTD \eTD \eTR
         \eTABLE
     \stopitem
 
     \startitem
         На комплексном чертеже задать плоскости общего положения:
-        % TODO: добавить рисунок
+
+        \component[figures/task_3.mp.mkiv]
+
+        \def\LocalDrawing{%
+            \Drawing[%
+                width=\figureWidth,
+                height=.25\textheight,
+            ]{block 1/task 3}%
+        }
+
+        \startcombination[%
+            nx=2,
+            ny=2,
+            distance=\columnSpacing,
+        ]
+            {\LocalDrawing}{a)~$\Sigma(A, B, C)$}
+            {\LocalDrawing}{б)~$\Sigma(a \cap b)$}
+            {\LocalDrawing}{в)~$\Sigma(a \parallel b)$}
+            {\LocalDrawing}{г)~$\Sigma(a, A)$}
+        \stopcombination
     \stopitem
 
     \startitem
