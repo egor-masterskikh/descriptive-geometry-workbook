@@ -183,29 +183,12 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
     \startitem
         Определить взаимное положение двух прямых.
 
-        \component[figures/task_4.1.mp.mkiv]
-        \component[figures/task_4.2.mp.mkiv]
-        \component[figures/task_4.3.mp.mkiv]
-        \component[figures/task_4.4.mp.mkiv]
+        \component[figures/task_4.mp.mkiv]
 
-        \def\LocalDrawing#1{%
-            \Drawing[%
-                width=.25\textwidth,
-                height=.25\textheight,
-                rightframe=on,
-            ]{#1}%
-        }
-
-        \startcombination[%
-            nx=4,
-            ny=1,
-            distance=0pt,
-        ]
-            {\LocalDrawing{block 1/task 4.1}}{}
-            {\LocalDrawing{block 1/task 4.2}}{}
-            {\LocalDrawing{block 1/task 4.3}}{}
-            {\LocalDrawing{block 1/task 4.4}}{}
-        \stopcombination
+        \Drawing[%
+            width=\textwidth,
+            height=.25\textheight,
+        ]{block 1/task 4}
     \stopitem
 
 \stopitemize
