@@ -126,5 +126,59 @@
         ulft
     );
     endgroup;
+
+
+    begingroup
+    O := O + (x_max, ypart O);
+
+    save A, a;
+    pair A[], a[]_dir;
+
+    A.x := .5 * x_max;
+    A.y := .7 * y1_max;
+    A.z := .7 * z_max;
+
+    A1 := O + (-A.x, -A.y);
+    A2 := O + (-A.x, A.z);
+
+    a1_dir := dir (180 - 10);
+    a2_dir := dir -20;
+
+    draw_line(
+        min(y1_max, x_max),
+        a1_dir,
+        A1,
+        0.5,
+        "$a_1$",
+        top
+    );
+
+    draw_line(
+        min(y1_max, x_max),
+        a1_dir,
+        A1 + (0, .4 * y1_max),
+        0.5,
+        "$b_1$",
+        top
+    );
+
+    draw_line(
+        min(z_max, x_max),
+        a2_dir,
+        A2,
+        0.5,
+        "$a_2$",
+        top
+    );
+
+    draw_line(
+        min(z_max, x_max),
+        a2_dir,
+        A2 + (0, -.3 * z_max),
+        0.5,
+        "$b_2$",
+        top
+    );
+    endgroup;
     \stopuseMPgraphic
 \stopcomponent
