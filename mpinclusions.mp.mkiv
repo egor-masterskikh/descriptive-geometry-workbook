@@ -7,6 +7,10 @@
     base_line_thickness := .5u;  % толщина основной линии
     thin_line_thickness := base_line_thickness / 2;  % толщина тонкой линии
 
+    pen base_pen, thin_pen;
+    base_pen := pencircle scaled base_line_thickness;
+    thin_pen := pencircle scaled thin_line_thickness;
+
     ahangle := 20;  % угол раствора стрелки
     ahlength := 4u;  % длина стрелки
     setarrows(open);
@@ -16,6 +20,7 @@
     point_circ := fullcircle scaled u;
 
     def draw_point_circ(expr pos) =
+        pickup thin_pen;
         if pair pos:
             fill point_circ shifted pos withcolor white;
             draw point_circ shifted pos;
@@ -63,6 +68,24 @@
                 label.rt("\tf 0", O);
             fi
         fi
+    enddef;
+
+    % numeric len -- длина отображаемого отрезка прямой
+    % pair point_on -- точка, принадлежащая прямой
+    % numeric k определяет, какую часть всего отрезка прямой составляет отрезок между начальной координатой отрезка и контрольной точкой
+    def draw_line(expr len, direction, point_on, k, label_str)(suffix label_pos) =
+        begingroup
+        save vec, start_point, end_point;
+        pair vec, start_point, end_point;
+
+        vec := len * direction;
+
+        end_point - start_point = vec;
+        point_on - start_point = k * vec;
+
+        draw start_point--end_point withpen base_pen;
+        label.label_pos(label_str, start_point);
+        endgroup;
     enddef;
     \stopMPinclusions
 \stopenvironment

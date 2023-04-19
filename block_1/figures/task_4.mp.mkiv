@@ -10,11 +10,20 @@
 
     draw_axes(4 * x_max, 0, 0, 0);
 
-    % TODO: добавить оставшиеся три рисунка
+    begingroup
+    save vert_delim_x;
+    for vert_delim_x := -x_max step -x_max until -3 * x_max:
+        draw (vert_delim_x, -y1_max)--(vert_delim_x, z_max);
+    endfor
+    endgroup;
+
+    O := (-4 * x_max, ypart O);
+
 
     begingroup
-    O := (-3 * x_max, 0);
+    O := O + (x_max, ypart O);
 
+    save A;
     pair A[];
 
     A.x := .5 * x_max;
@@ -24,60 +33,98 @@
     A1 := O + (-A.x, -A.y);
     A2 := O + (-A.x, A.z);
 
-    pair a[]_vec, a[]_start, a[]_end, b[]_vec, b[]_start, b[]_end;
-    path a[], b[];
+    draw_line(
+        min(y1_max, x_max),
+        dir 30,
+        A1,
+        0.6,
+        "$a_1$",
+        ulft
+    );
 
-    a1_len := min(y1_max, x_max);
-    a1_vec := a1_len * dir 30;
+    draw_line(
+        min(y1_max, x_max),
+        dir (180 - 18),
+        A1,
+        0.5,
+        "$b_1$",
+        top
+    );
 
-    a1_end - a1_start = a1_vec;
-    a1_end - A1 = .4 * a1_vec;  % устанавливам соотношение отрезков, на которые точка A1 делит вектор a1
+    draw_line(
+        min(z_max, x_max),
+        dir -18,
+        A2,
+        0.4,
+        "$a_2$",
+        top
+    );
 
+    draw_line(
+        min(z_max, x_max),
+        dir (180 + 40),
+        A2,
+        0.5,
+        "$b_2$",
+        ulft
+    );
 
-    b1_len := min(y1_max, x_max);
-    b1_vec := b1_len * dir -18;
-
-    b1_end - b1_start = b1_vec;
-    b1_end - A1 = .5 * b1_vec;
-
-
-    a2_len := min(z_max, x_max);
-    a2_vec := a2_len * dir - 18;
-
-    a2_end - a2_start = a2_vec;
-    a2_end - A2 = .6 * a2_vec;
-
-
-    b2_len := min(z_max, x_max);
-    b2_vec := b2_len * dir 40;
-
-    b2_end - b2_start = b2_vec;
-    b2_end - A2 = .5 * b2_vec;
-
-
-    a1 := a1_start--a1_end;
-    b1 := b1_start--b1_end;
-    a2 := a2_start--a2_end;
-    b2 := b2_start--b2_end;
-
-
-    pickup pencircle scaled base_line_thickness;
-
-    draw a1;
-    draw b1;
-    draw a2;
-    draw b2;
-
-    pickup pencircle scaled thin_line_thickness;
-
-    draw A1--A2;
+    draw A1--A2 withpen thin_pen;
     draw_point_circ(A1);
     draw_point_circ(A2);
 
-    label.ulft(btex $a_1$ etex, a1_start);
-    label.top(btex $b_1$ etex, b1_end);
-    label.top(btex $a_2$ etex, a2_start);
-    label.ulft(btex $b_2$ etex, b2_end);
-    endgroup
+    endgroup;
+
+
+    begingroup
+    O := O + (x_max, ypart O);
+
+    save A, B;
+    pair A[], B[];
+
+    A.x := .65 * x_max;
+    A.y := .4 * y1_max;
+    B.x := .35 * x_max;
+    B.z := .6 * z_max;
+
+    A1 := O + (-A.x, -A.y);
+    B2 := O + (-B.x, B.z);
+
+    draw_line(
+        0.9 * min(y1_max, x_max),
+        dir (180 + 33),
+        A1,
+        0.6,
+        "$a_1$",
+        lrt
+    );
+
+    draw_line(
+        0.9 * min(y1_max, x_max),
+        dir (180 - 20),
+        A1,
+        0.7,
+        "$b_1$",
+        bot
+    );
+
+    draw_line(
+        0.9 * min(z_max, x_max),
+        dir -15,
+        B2,
+        0.7,
+        "$a_2$",
+        top
+    );
+
+    draw_line(
+        0.9 * min(z_max, x_max),
+        dir 36,
+        B2,
+        0.6,
+        "$b_2$",
+        ulft
+    );
+    endgroup;
     \stopuseMPgraphic
 \stopcomponent
