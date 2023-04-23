@@ -27,6 +27,11 @@
         fi
     enddef;
 
+    def draw_point_circ_with_label(expr pos, label_str)(suffix label_pos) =
+        draw_point_circ(pos);
+        label.label_pos(label_str, pos);
+    enddef;
+
     def draw_axes(expr x_max, yi_max, z_max, yiii_max) =
         pair O, X, Z, Y[];
 
@@ -73,19 +78,36 @@
     % numeric len -- длина отображаемого отрезка прямой
     % pair point_on -- точка, принадлежащая прямой
     % numeric k определяет, какую часть всего отрезка прямой составляет отрезок между начальной координатой отрезка и контрольной точкой
-    def draw_line(expr len, direction, point_on, k, label_str)(suffix label_pos) =
-        begingroup
+    % boolean return_val определяет, нужно ли возвращать значение начальной координаты
+    vardef draw_line(expr len, direction, point_on, point_on_k, return_val) =
         save vec, start_point, end_point;
         pair vec, start_point, end_point;
 
         vec := len * direction;
 
         end_point - start_point = vec;
-        point_on - start_point = k * vec;
+        point_on - start_point = point_on_k * vec;
 
         draw start_point--end_point withpen base_pen;
-        label.label_pos(label_str, start_point);
-        endgroup;
+
+        if return_val:
+            start_point
+        fi
+    enddef;
+
+    % numeric label_k определяет, какую часть всего отрезка прямой составляет отрезок между начальной координатой отрезка и координатой метки
+    % string label_str -- собственно содержимое метки
+    % suffix label_pos -- расположение метки относительно её координаты
+    vardef draw_line_with_label(expr len, direction, point_on, point_on_k, label_k, label_str)(suffix label_pos)(expr return_val) =
+        save start_point;
+        pair start_point;
+
+        start_point := draw_line(len, direction, point_on, point_on_k, true);
+        label.label_pos(label_str, start_point + label_k * len * direction);
+
+        if return_val:
+            start_point
+        fi
     enddef;
     \stopMPinclusions
 \stopenvironment

@@ -33,40 +33,48 @@
     A1 := O + (-A.x, -A.y);
     A2 := O + (-A.x, A.z);
 
-    draw_line(
+    draw_line_with_label(
         min(y1_max, x_max),
         dir 30,
         A1,
         0.6,
+        0,
         "$a_1$",
-        ulft
+        ulft,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         min(y1_max, x_max),
         dir (180 - 18),
         A1,
         0.5,
+        0,
         "$b_1$",
-        top
+        top,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         min(z_max, x_max),
         dir -18,
         A2,
         0.4,
+        0,
         "$a_2$",
-        top
+        top,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         min(z_max, x_max),
         dir (180 + 40),
         A2,
         0.5,
+        0,
         "$b_2$",
-        ulft
+        ulft,
+        false
     );
 
     draw A1--A2 withpen thin_pen;
@@ -90,40 +98,48 @@
     A1 := O + (-A.x, -A.y);
     B2 := O + (-B.x, B.z);
 
-    draw_line(
+    draw_line_with_label(
         0.9 * min(y1_max, x_max),
         dir (180 + 33),
         A1,
         0.6,
+        0,
         "$a_1$",
-        lrt
+        lrt,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         0.9 * min(y1_max, x_max),
         dir (180 - 20),
         A1,
         0.7,
+        0,
         "$b_1$",
-        bot
+        bot,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         0.9 * min(z_max, x_max),
         dir -15,
         B2,
         0.7,
+        0,
         "$a_2$",
-        top
+        top,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         0.9 * min(z_max, x_max),
         dir 36,
         B2,
         0.6,
+        0,
         "$b_2$",
-        ulft
+        ulft,
+        false
     );
     endgroup;
 
@@ -144,41 +160,100 @@
     a1_dir := dir (180 - 10);
     a2_dir := dir -20;
 
-    draw_line(
+    draw_line_with_label(
         min(y1_max, x_max),
         a1_dir,
         A1,
         0.5,
+        0,
         "$a_1$",
-        top
+        top,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         min(y1_max, x_max),
         a1_dir,
         A1 + (0, .4 * y1_max),
         0.5,
+        0,
         "$b_1$",
-        top
+        top,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         min(z_max, x_max),
         a2_dir,
         A2,
         0.5,
+        0,
         "$a_2$",
-        top
+        top,
+        false
     );
 
-    draw_line(
+    draw_line_with_label(
         min(z_max, x_max),
         a2_dir,
         A2 + (0, -.3 * z_max),
         0.5,
+        0,
         "$b_2$",
-        top
+        top,
+        false
     );
+    endgroup;
+
+
+    begingroup
+    O := O + (x_max, ypart O);
+
+    save A, B, a, b;
+    pair A[], B[], b[]_dir, a[]_start;
+
+    A1 := (-.35 * x_max, -.5 * y1_max);
+    b1_dir := dir -45;
+    B1 - A1 = - 0.2 * x_max * (b1_dir rotated 90);
+
+    a2_len := .7 * x_max;
+
+    draw_line_with_label(
+        min(y1_max, x_max),
+        b1_dir,
+        B1,
+        0.6,
+        0,
+        "$b_1$",
+        top,
+        false
+    );
+
+    a2_start := draw_line_with_label(
+                    a2_len,
+                    dir 90,
+                    (xpart A1, .2 * z_max),
+                    0,
+                    1,
+                    "$a_2$",
+                    rt,
+                    true
+                );
+
+    draw_line_with_label(
+        min(z_max, x_max),
+        dir 37,
+        a2_start + (0, 0.4 * a2_len),
+        0.7,
+        0,
+        "$b_2$",
+        ulft,
+        false
+    );
+
+    draw A1--a2_start withpen thin_pen;
+
+    draw_point_circ_with_label(A1, "$a_1$", rt);
     endgroup;
     \stopuseMPgraphic
 \stopcomponent
