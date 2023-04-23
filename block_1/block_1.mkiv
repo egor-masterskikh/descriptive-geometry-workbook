@@ -194,7 +194,30 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
         \Drawing[%
             width=\textwidth,
             height=.25\textheight,
+            toffset=0mm,
+            boffset=0mm,
         ]{block 1/task 4}
+
+        \page[no]
+
+        \techfont
+
+        \startframed[%
+            width=\textwidth,
+            height=.25mm,
+            loffset=0mm,
+            roffset=0mm,
+            toffset=0mm,
+            boffset=0mm,
+            location=line,
+        ]
+            \startMPcode
+            x_max := .25 * \framedwidth;
+            for fig_i := 0 upto 3:
+                draw ((-4 * x_max + 3mm, 0)--(-3 * x_max - 3mm, 0)) shifted (fig_i * x_max, 0);
+            endfor
+            \stopMPcode
+        \stopframed
     \stopitem
 
 \stopitemize

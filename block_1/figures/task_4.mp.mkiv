@@ -73,7 +73,7 @@
         0.5,
         0,
         "$b_2$",
-        ulft,
+        rt,
         false
     );
 
@@ -105,7 +105,7 @@
         0.6,
         0,
         "$a_1$",
-        lrt,
+        rt,
         false
     );
 
@@ -116,7 +116,7 @@
         0.7,
         0,
         "$b_1$",
-        bot,
+        top,
         false
     );
 
@@ -187,7 +187,7 @@
         a2_dir,
         A2,
         0.5,
-        0,
+        1,
         "$a_2$",
         top,
         false
@@ -198,7 +198,7 @@
         a2_dir,
         A2 + (0, -.3 * z_max),
         0.5,
-        0,
+        1,
         "$b_2$",
         top,
         false
@@ -216,7 +216,7 @@
     b1_dir := dir -45;
     B1 - A1 = - 0.2 * x_max * (b1_dir rotated 90);
 
-    a2_len := .7 * x_max;
+    a2_len := .7 * z_max;
 
     draw_line_with_label(
         min(y1_max, x_max),
@@ -241,7 +241,7 @@
                 );
 
     draw_line_with_label(
-        min(z_max, x_max),
+        0.9 * min(z_max, x_max),
         dir 37,
         a2_start + (0, 0.4 * a2_len),
         0.7,
