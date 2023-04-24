@@ -1,0 +1,60 @@
+\environment[env.mkiv]
+
+\startcomponent .
+\setuplayout[titlepage]
+\starttext
+\startalignment[middle]
+{%
+\switchtobodyfont[exo2, big]
+
+Федеральное агентство по образованию
+
+Московский авиационный институт
+
+}
+
+\vfill
+
+{%
+\techfont
+
+\startframed[%
+    height=.2\textheight,
+    toffset=0mm,
+    boffset=0mm,
+    loffset=0mm,
+    roffset=0mm,
+]
+    \switchtobodyfont[20mm]
+    Рабочая\hspace тетрадь \crlf
+    \switchtobodyfont[14mm]
+    по\hspace начертательной\hspace геометрии
+\stopframed
+
+\switchtobodyfont[7mm]
+\slanted
+
+Студент:\hspace[medium]\thinrule
+
+Группа:\hspace[medium]\thinrule
+
+Преподаватель:\hspace[medium]\thinrule
+
+}
+
+\vfill
+
+{%
+\switchtobodyfont[exo2, big]
+
+Москва \currentdate[year]
+
+}
+
+\stopalignment
+
+\page[empty]
+
+\stoptext
+\setuplayout[reset]
+\stopcomponent

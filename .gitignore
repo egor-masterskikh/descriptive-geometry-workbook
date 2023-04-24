@@ -10,3 +10,9 @@
 !.gitignore
 !*.sfd
 !main.pdf
+!*.otf
+!*.ttf
+!**/README.txt
+!**/OFL.txt
+!**/NOTICE
+!**/LICENSE
