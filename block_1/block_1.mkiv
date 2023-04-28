@@ -53,18 +53,26 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
     ]{#1}%
 }
 
-\startfloatcombination[
-    nx=2,  % количество столбцов в комбинации
-    alternative=text,
-    distance=\columnSpacing  % горизонтальное расстояние между столбцами
-]
-    \startplacefigure[title={Комплексный чертёж точки}, reference={fig:комплексный чертёж точки}]
-        \LocalDrawing{комплексный чертёж точки}
-    \stopplacefigure
-    \startplacefigure[title={Комплексный чертёж прямой}, reference={fig:комплексный чертёж прямой}]
-        \LocalDrawing{комплексный чертёж прямой}
-    \stopplacefigure
-\stopfloatcombination
+\startplacefigure[location=none]
+    \startfloatcombination[
+        nx=2,  % количество столбцов в комбинации
+        alternative=text,
+        distance=\columnSpacing  % горизонтальное расстояние между столбцами
+    ]
+        \startplacefigure[
+            title={Комплексный чертёж точки},
+            reference={fig:комплексный чертёж точки},
+        ]
+            \LocalDrawing{комплексный чертёж точки}
+        \stopplacefigure
+        \startplacefigure[
+            title={Комплексный чертёж прямой},
+            reference={fig:комплексный чертёж прямой},
+        ]
+            \LocalDrawing{комплексный чертёж прямой}
+        \stopplacefigure
+    \stopfloatcombination
+\stopplacefigure
 }
 
 \startsubsubject[title={Комплексный чертёж плоскости}]
@@ -75,7 +83,35 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 На комплексном чертеже любая плоскость может быть задана проекциями элементов, определяющих её положение в пространстве (\in{рис.}[fig:комплексный чертёж плоскости]).
 В ходе решения задачи иногда приходится переходить от одного задания плоскости к другому.
 
-% TODO: добавить комплексный чертёж плоскости
+\component[figures/комплексный_чертёж_плоскости.mp.mkiv]
+
+\startplacefigure[%
+    title={Комплексный чертёж плоскости},
+    reference={fig:комплексный чертёж плоскости},
+]
+    \Drawing[%
+        width=\textwidth,
+        height=.3\textheight,
+        toffset=0mm,
+        boffset=0mm,
+        roffset=3mm,
+    ]{комплексный чертёж плоскости}
+
+    \blank[small]
+
+    \bTABLE[%
+        option=stretch,  % ширина всей таблицы будет растянута по ширине страницы
+        align={middle, lohi},
+        frame=off,
+    ]
+        \bTR
+        \bTD $\Sigma(A, B, C)$ \eTD
+        \bTD $\Sigma(a, C)$ \eTD
+        \bTD $\Sigma(a \cap b)$ \eTD
+        \bTD $\Sigma(a \parallel b)$ \eTD
+        \eTR
+    \eTABLE
+\stopplacefigure
 
 \stopsubsubject  % Комплексный чертёж плоскости
 

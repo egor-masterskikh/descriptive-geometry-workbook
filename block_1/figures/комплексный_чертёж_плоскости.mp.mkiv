@@ -1,0 +1,119 @@
+\startcomponent .
+    \startuseMPgraphic{комплексный чертёж плоскости}
+    total_width := \framedwidth;
+    fig_width := .25 * total_width;  % ширина каждого из 4-х рисунков
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(4 * x_max, 0, 0, 0);
+
+    begingroup
+    save vert_delim_x;
+    for vert_delim_x := -x_max step -x_max until -3 * x_max:
+        draw (vert_delim_x, -y1_max)--(vert_delim_x, z_max);
+    endfor
+    endgroup;
+
+
+    pair A[], B[], C[];
+
+    A.x := .7 * x_max;
+    A.y := .8 * y1_max;
+    A.z := .5 * z_max;
+
+    B.x := .4 * x_max;
+    B.y := .25 * y1_max;
+    B.z := .8 * z_max;
+
+    C.x := .25 * x_max;
+    C.y := .6 * y1_max;
+    C.z := .25 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    B1 := (-B.x, -B.y);
+    B2 := (-B.x, B.z);
+
+    C1 := (-C.x, -C.y);
+    C2 := (-C.x, C.z);
+
+    def draw_points =
+        draw (A1--A2) shifted O;
+        draw (B1--B2) shifted O;
+        draw (C1--C2) shifted O;
+
+        draw_point_circ_with_label(
+            A1 + O,
+            "$A_1$",
+            lrt
+        );
+        draw_point_circ(B1 + O);
+        draw thelabel.lft("$B_1$", B1 + O) shifted (-3pt, 0);
+        draw_point_circ_with_label(
+            C1 + O,
+            "$C_1$",
+            rt
+        );
+        draw_point_circ_with_label(
+            A2 + O,
+            "$A_2$",
+            ulft
+        );
+        draw_point_circ(B2 + O);
+        draw thelabel.rt("$B_2$", B2 + O) shifted (2pt, -3pt);
+        draw_point_circ(C2 + O);
+        draw thelabel.rt("$C_2$", C2 + O) shifted (0, -2pt);
+    enddef;
+
+    O := (-3 * x_max, ypart O);
+    draw_points;
+
+    O := O + (x_max, ypart O);
+    draw (1.2[A1, B1]--1.2[B1, A1]) shifted O withpen base_pen;
+    label.ulft(btex $a_1$ etex, .55[A1, B1] + O);
+    draw (1.2[A2, B2]--1.5[B2, A2]) shifted O withpen base_pen;
+    label.ulft(btex $a_2$ etex, .5[A2, B2] + O);
+    draw_points;
+
+    O := O + (x_max, ypart O);
+    draw (1.2[A1, B1]--1.2[B1, A1]) shifted O withpen base_pen;
+    label.ulft(btex $a_1$ etex, .55[A1, B1] + O);
+    draw (1.2[A2, B2]--1.5[B2, A2]) shifted O withpen base_pen;
+    label.ulft(btex $a_2$ etex, .5[A2, B2] + O);
+    draw (1.6[B1, C1]--1.2[C1, B1]) shifted O withpen base_pen;
+    label.rt(btex $b_1$ etex, 1.6[B1, C1] + O);
+    draw (1.2[B2, C2]--1.2[C2, B2]) shifted O withpen base_pen;
+    draw_points;
+
+    O := O + (x_max, ypart O);
+    draw (1.2[A1, B1]--1.2[B1, A1]) shifted O withpen base_pen;
+    label.ulft(btex $a_1$ etex, .55[A1, B1] + O);
+    draw (1.2[A2, B2]--1.5[B2, A2]) shifted O withpen base_pen;
+    label.ulft(btex $a_2$ etex, .5[A2, B2] + O);
+    draw_line_with_label(
+        length (B1 - A1),
+        (B1 - A1) / length (B1 - A1),
+        C1,
+        0.6,
+        1,
+        "$b_1$",
+        top,
+        false
+    );
+    draw_line_with_label(
+        length (B2 - A2),
+        (B2 - A2) / length (B2 - A2),
+        C2,
+        0.4,
+        1,
+        "$b_2$",
+        top,
+        false
+    );
+    draw_points;
+    \stopuseMPgraphic
+\stopcomponent
