@@ -1,0 +1,21 @@
+project_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+
+readarray -d : -t font_dirs_arr <<<"$OSFONTDIR"
+
+project_fonts_are_loaded=false
+
+for font_dir in "${font_dirs_arr[@]}"; do
+  if [ "$font_dir" == "$project_dir/fonts" ]; then
+    project_fonts_are_loaded=true
+    break
+  fi
+done
+
+if ! $project_fonts_are_loaded; then
+  OSFONTDIR+=":$project_dir/fonts"
+  export OSFONTDIR
+#  mtxrun --generate
+#  mtxrun --script font --reload
+fi
+
+context  main.mkiv

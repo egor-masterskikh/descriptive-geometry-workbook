@@ -15,6 +15,9 @@
     ahlength := 4u;  % длина стрелки
     setarrows(open);
 
+    path arrow_head;
+    arrow_head := (-ahlength * cosd(ahangle / 2), ahlength * sind(ahangle / 2))--(0, 0)--(-ahlength * cosd(ahangle / 2), -ahlength * sind(ahangle / 2));
+
     % точка-кружочек
     path point_circ;
     point_circ := fullcircle scaled u;
@@ -46,7 +49,7 @@
         hor_axis := X--Y3;
         vert_axis := Y1--Z;
 
-        pickup pencircle scaled thin_line_thickness;
+        pickup thin_pen;
 
         label.top("$X_{12}$", X);
 
@@ -64,10 +67,14 @@
                 
                 pair k_endpoint;
                 path k;
-                k_endpoint := (yiii_max, -yiii_max);
+                k_endpoint := (1, -1) * (min(yiii_max, yi_max) - ahlength);
                 k := O--k_endpoint;  % постоянная прямая чертежа
                 draw k;
-                label.bot("$k_0$", k_endpoint);
+                if (yiii_max < yi_max):
+                    label.bot("$k_0$", k_endpoint);
+                else:
+                    label.rt("$k_0$", k_endpoint);
+                fi
             else:
                 drawarrow reverse(hor_axis);
                 label.rt("\tf 0", O);
