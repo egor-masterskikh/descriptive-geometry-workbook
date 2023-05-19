@@ -6,15 +6,15 @@
 .vscode
 
 !*.mkiv
+!*.md
+!*.sh
 !.gitignore
+
+!**/LICENSE
+!**/NOTICE
+!**/OFL.txt
 
 !*.sfd
 !*.otf
-!**/README.txt
-!**/OFL.txt
-!**/NOTICE
-!**/LICENSE
 
-!*.sh
-
-!main.pdf
+!*.pdf

@@ -14,8 +14,12 @@ done
 if ! $project_fonts_are_loaded; then
   OSFONTDIR+=":$project_dir/fonts"
   export OSFONTDIR
-#  mtxrun --generate
-#  mtxrun --script font --reload
 fi
 
-context  main.mkiv
+# при первом запуске необходимо обновить базу данных шрифтов
+# для этого раскомментируйте следующие две строчки
+#  mtxrun --generate
+#  mtxrun --script font --reload
+# после первого запуска их можно закомментировать
+
+context main.mkiv --result="Рабочая тетрадь по начерту (все блоки)"

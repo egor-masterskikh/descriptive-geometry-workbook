@@ -1,5 +1,13 @@
 \startcomponent .
     \startuseMPgraphic{block 1/task 3}
-    draw_axes(\framedwidth, 0, 0, 0);
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := .5 * fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+    y3_max := fig_width - x_max;
+
+    draw_axes(x_max, y1_max, z_max, y3_max);
     \stopuseMPgraphic
 \stopcomponent
