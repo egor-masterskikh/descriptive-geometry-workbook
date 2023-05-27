@@ -75,7 +75,7 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 {
 \def\LocalDrawing#1{%
     \Drawing[%
-        width=\figureWidth,
+        width=\measure{combination},
         height=.6\textwidth,
         roffset=6mm,
     ]{#1}%
@@ -89,13 +89,13 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
         alternative=text,
         distance=\columnSpacing,  % горизонтальное расстояние между столбцами
     ]
-        \startplacefigure[
+        \startplacefigure[%
             title={Комплексный чертёж точки},
             reference={fig:комплексный чертёж точки},
         ]
             \LocalDrawing{комплексный чертёж точки}
         \stopplacefigure
-        \startplacefigure[
+        \startplacefigure[%
             title={Комплексный чертёж прямой},
             reference={fig:комплексный чертёж прямой},
         ]
@@ -229,7 +229,7 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 
         \def\LocalDrawing{%
             \Drawing[%
-                width=\figureWidth,
+                width=\measure{combination},
                 height=.25\textheight,
             ]{block 1/task 3}%
         }

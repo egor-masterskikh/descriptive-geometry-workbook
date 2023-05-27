@@ -22,4 +22,4 @@ fi
 #  mtxrun --script font --reload
 # после первого запуска их можно закомментировать
 
-context main.mkiv --result="Рабочая тетрадь по начерту (все блоки)"
+context main.mkiv --result="Рабочая_тетрадь_по_начерту"

@@ -21,5 +21,5 @@
 Там же есть [библиотека руководств по ConTeXt'у](https://wiki.contextgarden.net/Documentation) (по большей части на английском).
 Новичку лучше всего начать с книги [«Не слишком короткое введение в ConTeXt Mark IV»](https://raw.githubusercontent.com/contextgarden/not-so-short-introduction-to-context/main/ru/introCTX_rus_s.pdf), переведённой на русский.
 
-Если для основного текста используется язык TeX, то для рисунков другой язык — MetaPost.
+Если для основного текста используется язык TeX, то для рисунков используется другой язык — MetaPost.
 По MetaPost'у есть хорошее [руководство](https://mirrors.mit.edu/CTAN/info/metapost/doc/russian/mpman-ru/mpman-ru.pdf) на русском языке. Более обширное и наглядное (но написанное на английском) руководство можно найти на сайте ConTeXt'а — [MetaFun](http://www.pragma-ade.nl/general/manuals/metafun-p.pdf).

@@ -12,7 +12,67 @@
 
 Прямые и плоскости, параллельные какой||либо плоскости проекций, называются прямыми и плоскостями \italic{уровня}.
 
-% TODO: добавить рисунки прямых и плоскостей проецирующих и уровня
+% TODO: добавить рисунки прямых и плоскостей, проецирующих и уровня
+
+\component[figures/горизонталь.mp.mkiv]
+\component[figures/фронталь.mp.mkiv]
+\component[figures/профильная_прямая.mp.mkiv]
+
+{
+\def\LocalDrawing#1{%
+    \Drawing[%
+        width=\measure{combination},
+        height=.3\textheight,
+        frame=on,
+    ]{#1}%
+}
+
+\startplacefigure[%
+    title={Прямые уровня},
+    reference={fig:прямые уровня},
+]
+    \startcombination[nx=3, distance=\columnSpacing]
+        \startcontent
+            \LocalDrawing{горизонталь}
+        \stopcontent
+        \startcaption
+            \startframed
+                \starttabulate[|mj0|i0m|]
+                    \NC h \NC\ \text{--- горизонталь} \NR
+                    \NC h \NC{} \parallel \Pi_1 \NR
+                    \NC Z \NC{} = \text{const} \NR
+                \stoptabulate
+            \stopframed
+        \stopcaption
+
+        \startcontent
+            \LocalDrawing{фронталь}
+        \stopcontent
+        \startcaption
+            \startframed
+                \starttabulate[|mj0|i0m|]
+                    \NC f \NC\ \text{--- фронталь} \NR
+                    \NC f \NC{} \parallel \Pi_2 \NR
+                    \NC Y \NC{} = \text{const} \NR
+                \stoptabulate
+            \stopframed
+        \stopcaption
+
+        \startcontent
+            \LocalDrawing{профильная прямая}
+        \stopcontent
+        \startcaption
+            \startframed
+                \starttabulate[|mj0|i0m|]
+                    \NC p \NC\ \text{--- профильная} \NR
+                    \NC p \NC{} \parallel \Pi_3 \NR
+                    \NC X \NC{} = \text{const} \NR
+                \stoptabulate
+            \stopframed
+        \stopcaption
+    \stopcombination
+\stopplacefigure
+}
 
 \stopsection  % Теоретические положения
 
