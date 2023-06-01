@@ -154,5 +154,61 @@
 
         label(label_str, bisector * (1 + 2 * arcs_distance / arc_r) + angle_point);
     enddef;
+
+    % pair A, B -- координаты точек, от которых будет сделан вынос
+    % numeric extension_line_length -- длина выносной линии
+    % numeric direction -- 1 или -1, определяет, в какую сторону относительно базовой линии будет сделан вынос
+    % boolean return_val определяет, нужно ли возвращать размерную линию
+    vardef draw_dimension_line(expr A, B, extension_line_length, direction, return_val) =
+        save extension_line_vec, extension_line, dimension_line;
+
+        pair extension_line_vec;
+        extension_line_vec := unitvector(B - A) rotated (direction * 90) scaled extension_line_length;
+
+        path extension_line;
+        extension_line := O--extension_line_vec scaled (1 + 2 * ahlength * sind(ahangle / 2) / extension_line_length);
+
+        draw extension_line shifted A;
+        draw extension_line shifted B;
+
+        path dimension_line;
+        dimension_line := (A--B) shifted extension_line_vec;
+
+        drawdblarrow dimension_line;
+
+        if return_val:
+            dimension_line
+        fi
+    enddef;
+
+    % pair initial_point -- точка, от которой будет сделан вынос
+    % numeric extension_angle -- угол, под которым будет выноситься полка
+    vardef draw_extension_line(expr initial_point, extension_angle, label_str) =
+        save extension_line, label_content, label_width, bar;
+
+        pair extension_line_vec;
+        extension_line_vec := dir extension_angle scaled font_size;
+
+        path extension_line;
+        extension_line := (O--extension_line_vec) shifted initial_point;
+
+        picture label_content;
+        label_content := thelabel.top(label_str, O);
+        label_width := length((lrcorner label_content) - (llcorner label_content));
+
+        pair bar_vec;
+        if (-90 < extension_angle) and (extension_angle < 90):
+            bar_vec := right * label_width;
+        else:
+            bar_vec := left * label_width;
+        fi
+
+        path bar_line;
+        bar_line := (O--bar_vec) shifted (point 1 of extension_line);
+
+        draw extension_line;
+        draw bar_line;
+        draw label_content shifted point 0.5 of bar_line;
+    enddef;
     \stopMPinclusions
 \stopenvironment

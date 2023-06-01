@@ -56,40 +56,21 @@
         "$\gamma$"
     );
 
-    extension_line_length := 10u;
-
-    pair extension_line_vec;
-    extension_line_vec := extension_line_length * unitvector(A1 - B1) rotated 90;
-
-    path extension_line;
-    extension_line := O--extension_line_vec scaled (1 + 1u / extension_line_length);
-
-    draw extension_line shifted A1;
-    draw extension_line shifted B1;
-
     path dimension_line;
-    dimension_line := (A1--B1) shifted extension_line_vec;
 
-    drawdblarrow dimension_line;
+    dimension_line := draw_dimension_line(
+        A1,
+        B1,
+        10u,
+        -1,
+        true
+    );
 
-    pair extra_extension_line_vec;
-    extra_extension_line_vec := dir -135 scaled font_size;
-    path extra_extension_line;
-    extra_extension_line := (O--extra_extension_line_vec) shifted (point 0.5 of dimension_line);
-
-    picture label_content;
-    label_content := btex $н.в.\ AB$ etex;
-    label_width := length((lrcorner label_content) - (llcorner label_content));
-
-    pair extra_dimension_line_vec;
-    extra_dimension_line_vec := left * label_width;
-    path extra_dimension_line;
-    extra_dimension_line := (O--extra_dimension_line_vec) shifted (point 1 of extra_extension_line);
-
-    draw extra_extension_line;
-    draw extra_dimension_line;
-    
-    label.top(label_content, point 0.5 of extra_dimension_line);
+    draw_extension_line(
+        point 0.5 of dimension_line,
+        -135,
+        "$н.в.\ AB$"
+    );
 
     draw_point_circ_with_label(A1, "$A_1$", urt);
     draw_point_circ_with_label(A2, "$A_2$", top);
