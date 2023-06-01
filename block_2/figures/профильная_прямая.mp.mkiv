@@ -1,0 +1,95 @@
+\startcomponent .
+    \startuseMPgraphic{профильная прямая}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := .3 * fig_width;
+    z_max := .5 * fig_height;
+    y1_max := fig_height - z_max;
+    y3_max := fig_width - x_max;
+
+    draw_axes(x_max, y1_max, z_max, y3_max);
+
+    pair E[], G[];
+
+    E.x := .5 * x_max;
+    E.y := .2 * y1_max;
+    E.z := .8 * z_max;
+
+    G.x := E.x;
+    G.y := .7 * y1_max;
+    G.z := 0.2 * z_max;
+
+    E1 := (-E.x, -E.y);
+    E2 := (-E.x, E.z);
+    E3 := (E.y, E.z);
+
+    G1 := (-G.x, -G.y);
+    G2 := (-G.x, G.z);
+    G3 := (G.y, G.z);
+
+    pickup thin_pen;
+
+    draw E1--E2;
+    draw E2--E3;
+
+    draw G1--G2;
+    draw G2--G3;
+
+    draw 1.2[G1, E1]--1.2[E1, G1] withpen base_pen;
+    draw 1.2[G2, E2]--1.2[E2, G2] withpen base_pen;
+    draw 1.2[G3, E3]--1.2[E3, G3] withpen base_pen;
+
+    label.rt(btex $p_1$ etex, .5[E1, G1]);
+    label.rt(btex $p_2$ etex, .5[E2, G2]);
+    label.urt(btex $p_3$ etex, .5[E3, G3]);
+
+    draw (O--right * (E.x + E.y)) shifted E1;
+    draw (O--down * (E.z + E.y)) shifted E3;
+
+    draw (O--right * (G.x + G.y)) shifted G1;
+    draw (O--down * (G.z + G.y)) shifted G3;
+
+    mark_angle_with_label(
+        E3 - G3,
+        (E1 - G1) rotated 90,
+        0.3,
+        G3,
+        1,
+        "$\alpha$"
+    );
+
+    mark_angle_with_label(
+        G2 - E2,
+        G3 - E3,
+        0.3,
+        E3,
+        2,
+        "$\beta$"
+    );
+
+    path dimension_line;
+
+    dimension_line := draw_dimension_line(
+        E3,
+        G3,
+        2 * font_size,
+        1,
+        true
+    );
+
+    draw_extension_line(
+        point 0.3 of dimension_line,
+        45,
+        "$н.в.\ EG$"
+    );
+
+    draw_point_circ_with_label(E1, "$E_1$", lft);
+    draw_point_circ_with_label(E2, "$E_2$", lft);
+    draw_point_circ_with_label(E3, "$E_3$", llft);
+
+    draw_point_circ_with_label(G1, "$G_1$", lft);
+    draw_point_circ_with_label(G2, "$G_2$", lft);
+    draw_point_circ_with_label(G3, "$G_3$", llft);
+    \stopuseMPgraphic
+\stopcomponent

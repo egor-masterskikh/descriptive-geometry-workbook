@@ -152,7 +152,7 @@
         bisector := arc_mid_point - angle_point;
         arc_r := length(bisector);
 
-        label(label_str, bisector * (1 + 2 * arcs_distance / arc_r) + angle_point);
+        label(label_str, bisector * (1 + font_size / (2 * arc_r)) + angle_point);
     enddef;
 
     % pair A, B -- координаты точек, от которых будет сделан вынос

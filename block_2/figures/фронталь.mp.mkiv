@@ -1,0 +1,81 @@
+\startcomponent .
+    \startuseMPgraphic{фронталь}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    z_max := .5 * fig_height;
+    y1_max := fig_height - z_max;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    pair C[], D[];
+
+    C.x := .7 * x_max;
+    C.y := .4 * y1_max;
+    C.z := .3 * z_max;
+
+    D.x := .2 * x_max;
+    D.y := C.y;
+    D.z := .7 * z_max;
+
+    C1 := (-C.x, -C.y);
+    C2 := (-C.x, C.z);
+
+    D1 := (-D.x, -D.y);
+    D2 := (-D.x, D.z);
+
+    pickup thin_pen;
+
+    draw C1--C2;
+    draw D1--D2;
+
+    draw 1.2[D1, C1]--1.2[C1, D1] withpen base_pen;
+    draw 1.2[D2, C2]--1.2[C2, D2] withpen base_pen;
+
+    label.top(btex $f_1$ etex, .5[C1, D1]);
+    label.ulft(btex $f_2$ etex, .5[C2, D2]);
+
+    draw (O--(D1 - C1)) shifted C2;
+
+    mark_angle_with_label(
+        D1 - C1,
+        D2 - C2,
+        0.3,
+        C2,
+        1,
+        "$\alpha$"
+    );
+
+    mark_angle_with_label(
+        C2 - D2,
+        (C2 - D2) + (D1 - C1),
+        0.2,
+        D2,
+        3,
+        "$\gamma$"
+    );
+
+    path dimension_line;
+
+    dimension_line := draw_dimension_line(
+        C2,
+        D2,
+        2 * font_size,
+        1,
+        true
+    );
+
+    draw_extension_line(
+        point 0.5 of dimension_line,
+        135,
+        "$н.в.\ CD$"
+    );
+
+    draw_point_circ_with_label(C1, "$C_1$", bot);
+    draw_point_circ_with_label(C2, "$C_2$", lrt);
+
+    draw_point_circ_with_label(D1, "$D_1$", bot);
+    draw_point_circ_with_label(D2, "$D_2$", lrt);
+    \stopuseMPgraphic
+\stopcomponent
