@@ -1,0 +1,55 @@
+\startcomponent .
+    \startuseMPgraphic{профильно-проецирующая прямая}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := .5 * fig_width;
+    z_max := .5 * fig_height;
+    y1_max := fig_height - z_max;
+    y3_max := fig_width - x_max;
+
+    draw_axes(x_max, y1_max, z_max, y3_max);
+
+    pair A[], B[];
+
+    A.x := .7 * x_max;
+    A.y := .3 * y1_max;
+    A.z := .5 * z_max;
+
+    B.x := .2 * x_max;
+    B.y := A.y;
+    B.z := A.z;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+    A3 := (A.y, A.z);
+
+    B1 := (-B.x, -B.y);
+    B2 := (-B.x, B.z);
+    B3 := (B.y, B.z);
+
+    pickup thin_pen;
+
+    draw A1--A2;
+    draw B1--B2;
+    draw A2--A3;
+
+
+    draw (O--right * (A.x + A.y)) shifted A1;
+    draw (O--down * (A.z + A.y)) shifted A3;
+
+    draw 1.2[B1, A1]--1.2[A1, B1] withpen base_pen;
+    draw 1.2[B2, A2]--1.2[A2, B2] withpen base_pen;
+
+    draw_point_circ_with_label(A1, "$A_1$", bot);
+    draw_point_circ_with_label(A2, "$A_2$", top);
+
+    draw_point_circ_with_label(B1, "$B_1$", bot);
+    draw_point_circ_with_label(B2, "$B_2$", top);
+
+    label.top(btex $d_1$ etex, .5[A1, B1]);
+    label.bot(btex $d_2$ etex, .5[A2, B2]);
+
+    draw_point_circ_with_label(A3, "$d_3 \equiv A_3 \equiv (B_3)$", urt);
+    \stopuseMPgraphic
+\stopcomponent

@@ -1,0 +1,40 @@
+\startcomponent .
+    \startuseMPgraphic{фронтально-проецирующая прямая}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    z_max := .5 * fig_height;
+    y1_max := fig_height - z_max;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    pair A[], B[];
+
+    A.x := .6 * x_max;
+    A.y := .8 * y1_max;
+    A.z := .6 * z_max;
+
+    B.x := A.x;
+    B.y := .3 * y1_max;
+    B.z := A.z;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    B1 := (-B.x, -B.y);
+    B2 := (-B.x, B.z);
+
+    pickup thin_pen;
+
+    draw A1--A2;
+    draw B1--B2;
+
+    draw 1.2[B1, A1]--1.2[A1, B1] withpen base_pen;
+
+    draw_point_circ_with_label(A1, "$A_1$", lft);
+    draw_point_circ_with_label(B1, "$B_1$", lft);
+    draw_point_circ_with_label(A2, "$b_2 \equiv A_2 \equiv (B_2)$", rt);
+    label.rt(btex $b_1$ etex, .5[A1, B1]);
+    \stopuseMPgraphic
+\stopcomponent
