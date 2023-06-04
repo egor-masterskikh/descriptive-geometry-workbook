@@ -4,9 +4,9 @@
     fig_height := \framedheight;
 
     y1_max := .5 * fig_height;
-    y3_max := y1_max;
     z_max := fig_height - y1_max;
-    x_max := fig_width - y3_max;
+    x_max := .6 * fig_width;
+    y3_max := fig_width - x_max;
 
     draw_axes(x_max, y1_max, z_max, y3_max);
 
