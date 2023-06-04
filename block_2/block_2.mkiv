@@ -17,78 +17,89 @@
 \def\LocalDrawing#1{%
     \Drawing[%
         width=\measure{combination},
-        height=.3\textheight,
+        height=.27\textheight,
         roffset=5mm,
     ]{#1}%
 }
 
-Прямые и плоскости, перпендикулярные или параллельные плоскостям проекций, называются соответственно прямыми и плоскостями \italic{частного положения}, в отличие от прямых и плоскостей общего положения, которые наклонены к плоскостям проекций.
-
 \startplacefigure[%
-    title={Прямые уровня},
-    reference={fig:прямые уровня},
+    location=none,  % подавление общей надписи
 ]
-    \startcombination[nx=3, distance=\columnSpacing]
-        \startcontent
-            \LocalDrawing{горизонталь}
-        \stopcontent
-        \startcaption
-            \startframed
-                \starttabulate[|mj0|i0m|]
-                    \NC h \NC\ \text{--- горизонталь} \NR
-                    \NC h \NC{} \parallel \Pi_1 \NR
-                    \NC Z \NC{} = \text{const} \NR
-                \stoptabulate
-            \stopframed
-        \stopcaption
+    \startfloatcombination[
+        nx=1,  % количество столбцов в комбинации
+        ny=2,
+        alternative=text,
+        distance=\columnSpacing,  % горизонтальное расстояние между столбцами
+        after={\blank[2*line]},
+    ]
+        \startplacefigure[%
+            title={Прямые уровня},
+            reference={fig:прямые уровня},
+        ]
+            \startcombination[nx=3, distance=\columnSpacing]
+                \startcontent
+                    \LocalDrawing{горизонталь}
+                \stopcontent
+                \startcaption
+                    \startframed
+                        \starttabulate[|mj0|i0m|]
+                            \NC h \NC\ \text{--- горизонталь} \NR
+                            \NC h \NC{} \parallel \Pi_1 \NR
+                            \NC Z \NC{} = \text{const} \NR
+                        \stoptabulate
+                    \stopframed
+                \stopcaption
 
-        \startcontent
-            \LocalDrawing{фронталь}
-        \stopcontent
-        \startcaption
-            \startframed
-                \starttabulate[|mj0|i0m|]
-                    \NC f \NC\ \text{--- фронталь} \NR
-                    \NC f \NC{} \parallel \Pi_2 \NR
-                    \NC Y \NC{} = \text{const} \NR
-                \stoptabulate
-            \stopframed
-        \stopcaption
+                \startcontent
+                    \LocalDrawing{фронталь}
+                \stopcontent
+                \startcaption
+                    \startframed
+                        \starttabulate[|mj0|i0m|]
+                            \NC f \NC\ \text{--- фронталь} \NR
+                            \NC f \NC{} \parallel \Pi_2 \NR
+                            \NC Y \NC{} = \text{const} \NR
+                        \stoptabulate
+                    \stopframed
+                \stopcaption
 
-        \startcontent
-            \LocalDrawing{профильная прямая}
-        \stopcontent
-        \startcaption
-            \startframed
-                \starttabulate[|mj0|i0m|]
-                    \NC p \NC\ \text{--- профильная} \NR
-                    \NC p \NC{} \parallel \Pi_3 \NR
-                    \NC X \NC{} = \text{const} \NR
-                \stoptabulate
-            \stopframed
-        \stopcaption
-    \stopcombination
+                \startcontent
+                    \LocalDrawing{профильная прямая}
+                \stopcontent
+                \startcaption
+                    \startframed
+                        \starttabulate[|mj0|i0m|]
+                            \NC p \NC\ \text{--- профильная} \NR
+                            \NC p \NC{} \parallel \Pi_3 \NR
+                            \NC X \NC{} = \text{const} \NR
+                        \stoptabulate
+                    \stopframed
+                \stopcaption
+            \stopcombination
+        \stopplacefigure
+
+        \startplacefigure[%
+            title={Проецирующие прямые},
+            reference={fig:проецирующие прямые},
+        ]
+            \startcombination[nx=3, distance=\columnSpacing]
+                {\LocalDrawing{горизонтально-проецирующая прямая}}
+                {Горизонтально-проецирующая}
+                {\LocalDrawing{фронтально-проецирующая прямая}}
+                {Фронтально-проецирующая}
+                {\LocalDrawing{профильно-проецирующая прямая}}
+                {Профильно-проецирующая}
+            \stopcombination
+        \stopplacefigure
+    \stopfloatcombination
 \stopplacefigure
+}
+
+Прямые и плоскости, перпендикулярные или параллельные плоскостям проекций, называются соответственно прямыми и плоскостями \italic{частного положения}, в отличие от прямых и плоскостей общего положения, которые наклонены к плоскостям проекций.
 
 Прямые и плоскости, параллельные какой||либо плоскости проекций, называются прямыми и плоскостями \italic{уровня}.
 
-\startplacefigure[%
-    title={Проецирующие прямые},
-    reference={fig:проецирующие прямые},
-]
-    \startcombination[nx=3, distance=\columnSpacing]
-        {\LocalDrawing{горизонтально-проецирующая прямая}}
-        {Горизонтально-проецирующая}
-        {\LocalDrawing{фронтально-проецирующая прямая}}
-        {Фронтально-проецирующая}
-        {\LocalDrawing{профильно-проецирующая прямая}}
-        {Профильно-проецирующая}
-    \stopcombination
-\stopplacefigure
-
 Прямые и плоскости, перпендикулярные какой||либо плоскости проекций, называются \italic{проецирующими}.
-
-}
 
 \component[figures/горизонтальная_плоскость.mp.mkiv]
 \component[figures/фронтальная_плоскость.mp.mkiv]
@@ -100,33 +111,32 @@
 {%
 \def\LocalDrawing#1{%
     \Drawing[%
-        width=.17\textwidth,  % шестая часть ширины страницы
-        height=.2\textheight,
-        roffset=5.5mm,
+        width=\measure{combination},
+        height=.25\textheight,
+        roffset=5mm,
     ]{#1}%
 }
 
 \startplacefigure[%
     location=none,  % подавление общей надписи
 ]
-    \blank[halfline]
-
     \startfloatcombination[
-        nx=2,  % количество столбцов в комбинации
+        nx=1,  % количество столбцов в комбинации
+        ny=2,
         alternative=text,
         distance=\columnSpacing,  % горизонтальное расстояние между столбцами
-        location=top,
+        after={\blank[2*line]},
     ]
         \startplacefigure[%
             title={Плоскости уровня},
             reference={fig:плоскости уровня},
         ]
-            \startcombination[nx=3, distance=.25\columnSpacing]
+            \startcombination[nx=3, distance=\columnSpacing]
                 \startcontent
                     \LocalDrawing{горизонтальная плоскость}
                 \stopcontent
                 \startcaption
-                    \tfx Горизонтальная \crlf
+                    Горизонтальная \crlf
                     $\Sigma \parallel \Pi_1$
                 \stopcaption
 
@@ -134,7 +144,7 @@
                     \LocalDrawing{фронтальная плоскость}
                 \stopcontent
                 \startcaption
-                    \tfx Фронтальная \crlf
+                    Фронтальная \crlf
                     $\Delta \parallel \Pi_2$
                 \stopcaption
 
@@ -142,7 +152,7 @@
                     \LocalDrawing{профильная плоскость}
                 \stopcontent
                 \startcaption
-                    \tfx Профильная \crlf
+                    Профильная \crlf
                     $\Gamma \parallel \Pi_3$
                 \stopcaption
             \stopcombination
@@ -152,12 +162,12 @@
             title={Проецирующие плоскости},
             reference={fig:проецирующие плоскости},
         ]
-            \startcombination[nx=3, distance=.25\columnSpacing]
+            \startcombination[nx=3, distance=\columnSpacing]
                 \startcontent
                     \LocalDrawing{горизонтально-проецирующая плоскость}
                 \stopcontent
                 \startcaption
-                    \tfx Горизонтально-проецирующая \crlf
+                    Горизонтально-проецирующая \crlf
                     $\Sigma \perp \Pi_1$
                 \stopcaption
 
@@ -165,7 +175,7 @@
                     \LocalDrawing{фронтально-проецирующая плоскость}
                 \stopcontent
                 \startcaption
-                    \tfx Фронтально-проецирующая \crlf
+                    Фронтально-проецирующая \crlf
                     $\Delta \perp \Pi_2$
                 \stopcaption
 
@@ -173,7 +183,7 @@
                     \LocalDrawing{профильно-проецирующая плоскость}
                 \stopcontent
                 \startcaption
-                    \tfx Профильно-проецирующая \crlf
+                    Профильно-проецирующая \crlf
                     $\Gamma \perp \Pi_3$
                 \stopcaption
             \stopcombination
