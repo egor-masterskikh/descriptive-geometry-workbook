@@ -90,7 +90,97 @@
 
 }
 
-% TODO: добавить рисунки плоскостей частного положения
+\component[figures/горизонтальная_плоскость.mp.mkiv]
+\component[figures/фронтальная_плоскость.mp.mkiv]
+\component[figures/профильная_плоскость.mp.mkiv]
+\component[figures/горизонтально-проецирующая_плоскость.mp.mkiv]
+\component[figures/фронтально-проецирующая_плоскость.mp.mkiv]
+\component[figures/профильно-проецирующая_плоскость.mp.mkiv]
+
+{%
+\def\LocalDrawing#1{%
+    \Drawing[%
+        width=.17\textwidth,  % шестая часть ширины страницы
+        height=.2\textheight,
+        roffset=5.5mm,
+    ]{#1}%
+}
+
+\startplacefigure[%
+    location=none,  % подавление общей надписи
+]
+    \blank[halfline]
+
+    \startfloatcombination[
+        nx=2,  % количество столбцов в комбинации
+        alternative=text,
+        distance=\columnSpacing,  % горизонтальное расстояние между столбцами
+        location=top,
+    ]
+        \startplacefigure[%
+            title={Плоскости уровня},
+            reference={fig:плоскости уровня},
+        ]
+            \startcombination[nx=3, distance=.25\columnSpacing]
+                \startcontent
+                    \LocalDrawing{горизонтальная плоскость}
+                \stopcontent
+                \startcaption
+                    \tfx Горизонтальная \crlf
+                    $\Sigma \parallel \Pi_1$
+                \stopcaption
+
+                \startcontent
+                    \LocalDrawing{фронтальная плоскость}
+                \stopcontent
+                \startcaption
+                    \tfx Фронтальная \crlf
+                    $\Delta \parallel \Pi_2$
+                \stopcaption
+
+                \startcontent
+                    \LocalDrawing{профильная плоскость}
+                \stopcontent
+                \startcaption
+                    \tfx Профильная \crlf
+                    $\Gamma \parallel \Pi_3$
+                \stopcaption
+            \stopcombination
+        \stopplacefigure
+
+        \startplacefigure[%
+            title={Проецирующие плоскости},
+            reference={fig:проецирующие плоскости},
+        ]
+            \startcombination[nx=3, distance=.25\columnSpacing]
+                \startcontent
+                    \LocalDrawing{горизонтально-проецирующая плоскость}
+                \stopcontent
+                \startcaption
+                    \tfx Горизонтально-проецирующая \crlf
+                    $\Sigma \perp \Pi_1$
+                \stopcaption
+
+                \startcontent
+                    \LocalDrawing{фронтально-проецирующая плоскость}
+                \stopcontent
+                \startcaption
+                    \tfx Фронтально-проецирующая \crlf
+                    $\Delta \perp \Pi_2$
+                \stopcaption
+
+                \startcontent
+                    \LocalDrawing{профильно-проецирующая плоскость}
+                \stopcontent
+                \startcaption
+                    \tfx Профильно-проецирующая \crlf
+                    $\Gamma \perp \Pi_3$
+                \stopcaption
+            \stopcombination
+        \stopplacefigure
+    \stopfloatcombination
+\stopplacefigure
+}
 
 \stopsection  % Теоретические положения
 

@@ -1,0 +1,23 @@
+\startcomponent .
+    \startuseMPgraphic{фронтальная плоскость}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    draw_line_with_label(
+        .85 * x_max,
+        right,
+        0.5 * (-x_max, -y1_max),
+        0.5,
+        0,
+        "$\Delta_1$",
+        top,
+        false
+    );
+    \stopuseMPgraphic
+\stopcomponent
