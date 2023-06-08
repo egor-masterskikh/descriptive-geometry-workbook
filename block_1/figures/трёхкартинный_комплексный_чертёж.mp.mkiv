@@ -1,16 +1,5 @@
 \startcomponent .
-    \startuseMPgraphic{диметрия:трёхкартинный комплексный чертёж}
-    transform cabinet_scaled_[], cabinet_slanted_[], cabinet_persp_[];
-
-    cabinet_scaled_1 := identity yscaled (0.5 * cosd 45);
-    cabinet_slanted_1 := identity slanted tand -45;
-    cabinet_persp_1 := cabinet_scaled_1 transformed cabinet_slanted_1;
-
-    cabinet_scaled_3 := identity xscaled (0.5 * cosd 45);
-    cabinet_slanted_3 := identity rotated 90 slanted tand 45 rotated -90;
-    cabinet_persp_3 := cabinet_scaled_3 transformed cabinet_slanted_3;
-
-
+\startuseMPgraphic{диметрия:трёхкартинный комплексный чертёж}
     fig_width := \framedwidth;
     fig_height := \framedheight;
 
@@ -30,7 +19,7 @@
 
     pickup thin_pen;
 
-    label.urt(btex 0 etex, O);
+    label.ulft(btex 0 etex, O);
 
     drawarrow O--X;
     label.top(btex $X_{12}$ etex, X);
@@ -43,7 +32,7 @@
     draw thelabel.llft(btex $Y_{13}$ etex, Y1 transformed cabinet_scaled_1) transformed cabinet_slanted_1;
 
 
-    pair A, A[], A[]_transformed, X_A, Y_A_transformed, Z_A;
+    pair A, A[], A[]_transformed, X_A, Y_A, Y_A_transformed, Z_A;
 
     A.x := .5 * x_max;
     A.y := .4 * y1_max;
@@ -57,7 +46,8 @@
     A3_transformed = A3 transformed cabinet_persp_3;
 
     X_A := A.x * left;
-    Y_A_transformed := (A.y * down) transformed cabinet_persp_1;
+    Y_A := (A.y * right);
+    Y_A_transformed := Y_A transformed cabinet_persp_3;
     Z_A := (A.z * up);
 
     A := A1_transformed + Z_A;
@@ -109,7 +99,8 @@
 
     draw_point_circ_with_label(X_A, "$X_A$", ulft);
     draw_point_circ_with_label(Z_A, "$Z_A$", ulft);
-    draw_point_circ_with_label(Y_A_transformed, "$Y_A$", rt);
+    draw_point_circ(Y_A_transformed);
+    draw thelabel.urt(btex $Y_A$ etex, Y_A transformed cabinet_scaled_3) transformed cabinet_slanted_3;
 
     draw_point_circ_with_label(A, "$A$", urt);
 
@@ -123,10 +114,10 @@
 
     draw P3_rotation_line;
     draw arrow_head transformed cabinet_scaled_3 shifted (point 0 of P3_rotation_line) transformed inverse cabinet_persp_3 rotatedaround(point 1 of P3_rotation_line, 90 - angle(direction 0.98 of P3_rotation_line));
-    \stopuseMPgraphic
+\stopuseMPgraphic
 
 
-    \startuseMPgraphic{трёхкартинный комплексный чертёж}
+\startuseMPgraphic{трёхкартинный комплексный чертёж}
     fig_width := \framedwidth;
     fig_height := \framedheight;
 
@@ -165,5 +156,5 @@
     draw_point_circ_with_label(Y1_A, "$Y_A$", llft);
     draw_point_circ_with_label(Z_A, "$Z_A$", ulft);
     draw_point_circ_with_label(Y3_A, "$Y_A$", urt);
-    \stopuseMPgraphic
+\stopuseMPgraphic
 \stopcomponent

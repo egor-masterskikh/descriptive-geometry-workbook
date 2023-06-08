@@ -22,6 +22,17 @@
 
     font_size := 5u;
 
+    % диметрические трансформации
+    transform cabinet_scaled_[], cabinet_slanted_[], cabinet_persp_[];
+
+    cabinet_scaled_1 := identity yscaled (0.5 * cosd 45);
+    cabinet_slanted_1 := identity slanted tand -45;
+    cabinet_persp_1 := cabinet_scaled_1 transformed cabinet_slanted_1;
+
+    cabinet_scaled_3 := identity xscaled (0.5 * cosd 45);
+    cabinet_slanted_3 := identity rotated 90 slanted tand 45 rotated -90;
+    cabinet_persp_3 := cabinet_scaled_3 transformed cabinet_slanted_3;
+
     % точка-кружочек
     path point_circ;
     point_circ := fullcircle scaled u;
