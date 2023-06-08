@@ -75,11 +75,11 @@
     P1_transformed := P1 transformed cabinet_persp_1;
     P3_transformed := P3 transformed cabinet_persp_3;
 
-    draw P1;
+    % draw P1;
     label.urt(btex П₁ etex, point 2 of P1);
     draw P2;
     label.lrt(btex П₂ etex, point 2 of P2);
-    draw P3;
+    % draw P3;
     label.llft(btex П₃ etex, point 2 of P3);
 
     draw P1_transformed;
@@ -87,6 +87,20 @@
 
     draw P3_transformed;
     draw thelabel.llft(btex П₃ etex, (point 2 of P3) transformed cabinet_scaled_3) transformed cabinet_slanted_3;
+
+    path P[]_visible_subpath, P[]_invisible_subpath;
+
+    P1_invisible_subpath := P1 cutafter (subpath (1, 2) of P1_transformed);
+    P1_visible_subpath := P1 cutbefore (subpath (1, 2) of P1_transformed);
+
+    P3_invisible_subpath := P3 cutafter (subpath (1, 2) of P3_transformed);
+    P3_visible_subpath := P3 cutbefore (subpath (1, 2) of P3_transformed);
+
+    draw P1_invisible_subpath dashed gost_dashpattern;
+    draw P1_visible_subpath;
+
+    draw P3_invisible_subpath dashed gost_dashpattern;
+    draw P3_visible_subpath;
 
 
     draw_point_circ_with_label(A2, "$A_2$", top);

@@ -32,6 +32,9 @@
     cabinet_scaled_3 := identity xscaled (0.5 * cosd 45);
     cabinet_slanted_3 := identity rotated 90 slanted tand 45 rotated -90;
     cabinet_persp_3 := cabinet_scaled_3 transformed cabinet_slanted_3;
+    
+    picture gost_dashpattern;
+    gost_dashpattern := dashpattern(off 1.2u on 3u);
 
     % точка-кружочек
     path point_circ;
