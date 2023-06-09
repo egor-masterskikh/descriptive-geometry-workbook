@@ -28,8 +28,8 @@
     label.lft(btex $Z_{23}$ etex, Z);
 
     draw O--(Y1 transformed cabinet_persp_1);
-    draw arrow_head rotated -90 shifted Y1 transformed cabinet_persp_1;
-    draw thelabel.llft(btex $Y_{13}$ etex, Y1 transformed cabinet_scaled_1) transformed cabinet_slanted_1;
+    draw arrow_head rotated -90 yscaled (0.8 * cosd 45) shifted (Y1 transformed cabinet_scaled_1) transformed cabinet_slanted_1;
+    draw thelabel.llft(btex $Y_{13}$ etex, Y1 yscaled 0.5) yscaled cosd 45 transformed cabinet_slanted_1;
 
 
     pair A, A[], A[]_transformed, X_A, Y_A, Y_A_transformed, Z_A;
@@ -83,10 +83,10 @@
     label.llft(btex П₃ etex, point 2 of P3);
 
     draw P1_transformed;
-    draw thelabel.urt(btex П₁ etex, (point 2 of P1) transformed cabinet_scaled_1) transformed cabinet_slanted_1;
+    draw thelabel.urt(btex П₁ etex, (point 2 of P1) yscaled 0.5) yscaled cosd 45 transformed cabinet_slanted_1;
 
     draw P3_transformed;
-    draw thelabel.llft(btex П₃ etex, (point 2 of P3) transformed cabinet_scaled_3) transformed cabinet_slanted_3;
+    draw thelabel.llft(btex П₃ etex, (point 2 of P3) xscaled 0.5) xscaled cosd 45 transformed cabinet_slanted_3;
 
     path P[]_visible_subpath, P[]_invisible_subpath;
 
@@ -106,15 +106,15 @@
     draw_point_circ_with_label(A2, "$A_2$", top);
 
     draw_point_circ(A1_transformed);
-    draw thelabel.bot(btex $A_1$ etex, A1 transformed cabinet_scaled_1) transformed cabinet_slanted_1;
+    draw thelabel.bot(btex $A_1$ etex, A1 yscaled 0.5) yscaled cosd 45 transformed cabinet_slanted_1;
 
     draw_point_circ(A3_transformed);
-    draw thelabel.top(btex $A_3$ etex, A3 transformed cabinet_scaled_3) transformed cabinet_slanted_3;
+    draw thelabel.top(btex $A_3$ etex, A3 xscaled 0.5) xscaled cosd 45 transformed cabinet_slanted_3;
 
     draw_point_circ_with_label(X_A, "$X_A$", ulft);
     draw_point_circ_with_label(Z_A, "$Z_A$", ulft);
     draw_point_circ(Y_A_transformed);
-    draw thelabel.urt(btex $Y_A$ etex, Y_A transformed cabinet_scaled_3) transformed cabinet_slanted_3;
+    draw thelabel.urt(btex $Y_A$ etex, Y_A xscaled 0.5) xscaled cosd 45 transformed cabinet_slanted_3;
 
     draw_point_circ_with_label(A, "$A$", urt);
 
