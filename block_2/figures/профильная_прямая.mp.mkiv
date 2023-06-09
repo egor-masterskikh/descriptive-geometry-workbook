@@ -73,7 +73,7 @@
     dimension_line := draw_dimension_line(
         E3,
         G3,
-        2 * font_size,
+        2 * (font_size + labeloffset),
         1,
         true
     );
@@ -89,7 +89,7 @@
     draw_point_circ_with_label(E3, "$E_3$", llft);
 
     draw_point_circ_with_label(G1, "$G_1$", lft);
-    draw_point_circ_with_label(G2, "$G_2$", lft);
+    draw_point_circ_with_label(G2, "$G_2$", ulft);
     draw_point_circ_with_label(G3, "$G_3$", llft);
     \stopuseMPgraphic
 \stopcomponent

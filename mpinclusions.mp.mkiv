@@ -20,7 +20,7 @@
 
     arcs_distance := 1u;  % расстояние между соседними дужками в обозначении угла
 
-    font_size := 5u;
+    font_size := 3.5u;
 
     % диметрические трансформации
     transform cabinet_scaled_[], cabinet_slanted_[], cabinet_persp_[];
@@ -159,14 +159,27 @@
     enddef;
 
     vardef mark_angle_with_label(expr a_vec, b_vec, k, angle_point, n, label_str) =
-        save arc_mid_point, bisector, arc_r;
-        pair arc_mid_point, bisector;
+        save arc_midpoint, bisector, arc_r, label_content, label_width, label_height, offset;
+        pair arc_midpoint, bisector;
 
-        arc_mid_point := mark_angle(a_vec, b_vec, k, angle_point, n, true);
-        bisector := arc_mid_point - angle_point;
-        arc_r := length(bisector);
+        arc_midpoint := mark_angle(a_vec, b_vec, k, angle_point, n, true);
+        arc_r := length(arc_midpoint - angle_point);
+        bisector := unitvector(arc_midpoint - angle_point);
 
-        label(label_str, bisector * (1 + font_size / (2 * arc_r)) + angle_point);
+        picture label_content;
+        label_content := thelabel(label_str, arc_midpoint);
+
+        label_width := length((lrcorner label_content) - (llcorner label_content));
+        label_height := length((ulcorner label_content) - (llcorner label_content));
+
+        offset := 0.5 * length(label_width, label_height);
+
+        if (-179 <= angle bisector) and (angle bisector <= -110)
+           or (130 <= angle bisector) and (angle bisector <= 180):
+            offset := offset + arcs_distance;
+        fi
+
+        draw label_content shifted (bisector * offset);
     enddef;
 
     % pair A, B -- координаты точек, от которых будет сделан вынос
@@ -201,7 +214,7 @@
         save extension_line, label_content, label_width, bar;
 
         pair extension_line_vec;
-        extension_line_vec := dir extension_angle scaled font_size;
+        extension_line_vec := dir extension_angle scaled (font_size + 2 * labeloffset);
 
         path extension_line;
         extension_line := (O--extension_line_vec) shifted initial_point;
