@@ -4,55 +4,37 @@
 \setuplayout[titlepage]
 \starttext
 \startalignment[middle]
-{%
-\switchtobodyfont[exo2, big]
+    \techfont  % костыль, без которого эта команда не имеет действия в рисунках
+    \switchtobodyfont[7mm]
+    \slanted
+    \setupinterlinespace[off]
 
-Федеральное агентство по образованию
+    {%
+        Московский авиационный институт \crlf
+        \switchtobodyfont[5mm]
+        (национальный исследовательский университет)
+    }
 
-Московский авиационный институт \crlf
-(национальный исследовательский университет)
+    \vfill
 
-}
+    {%
+        \switchtobodyfont[14mm]
+        Рабочая тетрадь \crlf
+        \switchtobodyfont[7mm]
+        по начертательной геометрии
+    }
 
-\vfill
+    \blank[2*line]
 
-{%
-\techfont
+    Студент:\hspace[medium]\thinrule
 
-\startframed[%
-    width=\textwidth,
-    height=.2\textheight,
-    toffset=0mm,
-    boffset=0mm,
-    loffset=0mm,
-    roffset=0mm,
-]
-    \switchtobodyfont[20mm]
-    Рабочая\hspace тетрадь \crlf
-    \switchtobodyfont[14mm]
-    по\hspace начертательной\hspace геометрии
-\stopframed
+    Группа:\hspace[medium]\thinrule
 
-\switchtobodyfont[7mm]
-\slanted
+    Преподаватель:\hspace[medium]\thinrule
 
-Студент:\hspace[medium]\thinrule
+    \vfill
 
-Группа:\hspace[medium]\thinrule
-
-Преподаватель:\hspace[medium]\thinrule
-
-}
-
-\vfill
-
-{%
-\switchtobodyfont[exo2, big]
-
-Москва \currentdate[year]
-
-}
-
+    Москва \currentdate[year]
 \stopalignment
 
 \page[empty]
