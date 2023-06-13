@@ -23,10 +23,10 @@ $\Pi_1$~--- горизонтальная, $\Pi_2$~--- фронтальная и 
     title={Трёхкартинный комплексный чертёж},
     reference={fig:трёхкартинный комплексный чертёж},
 ]
-    \startcombination[distance=0pt, width=\textwidth]
+    \startcombination
         \startcontent
             \Drawing[%
-                width=.5\textwidth,
+                width=\measure{combination},
                 height=.5\textwidth,
                 toffset=0pt,
                 boffset=0pt,
@@ -37,9 +37,8 @@ $\Pi_1$~--- горизонтальная, $\Pi_2$~--- фронтальная и 
         \startcaption\stopcaption
         \startcontent
             \Drawing[%
-                width=.5\textwidth,
+                width=\measure{combination},
                 height=.5\textwidth,
-                loffset=3mm,
                 roffset=5mm,
             ]{трёхкартинный комплексный чертёж}
         \stopcontent
@@ -77,18 +76,14 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
     \Drawing[%
         width=\measure{combination},
         height=.6\textwidth,
-        roffset=6mm,
+        roffset=5.5mm,
     ]{#1}%
 }
 
 \startplacefigure[%
     location=none,  % подавление общей надписи
 ]
-    \startfloatcombination[
-        nx=2,  % количество столбцов в комбинации
-        alternative=text,
-        distance=\columnSpacing,  % горизонтальное расстояние между столбцами
-    ]
+    \startfloatcombination
         \startplacefigure[%
             title={Комплексный чертёж точки},
             reference={fig:комплексный чертёж точки},
@@ -122,15 +117,13 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
     \Drawing[%
         width=\textwidth,
         height=.3\textheight,
-        toffset=0mm,
-        boffset=0mm,
         roffset=3mm,
     ]{комплексный чертёж плоскости}
 
     \blank[small]
 
     \bTABLE[%
-        option=stretch,  % ширина всей таблицы будет растянута по ширине страницы
+        option=stretch,  % таблица будет растянута по ширине страницы
         align={middle, lohi},
         frame=off,
     ]
@@ -155,7 +148,7 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
     \item Как образуется эпюр Монжа?
           Дайте определение комплексного чертежа.
     \item Как образуется трёхкартинный комплексный чертёж?
-    \item Что представляет собой постоянная прямая чертежа $k_0$?
+    \item Что представляет собой постоянная прямая чертежа~$k_0$?
     \item Что на комплексном чертеже является характерным признаком параллельности прямых в пространстве?
     \item Что на комплексном чертеже является характерным признаком пересекающихся в пространстве прямых?
     \item Что на комплексном чертеже является характерным признаком скрещивающихся в пространстве прямых?
@@ -164,9 +157,7 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
 
 \page
 
-\startsection[title={Задачи}]
-
-\startitemize[n, inmargin]
+\startTasks
     \startitem
         Построить комплексный чертёж точек $A(70,20,0)$ и $B(20,40,30)$.
         Обозначить высоту и глубину точек.
@@ -231,11 +222,7 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
             ]{block 1/task 3}%
         }
 
-        \startcombination[%
-            nx=2,
-            ny=2,
-            distance=\columnSpacing,
-        ]
+        \startcombination[ny=2]
             {\LocalDrawing}{a)~$\Sigma(A, B, C)$}
             {\LocalDrawing}{б)~$\Sigma(a \cap b)$}
             {\LocalDrawing}{в)~$\Sigma(a \parallel b)$}
@@ -249,12 +236,9 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
         \page[no]
 
         \component[figures/task_4.mp.mkiv]
-
         \Drawing[%
             width=\textwidth,
             height=.25\textheight,
-            toffset=0mm,
-            boffset=0mm,
         ]{block 1/task 4}
 
         \page[no]
@@ -264,10 +248,6 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
         \startframed[%
             width=\textwidth,
             height=.25mm,
-            loffset=0mm,
-            roffset=0mm,
-            toffset=0mm,
-            boffset=0mm,
             location=line,
         ]
             \startMPcode
@@ -278,10 +258,7 @@ $AA_1$~--- высота точки~$A$ (координата~$Z$), $AA_2$~--- г
             \stopMPcode
         \stopframed
     \stopitem
-
-\stopitemize
-
-\stopsection  % Задачи
+\stopTasks
 
 \stopchapter
 
