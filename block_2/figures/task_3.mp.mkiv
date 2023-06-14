@@ -1,0 +1,104 @@
+\startcomponent .
+\startuseMPgraphic{block 2/task 3.1}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    y1_max := 0.5 * fig_height;
+    z_max := fig_height - y1_max;
+    x_max := fig_width;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    l1_inclination := 40;
+    l2_inclination := -25;
+
+    pair A[], P[]_[];
+
+    A.x := 0.2 * x_max;
+    A.y := 0.5 * y1_max;
+    A.z := 0.5 * z_max;
+
+    P1.x := 0.6 * x_max;
+    P1.y := A.y;
+    P1.z := 0.75 * z_max;
+
+    P2.x := 0.4 * x_max;
+    P2.y := 0.2 * y1_max;
+    P2.z := A.z;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    P1_1 := (-P1.x, -P1.y);
+    P1_2 := (-P1.x, P1.z);
+
+    P2_1 := (-P2.x, -P2.y);
+    P2_2 := (-P2.x, P2.z);
+
+    draw A1--A2;
+
+    draw_point_circ_with_label(A1, "$A_1$", bot);
+    draw_point_circ_with_label(A2, "$A_2$", top);
+
+    path l[];
+
+    l1 := 1.75[P2_1, P1_1]--1.3[P1_1, P2_1];
+    l2 := 1.5[P2_2, P1_2]--1.5[P1_2, P2_2];
+
+    draw l1 withpen base_pen;
+    label.ulft("$l_1$", point 0 of l1);
+
+    draw l2 withpen base_pen;
+    label.urt("$l_2$", point 0 of l2);
+\stopuseMPgraphic
+
+\startuseMPgraphic{block 2/task 3.2}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    y1_max := 0.5 * fig_height;
+    z_max := fig_height - y1_max;
+    x_max := 0.6 * fig_width;
+    y3_max := fig_width - x_max;
+
+    draw_axes(x_max, y1_max, z_max, y3_max);
+
+    pair A[], M[], N[];
+
+    A.x := 0.2 * x_max;
+    A.y := 0.75 * y1_max;
+    A.z := 0.3 * z_max;
+
+    M.x := 0.7 * x_max;
+    M.y := 0.2 * y1_max;
+    M.z := 0.15 * z_max;
+
+    N.x := M.x;
+    N.y := 0.9 * y1_max;
+    N.z := 0.95 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    M1 := (-M.x, -M.y);
+    M2 := (-M.x, M.z);
+
+    N1 := (-N.x, -N.y);
+    N2 := (-N.x, N.z);
+
+    draw A1--A2;
+    draw_point_circ_with_label(A1, "$A_1$", bot);
+    draw_point_circ_with_label(A2, "$A_2$", top);
+
+    draw M1--M2;
+    draw M1--N1 withpen base_pen;
+    draw M2--N2 withpen base_pen;
+    draw_point_circ_with_label(M1, "$M_1$", lft);
+    draw_point_circ_with_label(M2, "$M_2$", lft);
+    draw_point_circ_with_label(N1, "$N_1$", lft);
+    draw_point_circ_with_label(N2, "$N_2$", lft);
+
+    draw_extension_line(0.5[M1, N1], -150, "$l_1$");
+    draw_extension_line(0.5[M2, N2], -150, "$l_2$");
+\stopuseMPgraphic
+\stopcomponent

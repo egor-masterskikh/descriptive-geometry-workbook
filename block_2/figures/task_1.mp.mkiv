@@ -12,19 +12,16 @@
 
     pair A[];
 
-    A.x := .4 * x_max;
-    A.y := .6 * y1_max;
-    A.z := .7 * z_max;
+    A.x := .5 * x_max;
+    A.y := .5 * y1_max;
+    A.z := .5 * z_max;
 
     A1 := (-A.x, -A.y);
     A2 := (-A.x, A.z);
 
-    pickup thin_pen;
-
     draw A1--A2;
 
-    draw_point_circ_with_label(A1, "$A_1$", lrt);
-    draw_point_circ_with_label(A2, "$A_2$", urt);
-
+    draw_point_circ_with_label(A1, "$A_1$", llft);
+    draw_point_circ_with_label(A2, "$A_2$", ulft);
     \stopuseMPgraphic
 \stopcomponent

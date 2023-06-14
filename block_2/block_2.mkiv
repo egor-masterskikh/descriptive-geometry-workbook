@@ -210,9 +210,20 @@
     \item Какая плоскость называется плоскостью общего положения?
 \stopQuestions
 
-% TODO: добавить рисунки к задачам
+\component[figures/task_1.mp.mkiv]
+\component[figures/task_3.mp.mkiv]
+\component[figures/task_5.mp.mkiv]
+\component[figures/task_7.mp.mkiv]
 
 \startTasks
+    \def\LocalDrawing{%
+        \CenteredDrawing[%
+            width=.6\textwidth,
+            height=.25\textheight,
+            roffset=5mm,
+        ]{block 2/task 1}%
+    }
+
     \startitem
         Через точку $A$ провести горизонтально||проецирующую прямую~$a(a_1, a_2)$, фронтально||проецирующую прямую~$b(b_1, b_2)$, профильно||проецирующую прямую~$c(c_1, c_2)$.
 
@@ -220,12 +231,7 @@
 
         \page[no]
 
-        \component[figures/task_1.mp.mkiv]
-        \Drawing[%
-            width=\textwidth,
-            height=.3\textheight,
-            roffset=5mm,
-        ]{block 2/task 1}
+        \LocalDrawing
     \stopitem
 
     \startitem
@@ -233,28 +239,45 @@
 
         \page[no]
 
-        \component[figures/task_2.mp.mkiv]
-        \Drawing[%
-            width=\textwidth,
-            height=.3\textheight,
-            roffset=5mm,
-        ]{block 2/task 2}
+        \LocalDrawing
     \stopitem
 
     \startitem
         Через точку~$A$ провести горизонталь~$h$ и фронталь~$f$, пересекающие прямую~$l$.
 
+        \blank[halfline]
+
         \page[no]
 
-        \component[figures/task_3.mp.mkiv]
+        \startcombination
+            \startcontent
+                \Drawing[%
+                    width=.4\dimexpr\textwidth-\columnSpacing\relax,
+                    height=.25\textheight,
+                    roffset=5.5mm,
+                ]{block 2/task 3.1}
+            \stopcontent
+            \startcaption а) \stopcaption
+
+            \startcontent
+                \Drawing[%
+                    width=.6\dimexpr\textwidth-\columnSpacing\relax,
+                    height=.25\textheight,
+                    roffset=5.5mm,
+                ]{block 2/task 3.2}
+            \stopcontent
+            \startcaption б) \stopcaption
+        \stopcombination
     \stopitem
 
     \startitem
         Через точку~$A$ провести горизонтально||проецирующую плоскость~$\Sigma$ под углом~$30^\circ$ к~$\Pi_2$, фронтально||проецирующую плоскость~$\Delta$ под углом~$45^\circ$ к~$\Pi_1$, а также горизонтальную и фронтальную плоскости уровня~$\Theta$ и $\Psi$.
 
+        \blank[halfline]
+
         \page[no]
 
-        \component[figures/task_4.mp.mkiv]
+        \LocalDrawing
     \stopitem
 
     \startitem
@@ -262,7 +285,10 @@
 
         \page[no]
 
-        \component[figures/task_5.mp.mkiv]
+        \CenteredDrawing[%
+            height=.2\textheight,
+            width=.3\textheight,
+        ]{block 2/task 5}
     \stopitem
 
     \startitem
@@ -270,7 +296,7 @@
 
         \page[no]
 
-        \component[figures/task_6.mp.mkiv]
+        \LocalDrawing
     \stopitem
 
     \startitem
@@ -278,7 +304,11 @@
 
         \page[no]
 
-        \component[figures/task_7.mp.mkiv]
+        \CenteredDrawing[%
+            width=.75\textwidth,
+            height=.25\textheight,
+            roffset=5mm,
+        ]{block 2/task 7}
     \stopitem
 \stopTasks
 

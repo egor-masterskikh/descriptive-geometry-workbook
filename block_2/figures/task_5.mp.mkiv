@@ -1,0 +1,37 @@
+\startcomponent .
+\startuseMPgraphic{block 2/task 5}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(x_max, 0, 0, 0);
+
+    l1_angle := 10;
+    l2_angle := 30;
+
+    draw_line_with_label(
+        0.5 * min(y1_max / sind l1_angle, x_max / cosd l1_angle),
+        dir l1_angle,
+        0.5 * (-x_max, -y1_max),
+        0.5,
+        1,
+        "$l_1$",
+        rt,
+        false
+    );
+
+    draw_line_with_label(
+        0.75 * min(z_max / sind l2_angle, x_max / cosd l2_angle),
+        dir l2_angle,
+        0.5 * (-x_max, z_max),
+        0.5,
+        1,
+        "$l_2$",
+        top,
+        false
+    );
+\stopuseMPgraphic
+\stopcomponent

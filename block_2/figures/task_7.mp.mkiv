@@ -1,0 +1,61 @@
+\startcomponent .
+\startuseMPgraphic{block 2/task 7}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+    x_max := .6 * fig_width;
+    y3_max := fig_width - x_max;
+
+    draw_axes(x_max, y1_max, z_max, y3_max);
+
+    pair A[], B[];
+
+    A.x := 0.7 * x_max;
+    A.y := 0.5 * y1_max;
+    A.z := 0.5 * z_max;
+
+    B.x := 0.3 * x_max;
+    B.y := 0.5 * y1_max;
+    B.z := 0.5 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    B1 := (-B.x, -B.y);
+    B2 := (-B.x, B.z);
+
+    draw A1--A2;
+    draw B1--B2;
+
+    pickup base_pen;
+
+    draw_line_with_label(
+        0.8 * y1_max,
+        dir 90,
+        A1,
+        0.5,
+        0,
+        "$l_1$",
+        rt,
+        false
+    );
+
+    draw_line_with_label(
+        0.8 * z_max,
+        dir 90,
+        B2,
+        0.5,
+        1,
+        "$m_2$",
+        rt,
+        false
+    );
+
+    pickup thin_pen;
+
+    draw_point_circ_with_label(A2, "$l_2$", urt);
+    draw_point_circ_with_label(B1, "$m_1$", lrt);
+\stopuseMPgraphic
+\stopcomponent
