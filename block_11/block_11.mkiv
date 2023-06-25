@@ -1,0 +1,589 @@
+% \environment[env.mkiv]
+% \environment[mpinclusions.mp.mkiv]
+
+\startcomponent .
+\starttext
+\startchapter[title={Расчётно-графические работы (РГР)}]
+
+\startsubsubject[title={Общие требования}]
+
+\startitemize[n][
+    before={\blank[small]},
+    inbetween={\blank[none]},
+]
+    \item Каждый студент получает отдельный вариант задания, номер которого остаётся постоянным при выполнении всех работ.
+    \item Выполненную работу нужно сдать преподавателю в установленные им сроки.
+    \item Все работы нужно выполнять простым карандашом.
+          Линии, относящиеся к условию задачи, следует проводить карандашами с жёсткостью {\sourcebold 2B}, {\sourcesemibold B} и {\sourcemedium HB}, толщиной~S.
+          Вспомогательные линии~--- карандашами c жёсткостью {\sourceregular H} и {\sourcelight 2H}, толщиной $\displaystyle\rm\vfrac{S}{3}$--$\displaystyle\rm\vfrac{S}{4}$.
+    \item Работы нужно выполнять в масштабе~\bold{1:1} на листе формата~\bold{A3}, написав условие задачи и исходные данные своего варианта.
+    \item Условие задачи и буквенные обозначения на чертеже следует выполнять стандартным шрифтом~\bold{5}, прямым или наклонным.
+    \item На чертеже необходимо сохранять или специально показывать такие построения, которые дают возможность проверить правильность решения задачи и проконтролировать точность графических построений.
+    \item Для проекций характерных точек (вершины, опорные точки и т.\,д.) фигуры, а также промежуточных точек искомой кривой нужно проводить линии связи.
+    \item Эллипсы на чертеже должны строиться только по осям.
+    \item По окончании всех работ необходимо сброшюровать чертежи вместе с заполненным титульным листом.
+\stopitemize
+
+\stopsubsubject
+
+\startsubsubject[title={Порядок сдачи работ}]
+
+\startitemize[n][
+    before={\blank[small]},
+    inbetween={\blank[none]},
+]
+    \item
+    Для того чтобы преподаватель зачёл и подписал работу, необходимо:
+    \vskip -.25\openlineheight
+    \startitemize[a, nowhite]
+        \item правильно решить задачу;
+        \item аккуратно и с соблюдением стандартов ЕСКД и настоящих указаний оформить решение;
+        \item уметь подробно рассказать, как решается задача;
+        \item обосновать рациональность выбранного способа решения;
+        \item ответить на контрольные вопросы, относящиеся к данному заданию.
+    \stopitemize
+
+    \item Если студент не сдал работу в установленный срок, то для допуска к зачёту ему необходимо специальное разрешение.
+          Иначе студент к зачёту или экзамену не допускается.
+    \item Подписанные преподавателем работы студент должен сохранить до зачёта или экзамена, и затем предъявить экзаменатору.
+\stopitemize
+
+\stopsubsubject
+
+\startsubject[title={РГР №1}]
+
+Для выполнения задания необходимо изучить следующие разделы курса:
+
+\startitemize[n][
+    before={\blank[none]},
+    inbetween={\blank[nowhite]},
+    after={\blank[medium]},
+]
+    \item образование комплексного чертежа;
+    \item позиционные задачи;
+    \item условия видимости на комплексном чертеже;
+    \item свойства ортогонального проецирования прямого угла;
+    \item условия перпендикулярности прямой и плоскости на комплексном чертеже;
+    \item определение натуральной величины отрезка способом прямоугольного треугольника.
+\stopitemize
+
+\bold{Задача.}
+Построить проекции и определить натуральную величину высоты~$SD$ пирамиды и угла наклона ребра~$AS$ к основанию~$ABC$.
+
+Задание нужно решать без преобразования комплексного чертежа.
+Варианты приведены в \in{табл.}[table:ргр 1 и 2].
+Образец выполнения приведён на \in{рис.}[fig:ргр 1].
+
+\startplacetable[
+    title={Варианты к РГР №1 и №2},
+    reference={table:ргр 1 и 2},
+]
+    \setupTABLE[
+        frame=off,
+        option=stretch,  % таблица во всю ширину
+    ]
+    \setupTABLE[column][first][leftframe=on, rightframe=on]
+    \setupTABLE[column][4, 7, 10, 13][rightframe=on]
+    \setupTABLE[row][first][leftframe=on, rightframe=on]
+    \setupTABLE[row][each][topframe=on, bottomframe=on]
+    \def\curVariant{\the\numexpr\currentTABLErow - 2\relax}
+    \bTABLE[align={middle, lohi}]
+        \bTR
+            \bTD[nr=2] № вар.  \eTD
+            \bTD[nc=3] S \eTD
+            \bTD[nc=3] A \eTD
+            \bTD[nc=3] B \eTD
+            \bTD[nc=3] C \eTD
+        \eTR
+        \bTR
+            \bTD X \eTD
+            \bTD Y \eTD
+            \bTD Z \eTD
+            \bTD X \eTD
+            \bTD Y \eTD
+            \bTD Z \eTD
+            \bTD X \eTD
+            \bTD Y \eTD
+            \bTD Z \eTD
+            \bTD X \eTD
+            \bTD Y \eTD
+            \bTD Z \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 30  \eTD
+            \bTD 20  \eTD
+            \bTD 130 \eTD
+            \bTD 110 \eTD
+            \bTD 60  \eTD
+            \bTD 30  \eTD
+            \bTD 60  \eTD
+            \bTD 140 \eTD
+            \bTD 70  \eTD
+            \bTD 0   \eTD
+            \bTD 100 \eTD
+            \bTD 10  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 15  \eTD
+            \bTD 10  \eTD
+            \bTD 90  \eTD
+            \bTD 110 \eTD
+            \bTD 20  \eTD
+            \bTD 50  \eTD
+            \bTD 60  \eTD
+            \bTD 110 \eTD
+            \bTD 80  \eTD
+            \bTD 10  \eTD
+            \bTD 80  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 40  \eTD
+            \bTD 90  \eTD
+            \bTD 0   \eTD
+            \bTD 120 \eTD
+            \bTD 110 \eTD
+            \bTD 120 \eTD
+            \bTD 90  \eTD
+            \bTD 15  \eTD
+            \bTD 0   \eTD
+            \bTD 20  \eTD
+            \bTD 0   \eTD
+            \bTD 60  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 10  \eTD
+            \bTD 20  \eTD
+            \bTD 115 \eTD
+            \bTD 130 \eTD
+            \bTD 0   \eTD
+            \bTD 50  \eTD
+            \bTD 90  \eTD
+            \bTD 100 \eTD
+            \bTD 100 \eTD
+            \bTD 40  \eTD
+            \bTD 80  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 50  \eTD
+            \bTD 110 \eTD
+            \bTD 120 \eTD
+            \bTD 130 \eTD
+            \bTD 20  \eTD
+            \bTD 80  \eTD
+            \bTD 70  \eTD
+            \bTD 110 \eTD
+            \bTD 10  \eTD
+            \bTD 30  \eTD
+            \bTD 40  \eTD
+            \bTD 40  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 30  \eTD
+            \bTD 80  \eTD
+            \bTD 20  \eTD
+            \bTD 130 \eTD
+            \bTD 110 \eTD
+            \bTD 110 \eTD
+            \bTD 90  \eTD
+            \bTD 0   \eTD
+            \bTD 40  \eTD
+            \bTD 10  \eTD
+            \bTD 0   \eTD
+            \bTD 80  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 15  \eTD
+            \bTD 0   \eTD
+            \bTD 105 \eTD
+            \bTD 140 \eTD
+            \bTD 30  \eTD
+            \bTD 60  \eTD
+            \bTD 90  \eTD
+            \bTD 110 \eTD
+            \bTD 85  \eTD
+            \bTD 40  \eTD
+            \bTD 80  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 40  \eTD
+            \bTD 20  \eTD
+            \bTD 110 \eTD
+            \bTD 120 \eTD
+            \bTD 60  \eTD
+            \bTD 30  \eTD
+            \bTD 70  \eTD
+            \bTD 120 \eTD
+            \bTD 70  \eTD
+            \bTD 20  \eTD
+            \bTD 90  \eTD
+            \bTD 10  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 90  \eTD
+            \bTD 120  \eTD
+            \bTD 30  \eTD
+            \bTD 130 \eTD
+            \bTD 90  \eTD
+            \bTD 90  \eTD
+            \bTD 90  \eTD
+            \bTD 20  \eTD
+            \bTD 0   \eTD
+            \bTD 30  \eTD
+            \bTD 50  \eTD
+            \bTD 50  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 45  \eTD
+            \bTD 120 \eTD
+            \bTD 85  \eTD
+            \bTD 115 \eTD
+            \bTD 60  \eTD
+            \bTD 70  \eTD
+            \bTD 20  \eTD
+            \bTD 10  \eTD
+            \bTD 50  \eTD
+            \bTD 60  \eTD
+            \bTD 80  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 35  \eTD
+            \bTD 15  \eTD
+            \bTD 100 \eTD
+            \bTD 130 \eTD
+            \bTD 0   \eTD
+            \bTD 40  \eTD
+            \bTD 80  \eTD
+            \bTD 110 \eTD
+            \bTD 80  \eTD
+            \bTD 30  \eTD
+            \bTD 80  \eTD
+            \bTD 25  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 85  \eTD
+            \bTD 0   \eTD
+            \bTD 100 \eTD
+            \bTD 110 \eTD
+            \bTD 100 \eTD
+            \bTD 80  \eTD
+            \bTD 60  \eTD
+            \bTD 30  \eTD
+            \bTD 0   \eTD
+            \bTD 10  \eTD
+            \bTD 40  \eTD
+            \bTD 50  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 35  \eTD
+            \bTD 120 \eTD
+            \bTD 120 \eTD
+            \bTD 120 \eTD
+            \bTD 70  \eTD
+            \bTD 90  \eTD
+            \bTD 20  \eTD
+            \bTD 15  \eTD
+            \bTD 60  \eTD
+            \bTD 60  \eTD
+            \bTD 85  \eTD
+            \bTD 20  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 45  \eTD
+            \bTD 95  \eTD
+            \bTD 105 \eTD
+            \bTD 120 \eTD
+            \bTD 75  \eTD
+            \bTD 80  \eTD
+            \bTD 20  \eTD
+            \bTD 20  \eTD
+            \bTD 70  \eTD
+            \bTD 80  \eTD
+            \bTD 100 \eTD
+            \bTD 30  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 30  \eTD
+            \bTD 0   \eTD
+            \bTD 100 \eTD
+            \bTD 110 \eTD
+            \bTD 0   \eTD
+            \bTD 40  \eTD
+            \bTD 60  \eTD
+            \bTD 100 \eTD
+            \bTD 70  \eTD
+            \bTD 10  \eTD
+            \bTD 70  \eTD
+            \bTD 20  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 20  \eTD
+            \bTD 90  \eTD
+            \bTD 10  \eTD
+            \bTD 120 \eTD
+            \bTD 100 \eTD
+            \bTD 90  \eTD
+            \bTD 80  \eTD
+            \bTD 0   \eTD
+            \bTD 30  \eTD
+            \bTD 0   \eTD
+            \bTD 0   \eTD
+            \bTD 70  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 50  \eTD
+            \bTD 20  \eTD
+            \bTD 100 \eTD
+            \bTD 130 \eTD
+            \bTD 50  \eTD
+            \bTD 40  \eTD
+            \bTD 80  \eTD
+            \bTD 130 \eTD
+            \bTD 70  \eTD
+            \bTD 30  \eTD
+            \bTD 80  \eTD
+            \bTD 20  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 0  \eTD
+            \bTD 115 \eTD
+            \bTD 10  \eTD
+            \bTD 125 \eTD
+            \bTD 90  \eTD
+            \bTD 95  \eTD
+            \bTD 90  \eTD
+            \bTD 20  \eTD
+            \bTD 0   \eTD
+            \bTD 25  \eTD
+            \bTD 20  \eTD
+            \bTD 70   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 0   \eTD
+            \bTD 10  \eTD
+            \bTD 100 \eTD
+            \bTD 120 \eTD
+            \bTD 0   \eTD
+            \bTD 60  \eTD
+            \bTD 70  \eTD
+            \bTD 90  \eTD
+            \bTD 90  \eTD
+            \bTD 20  \eTD
+            \bTD 70  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 95  \eTD
+            \bTD 5   \eTD
+            \bTD 100 \eTD
+            \bTD 115 \eTD
+            \bTD 95  \eTD
+            \bTD 85  \eTD
+            \bTD 70  \eTD
+            \bTD 35  \eTD
+            \bTD 10  \eTD
+            \bTD 15  \eTD
+            \bTD 35  \eTD
+            \bTD 50  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 40  \eTD
+            \bTD 120 \eTD
+            \bTD 115 \eTD
+            \bTD 120 \eTD
+            \bTD 60  \eTD
+            \bTD 85  \eTD
+            \bTD 20  \eTD
+            \bTD 25  \eTD
+            \bTD 50  \eTD
+            \bTD 70  \eTD
+            \bTD 80  \eTD
+            \bTD 15  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 25  \eTD
+            \bTD 110 \eTD
+            \bTD 20  \eTD
+            \bTD 110 \eTD
+            \bTD 90  \eTD
+            \bTD 120 \eTD
+            \bTD 60  \eTD
+            \bTD 0   \eTD
+            \bTD 20  \eTD
+            \bTD 0   \eTD
+            \bTD 0   \eTD
+            \bTD 60  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 25  \eTD
+            \bTD 0   \eTD
+            \bTD 90  \eTD
+            \bTD 105 \eTD
+            \bTD 25  \eTD
+            \bTD 55  \eTD
+            \bTD 60  \eTD
+            \bTD 115 \eTD
+            \bTD 90  \eTD
+            \bTD 30  \eTD
+            \bTD 70  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 70  \eTD
+            \bTD 110 \eTD
+            \bTD 95  \eTD
+            \bTD 110 \eTD
+            \bTD 30  \eTD
+            \bTD 60  \eTD
+            \bTD 50  \eTD
+            \bTD 110 \eTD
+            \bTD 0   \eTD
+            \bTD 10  \eTD
+            \bTD 70  \eTD
+            \bTD 40  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 30  \eTD
+            \bTD 30  \eTD
+            \bTD 110 \eTD
+            \bTD 120 \eTD
+            \bTD 0   \eTD
+            \bTD 70  \eTD
+            \bTD 60  \eTD
+            \bTD 95  \eTD
+            \bTD 110 \eTD
+            \bTD 30  \eTD
+            \bTD 30  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 20  \eTD
+            \bTD 115 \eTD
+            \bTD 105 \eTD
+            \bTD 95  \eTD
+            \bTD 70  \eTD
+            \bTD 60  \eTD
+            \bTD 0   \eTD
+            \bTD 0   \eTD
+            \bTD 45  \eTD
+            \bTD 45  \eTD
+            \bTD 85  \eTD
+            \bTD 0   \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 20  \eTD
+            \bTD 100 \eTD
+            \bTD 0   \eTD
+            \bTD 110 \eTD
+            \bTD 100 \eTD
+            \bTD 90  \eTD
+            \bTD 70  \eTD
+            \bTD 20  \eTD
+            \bTD 10  \eTD
+            \bTD 20  \eTD
+            \bTD 15  \eTD
+            \bTD 50  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 45  \eTD
+            \bTD 100 \eTD
+            \bTD 90  \eTD
+            \bTD 115 \eTD
+            \bTD 30  \eTD
+            \bTD 85  \eTD
+            \bTD 70  \eTD
+            \bTD 100 \eTD
+            \bTD 20  \eTD
+            \bTD 0   \eTD
+            \bTD 50  \eTD
+            \bTD 60  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 25  \eTD
+            \bTD 0   \eTD
+            \bTD 95  \eTD
+            \bTD 110 \eTD
+            \bTD 0   \eTD
+            \bTD 45  \eTD
+            \bTD 70  \eTD
+            \bTD 90  \eTD
+            \bTD 80  \eTD
+            \bTD 25  \eTD
+            \bTD 40  \eTD
+            \bTD 10  \eTD
+        \eTR
+        \bTR
+            \bTD \curVariant \eTD
+            \bTD 35  \eTD
+            \bTD 100 \eTD
+            \bTD 100 \eTD
+            \bTD 120 \eTD
+            \bTD 65  \eTD
+            \bTD 65  \eTD
+            \bTD 10  \eTD
+            \bTD 0   \eTD
+            \bTD 40  \eTD
+            \bTD 70  \eTD
+            \bTD 75  \eTD
+            \bTD 20  \eTD
+        \eTR
+    \eTABLE
+\stopplacetable
+
+\stopsubject
+
+\startsubject[title={РГР №2}]
+
+Для выполнения задания необходимо изучить блок~№\in[chap:способы преобразования комплексного чертежа] \about[chap:способы преобразования комплексного чертежа] (\at{с.}[chap:способы преобразования комплексного чертежа]).
+
+\bold{Задача.}
+Способом замены плоскостей проекций определить натуральные величины высоты~$SD$ пирамиды~$SABC$ и основания~$ABC$.
+
+Варианты приведены в \in{табл.}[table:ргр 1 и 2].
+Образец выполнения приведён на \in{рис.}[fig:ргр 2].
+
+\stopsubject
+
+\startsubject[title={РГР №3}]
+
+Для выполнения задания необходимо изучить следующие разделы курса:
+
+% TODO
+
+\stopsubject
+
+\stopchapter
+\stoptext
+\stopcomponent
