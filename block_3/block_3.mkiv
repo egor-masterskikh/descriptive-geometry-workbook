@@ -10,11 +10,54 @@
 
 \startsubject[title={Задачи на взаимную принадлежность}]
 
-\italic{Точка принадлежит прямой}, если проекции точки принадлежат одноимённым проекциям прямой: $A \in a \Longleftrightarrow A_1 \in a_1,\ A_2 \in a_2$ (\in{рис.}[fig:точка принадлежит прямой]).
+\startplacefigure[
+    title={Точка принадлежит прямой},
+    reference={fig:точка принадлежит прямой},
+    location={right, height},
+]
+    \Drawing[
+        width=.36\textwidth,
+        height=.2\textheight,
+        roffset=5.5mm,
+    ]{точка принадлежит прямой}
+\stopplacefigure
 
-\italic{Прямая лежит в плоскости}, если две любые её точки принадлежат этой плоскости: $l \subset \Sigma(A, B, C) \Longleftrightarrow l \cap AB = 1,\ l \cap AC = 2$ (\in{рис.}[fig:прямая лежит в плоскости]).
+\dontleavehmode
+\italic{Точка принадлежит прямой}, если проекции точки принадлежат одноимённым проекциям прямой: \crlf
+$A \in a \Longleftrightarrow A_1 \in a_1$, $A_2 \in a_2$ (\in{рис.}[fig:точка принадлежит прямой]).
 
-\italic{Точка принадлежит плоскости}, если она принадлежит какой-либо прямой, лежащей в этой плоскости: $M \in \Sigma(A, B, C) \Longleftrightarrow M \in l,\ l \subset \Sigma(A, B, C)$ (\in{рис.}[fig:точка принадлежит плоскости]).
+\dontleavehmode
+\italic{Прямая лежит в плоскости}, если две любые её точки принадлежат этой плоскости: \crlf
+$l \subset \Sigma(A, B, C) \Longleftrightarrow l \cap AB = 1,\ l \cap AC = 2$ (\in{рис.}[fig:прямая лежит в плоскости]).
+
+\dontleavehmode
+\italic{Точка принадлежит плоскости}, если она принадлежит какой-либо прямой, лежащей в этой плоскости: \crlf
+$M \in \Sigma(A, B, C) \Longleftrightarrow M \in l,\ l \subset \Sigma(A, B, C)$ (\in{рис.}[fig:точка принадлежит плоскости]).
+
+\startplacefigure[location=none]
+    \def\LocalDrawing#1{%
+        \Drawing[%
+            width=\measure{combination},
+            height=.25\textheight,
+            roffset=5.5mm,
+        ]{#1}%
+    }
+
+    \startfloatcombination
+        \startplacefigure[
+            title={Прямая лежит в плоскости},
+            reference={fig:прямая лежит в плоскости},
+        ]
+            \LocalDrawing{прямая лежит в плоскости}
+        \stopplacefigure
+        \startplacefigure[
+            title={Точка принадлежит плоскости},
+            reference={fig:точка принадлежит плоскости},
+        ]
+            \LocalDrawing{точка принадлежит плоскости}
+        \stopplacefigure
+    \stopfloatcombination
+\stopplacefigure
 
 \stopsubject
 
@@ -26,6 +69,8 @@
 
 Построим точку~$K(K_1, K_2) = l(l_1, l_2) \cap \Sigma(\Sigma_2)$ (\in{рис.}[fig:пересечение прямой общего положения с проецирующей плоскостью]) и определим видимость участков прямой~$l$.
 Полупрямая, находящаяся выше плоскости~$\Sigma$, будет видимой на $\Pi_1$.
+
+% TODO: добавить рисунок
 
 \stopsubsubject
 
@@ -44,6 +89,8 @@
     \item видимость прямой~$l$ определяем способом конкурирующих точек.
 \stopitemize
 
+% TODO: добавить рисунок
+
 \stopsubsubject
 
 \startsubsubject[title={Пересечение проецирующей плоскости с плоскостью общего положения}]
@@ -54,6 +101,8 @@
     \item $l_2 \equiv \Delta_2$;
     \item строим $l_1$, учитывая, что $l \subset \Psi$;
 \stopitemize
+
+% TODO: добавить рисунок
 
 \stopsubsubject
 
@@ -70,6 +119,17 @@
         При виде сверху на $\Pi_1$ видимой будет та точка, высота которой больше.
         При виде спереди на $\Pi_2$ видимой будет та точка, глубина которой больше.
 \stopitemize
+
+\startplacefigure[
+    title={Первая основная позиционная задача},
+    reference={fig:первая основная позиционная задача},
+]
+    \Drawing[
+        width=.5\textwidth,
+        height=.27\textheight,
+        roffset=5.5mm,
+    ]{первая основная позиционная задача}
+\stopplacefigure
 
 \stopsubsubject
 
