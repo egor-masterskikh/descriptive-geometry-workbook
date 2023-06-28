@@ -11,15 +11,10 @@
 
     inclination := 30;
 
-    draw_line_with_label(
-        0.7 * min(x_max / cosd inclination, y1_max / sind inclination),
-        dir inclination,
-        0.5 * (-x_max, -y1_max),
-        0.5,
-        0,
-        "$\Sigma_1$",
-        ulft,
-        false
-    );
+    draw get_line_and_draw_label(
+        0.7 * min(x_max / cosd inclination, y1_max / sind inclination), inclination,
+        0.5 * (-x_max, -y1_max), 0.5,
+        0, "$\Sigma_1$", ulft
+    ) withpen base_pen;
     \stopuseMPgraphic
 \stopcomponent

@@ -31,26 +31,16 @@
 
     pickup base_pen;
 
-    draw_line_with_label(
-        0.8 * y1_max,
-        dir 90,
-        A1,
-        0.5,
-        0,
-        "$l_1$",
-        rt,
-        false
+    draw get_line_and_draw_label(
+        0.8 * y1_max, 90,
+        A1, 0.5,
+        0, "$l_1$", rt
     );
 
-    draw_line_with_label(
-        0.8 * z_max,
-        dir 90,
-        B2,
-        0.5,
-        1,
-        "$m_2$",
-        rt,
-        false
+    draw get_line_and_draw_label(
+        0.8 * z_max, 90,
+        B2, 0.5,
+        1, "$m_2$", rt
     );
 
     pickup thin_pen;

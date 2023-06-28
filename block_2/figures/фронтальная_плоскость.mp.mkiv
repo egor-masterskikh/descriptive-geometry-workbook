@@ -9,15 +9,10 @@
 
     draw_axes(x_max, y1_max, z_max, 0);
 
-    draw_line_with_label(
-        .8 * x_max,
-        right,
-        0.5 * (-x_max, -y1_max),
-        0.5,
-        0,
-        "$\Delta_1$",
-        top,
-        false
-    );
+    draw get_line_and_draw_label(
+        .8 * x_max, 0,
+        0.5 * (-x_max, -y1_max), 0.5,
+        0, "$\Delta_1$", top
+    ) withpen base_pen;
     \stopuseMPgraphic
 \stopcomponent

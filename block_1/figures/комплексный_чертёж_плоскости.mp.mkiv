@@ -94,26 +94,16 @@
     label.ulft(btex $a_1$ etex, .55[A1, B1] + O);
     draw (1.2[A2, B2]--1.5[B2, A2]) shifted O withpen base_pen;
     label.ulft(btex $a_2$ etex, .5[A2, B2] + O);
-    draw_line_with_label(
-        length (B1 - A1),
-        (B1 - A1) / length (B1 - A1),
-        C1,
-        0.6,
-        1,
-        "$b_1$",
-        top,
-        false
-    );
-    draw_line_with_label(
-        length (B2 - A2),
-        (B2 - A2) / length (B2 - A2),
-        C2,
-        0.4,
-        1,
-        "$b_2$",
-        top,
-        false
-    );
+    draw get_line_and_draw_label(
+        length(B1 - A1), angle(B1 - A1),
+        C1, 0.6,
+        1, "$b_1$", top
+    ) withpen base_pen;
+    draw get_line_and_draw_label(
+        length(B2 - A2), angle(B2 - A2),
+        C2, 0.4,
+        1, "$b_2$", top
+    ) withpen base_pen;
     draw_points;
     \stopuseMPgraphic
 \stopcomponent

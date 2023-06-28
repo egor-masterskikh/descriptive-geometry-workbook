@@ -103,58 +103,51 @@
     % numeric len -- длина отображаемого отрезка прямой
     % pair point_on -- точка, принадлежащая прямой
     % numeric point_on_k определяет, какую часть всего отрезка прямой составляет отрезок между начальной координатой отрезка и контрольной точкой
-    % boolean return_val определяет, нужно ли возвращать значение начальной координаты
-    vardef draw_line(expr len, direction, point_on, point_on_k, return_val) =
+    vardef get_line(expr len, inclination, point_on, point_on_k) =
         save vec, start_point, end_point;
         pair vec, start_point, end_point;
 
-        vec := len * direction;
+        vec := len * dir inclination;
 
         end_point - start_point = vec;
         point_on - start_point = point_on_k * vec;
 
-        draw start_point--end_point withpen base_pen;
-
-        if return_val:
-            start_point
-        fi
+        start_point--end_point
     enddef;
 
     % numeric label_k определяет, какую часть всего отрезка прямой составляет отрезок между начальной координатой отрезка и координатой метки
     % string label_str -- собственно содержимое метки
     % suffix label_pos -- расположение метки относительно её координаты
-    vardef draw_line_with_label(expr len, direction, point_on, point_on_k, label_k, label_str)(suffix label_pos)(expr return_val) =
-        save start_point;
-        pair start_point;
-
-        start_point := draw_line(len, direction, point_on, point_on_k, true);
-        label.label_pos(label_str, start_point + label_k * len * direction);
-
-        if return_val:
-            start_point
-        fi
+    vardef get_line_and_draw_label(expr len, inclination, point_on, point_on_k, label_k, label_str)(suffix label_pos) =
+        save line; path line;
+        line := get_line(len, inclination, point_on, point_on_k);
+        label.label_pos(label_str, point label_k of line);
+        line
     enddef;
 
     % pair a_vec, b_vec -- векторы, угол между которыми будет обозначен
     % numeric k -- отношение радиуса дуги к длине кратчайшего вектора
     % pair angle_point -- точка, около которой будет обозначен угол
-    % numeric n -- количество дужек, обозначающих угол
-    % boolean return_val определяет, нужно ли возвращать значение середины наибольшей дуги
+    % numeric n -- режим рисования дужки
+        % n = 1 -- только дужка
+        % n = 2 -- дужка со стрелкой вначале
+        % n = 3 -- дужка со стрелкой вконце
+        % n = 4 -- дужка со стрелками на обоих концах
+        % n = 5 -- дужка со стрелкой посередине
+    % boolean return_val определяет, нужно ли возвращать значение середины дуги
     vardef mark_angle(expr a_vec, b_vec, k, angle_point, n, return_val) =
-        save arc, start_r, end_r;
+        save arc, r;
         path arc;
 
-        arc := unitvector(a_vec){a_vec rotated 90}..unitvector(b_vec);
+        r := k * min(length(a_vec), length(b_vec));
+        arc := (unitvector(a_vec){a_vec rotated 90}..unitvector(b_vec)) scaled r;
 
-        start_r := k * min(length(a_vec), length(b_vec));
-        end_r := start_r + arcs_distance * (n - 1);
-
-        for cur_r = start_r step arcs_distance until end_r:
-            draw arc scaled cur_r shifted angle_point;
-        endfor
+        if n = 1:
+            draw arc shifted angle_point;
+        fi
 
         if return_val:
-            (point 0.5 of arc scaled end_r shifted angle_point)
+            (point 0.5 of arc shifted angle_point)
         fi
     enddef;
 
@@ -236,6 +229,13 @@
         draw extension_line;
         draw bar_line;
         draw label_content shifted point 0.5 of bar_line;
+    enddef;
+
+    % path trail -- путь
+    % numeric arrow_k определяет, в каком отношении стрелка делит путь
+    vardef draw_path_with_arrow(expr trail, arrow_k) =
+        drawarrow subpath(0, arrow_k) of trail;
+        draw subpath(arrow_k, 1) of trail;
     enddef;
     \stopMPinclusions
 \stopenvironment

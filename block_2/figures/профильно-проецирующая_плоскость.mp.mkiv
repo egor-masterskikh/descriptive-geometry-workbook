@@ -12,15 +12,10 @@
 
     inclination := 60;
 
-    draw_line_with_label(
-        0.7 * min(y3_max / cosd inclination, z_max / sind inclination),
-        dir inclination,
-        0.5 * (y3_max, z_max),
-        0.5,
-        1,
-        "$\Gamma_3$",
-        ulft,
-        false
-    );
+    draw get_line_and_draw_label(
+        0.7 * min(y3_max / cosd inclination, z_max / sind inclination), inclination,
+        0.5 * (y3_max, z_max), 0.5,
+        1, "$\Gamma_3$", ulft
+    ) withpen base_pen;
     \stopuseMPgraphic
 \stopcomponent
