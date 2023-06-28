@@ -19,8 +19,8 @@
     A2 := (-A.x, A.z);
 
     B.x := .6 * x_max;
-    B.y := .85 * y1_max;
-    B.z := .85 * z_max;
+    B.y := .88 * y1_max;
+    B.z := .88 * z_max;
 
     B1 := (-B.x, -B.y);
     B2 := (-B.x, B.z);
@@ -32,7 +32,7 @@
     C1 := (-C.x, -C.y);
     C2 := (-C.x, C.z);
 
-    P1_1 := .6[B1, C1];
+    P1_1 := .55[B1, C1];
     P1_2 = whatever[B2, C2];
     xpart P1_2 = xpart P1_1;
 
@@ -43,7 +43,7 @@
 
     pair M[];
 
-    M1 := .6[A1, P1_1];
+    M1 := .65[A1, P1_1];
     M2 := whatever[A2, P1_2];
     xpart M2 = xpart M1;
 
