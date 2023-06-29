@@ -198,5 +198,14 @@
 
     label.lft("$d_1$", point 0 of d1);
     label.top("$d_2$", point 1 of d2);
+
+    label.top("$m_1$", point 0.5 of (P1_1--P2_1));
+    label.top("$\bar{m}_1$", point 0.5 of (m'1 cutbefore b1 cutafter (P2_1--P2_2)));
+
+    label.top("$n_1$", point 0.5 of (P4_1--P3_1));
+    label.top("$\bar{n}_1$", point 0.5 of (n'1 cutbefore c1 cutafter (P3_1--P3_2)));
+
+    label.lrt("$l_1$", point 0.6 of (A1--B1));
+    label.urt("$l_2$", point 0.6 of (A2--B2));
 \stopuseMPgraphic
 \stopcomponent
