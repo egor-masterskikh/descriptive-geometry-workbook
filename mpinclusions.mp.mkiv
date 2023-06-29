@@ -232,7 +232,7 @@
     enddef;
 
     % path trail -- путь
-    % numeric arrow_k определяет, в каком отношении стрелка делит путь
+    % numeric arrow_k определяет, на какой части пути разместить стрелку
     vardef draw_path_with_arrow(expr trail, arrow_k) =
         drawarrow subpath(0, arrow_k) of trail;
         draw subpath(arrow_k, 1) of trail;
