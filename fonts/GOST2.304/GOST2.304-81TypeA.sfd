@@ -23,7 +23,7 @@ OS2Version: 4
 OS2_WeightWidthSlopeOnly: 1
 OS2_UseTypoMetrics: 0
 CreationTime: 1422632559
-ModificationTime: 1680295123
+ModificationTime: 1688123486
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -940,7 +940,7 @@ EndChar
 
 StartChar: uni0000
 Encoding: 0 0 1
-AltUni2: 00001d.ffffffff.0 000008.ffffffff.0 00001d.ffffffff.0 000008.ffffffff.0
+AltUni2: 000008.ffffffff.0 00001d.ffffffff.0 000008.ffffffff.0 00001d.ffffffff.0
 Width: 0
 GlyphClass: 2
 Flags: W
@@ -4430,19 +4430,19 @@ StartChar: macron
 Encoding: 175 175 114
 Width: 227
 GlyphClass: 4
-Flags: W
+Flags: HW
 TeX: 636 -591
 AnchorPoint: "Anchor-1" 114 614 mark 0
 LayerCount: 2
 Fore
 SplineSet
-46 614 m 0
- 46 626 57 636 69 636 c 2
- 159 636 l 2
- 171 636 182 626 182 614 c 0
- 182 602 171 591 159 591 c 2
- 69 591 l 2
- 57 591 46 602 46 614 c 0
+11 614 m 0
+ 11 626 22 636 34 636 c 2
+ 194 636 l 2
+ 206 636 217 626 217 614 c 0
+ 217 602 206 591 194 591 c 2
+ 34 591 l 6
+ 22 591 11 602 11 614 c 0
 EndSplineSet
 EndChar
 
