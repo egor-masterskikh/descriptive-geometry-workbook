@@ -1,0 +1,106 @@
+\startcomponent .
+\startuseMPgraphic{параллельность двух плоскостей}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    pair A[], M[];
+
+    A.x := .75 * x_max;
+    A.y := .45 * y1_max;
+    A.z := .55 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    M.x := .25 * x_max;
+    M.y := .4 * y1_max;
+    M.z := .45 * z_max;
+
+    M1 := (-M.x, -M.y);
+    M2 := (-M.x, M.z);
+
+    path a[], b[], m[], n[];
+
+    a1_inclination := 15;
+    a2_inclination := -30;
+
+    b1_inclination := -40;
+    b2_inclination := 50;
+
+    a1 := get_line(
+        0.42 * min(x_max / cosd a1_inclination, y1_max / sind a1_inclination), a1_inclination,
+        A1, 0.5
+    );
+    a2 := get_line(
+        0.5 * min(x_max / cosd a2_inclination, z_max / sind a2_inclination), a2_inclination,
+        A2, 0.5
+    );
+
+    b1 := get_line(
+        0.6 * min(x_max / cosd b1_inclination, y1_max / sind b1_inclination), b1_inclination,
+        A1, 0.5
+    );
+    b2 := get_line(
+        0.65 * min(x_max / cosd b2_inclination, z_max / sind b2_inclination), b2_inclination,
+        A2, 0.5
+    );
+
+    m1 := get_line(
+        arclength(a1), a1_inclination,
+        M1, 0.5
+    );
+    m2 := get_line(
+        arclength(a2), a2_inclination,
+        M2, 0.5
+    );
+
+    n1 := get_line(
+        arclength(b1), b1_inclination,
+        M1, 0.5
+    );
+    n2 := get_line(
+        arclength(b2), b2_inclination,
+        M2, 0.5
+    );
+
+    draw A1--A2;
+    draw M1--M2;
+    
+    pickup base_pen;
+
+    draw a1;
+    draw a2;
+    draw b1;
+    draw b2;
+
+    draw m1;
+    draw m2;
+    draw n1;
+    draw n2;
+    
+    pickup thin_pen;
+
+    label.top("$a_1$", point 0 of a1);
+    label.top("$a_2$", point 1 of a2);
+
+    label.top("$b_1$", point 0 of b1);
+    label.ulft("$b_2$", point 1 of b2);
+
+    label.top("$m_1$", point 0 of m1);
+    label.top("$m_2$", point 0 of m2);
+
+    label.top("$n_1$", point 1 of n1);
+    label.ulft("$n_2$", point 1 of n2);
+
+    draw_point_circ(A1);
+    draw_point_circ(A2);
+    draw_point_circ(M1);
+    draw_point_circ(M2);
+\stopuseMPgraphic
+\stopcomponent

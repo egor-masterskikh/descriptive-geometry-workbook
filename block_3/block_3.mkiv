@@ -11,7 +11,7 @@
 \startsubject[title={Задачи на взаимную принадлежность}]
 
 \startplacefigure[
-    title={Точка принадлежит прямой},
+    title={Точка принадлежит прямой: $A \in a$},
     reference={fig:точка принадлежит прямой},
     location={right, height},
 ]
@@ -45,13 +45,13 @@ $M \in \Sigma(A, B, C) \Longleftrightarrow M \in l,\ l \subset \Sigma(A, B, C)$ 
 
     \startfloatcombination
         \startplacefigure[
-            title={Прямая лежит в плоскости},
+            title={Прямая лежит в плоскости: $l \subset \Sigma(A, B, C)$},
             reference={fig:прямая лежит в плоскости},
         ]
             \LocalDrawing{прямая лежит в плоскости}
         \stopplacefigure
         \startplacefigure[
-            title={Точка принадлежит плоскости},
+            title={Точка принадлежит плоскости: $M \in \Sigma(A, B, C)$},
             reference={fig:точка принадлежит плоскости},
         ]
             \LocalDrawing{точка принадлежит плоскости}
@@ -121,7 +121,7 @@ $M \in \Sigma(A, B, C) \Longleftrightarrow M \in l,\ l \subset \Sigma(A, B, C)$ 
 \stopitemize
 
 \startplacefigure[
-    title={Первая основная позиционная задача},
+    title={Первая основная позиционная задача: $l \cap \Theta(A, B, C) = K$},
     reference={fig:первая основная позиционная задача},
 ]
     \Drawing[
@@ -148,7 +148,7 @@ $M \in \Sigma(A, B, C) \Longleftrightarrow M \in l,\ l \subset \Sigma(A, B, C)$ 
 \stopitemize
 
 \startplacefigure[
-    title={Вторая основная позиционная задача},
+    title={Вторая основная позиционная задача: $\Phi(a \cap b) \cap \Omega(c \parallel d) = l(A, B)$},
     reference={fig:вторая основная позиционная задача},
 ]
     \Drawing[
@@ -173,6 +173,32 @@ $l \parallel m \subset \Sigma \Longrightarrow l \parallel \Sigma$ (\in{рис.}[
 $\Theta(a \cap b),\ \Phi(m \cap n),\ a \parallel m,\ b \parallel n \Longrightarrow \Theta \parallel \Phi$ (\in{рис.}[fig:параллельность двух плоскостей]).
 
 \stopsubsubject
+
+\startplacefigure[location=none]
+    \startfloatcombination
+        \def\LocalDrawing#1{%
+            \Drawing[%
+                width=\measure{combination},
+                height=.27\textheight,
+                roffset=5.5mm,
+            ]{#1}%
+        }
+
+        \startplacefigure[
+            title={Параллельность прямой и плоскости: $l \parallel \Sigma(A, B, C)$},
+            reference={fig:параллельность прямой и плоскости},
+        ]
+            \LocalDrawing{параллельность прямой и плоскости}
+        \stopplacefigure
+
+        \startplacefigure[
+            title={Параллельность двух плоскостей: $\Theta(a \cap b) \parallel \Phi(m \cap n)$},
+            reference={fig:параллельность двух плоскостей},
+        ]
+            \LocalDrawing{параллельность двух плоскостей}
+        \stopplacefigure
+    \stopfloatcombination
+\stopplacefigure
 
 \stopsubject
 
