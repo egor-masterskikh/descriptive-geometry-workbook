@@ -98,7 +98,7 @@
     draw_point_circ_with_label(N1, "$N_1$", lft);
     draw_point_circ_with_label(N2, "$N_2$", lft);
 
-    draw_extension_line(0.5[M1, N1], -150, "$l_1$");
-    draw_extension_line(0.5[M2, N2], -150, "$l_2$");
+    draw get_ext_line_and_draw_label(0.5[M1, N1], -150, "$l_1$");
+    draw get_ext_line_and_draw_label(0.5[M2, N2], -150, "$l_2$");
 \stopuseMPgraphic
 \stopcomponent

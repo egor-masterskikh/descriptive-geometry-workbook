@@ -226,34 +226,39 @@
         dim_line
     enddef;
 
-    % pair initial_point -- точка, от которой будет сделан вынос
-    % numeric extension_angle -- угол, под которым будет выноситься полка
-    vardef draw_extension_line(expr initial_point, extension_angle, label_str) =
-        save extension_line, label_content, label_width, bar;
+    % pair init_point -- точка, от которой будет сделан вынос
+    % numeric ext_angle -- угол, под которым будет выноситься полка
+    vardef get_ext_line(expr init_point, ext_angle, label_str) =
+        save ext_line, label_content, label_width, bar;
 
-        pair extension_line_vec;
-        extension_line_vec := dir extension_angle scaled (font_size + 2 * labeloffset);
-
-        path extension_line;
-        extension_line := (O--extension_line_vec) shifted initial_point;
+        pair ext_line_vec;
+        ext_line_vec := dir ext_angle scaled (font_size + 2 * labeloffset);
 
         picture label_content;
         label_content := thelabel.top(label_str, O);
         label_width := length((lrcorner label_content) - (llcorner label_content));
 
-        pair bar_vec;
-        if (-90 < extension_angle) and (extension_angle < 90):
-            bar_vec := right * label_width;
+        pair bar_line_vec;
+        if abs(ext_angle) < 90:
+            bar_line_vec := right * label_width;
         else:
-            bar_vec := left * label_width;
+            bar_line_vec := left * label_width;
         fi
 
-        path bar_line;
-        bar_line := (O--bar_vec) shifted (point 1 of extension_line);
+        path res_line;
+        res_line := (O--ext_line_vec--(ext_line_vec + bar_line_vec)) shifted init_point;
 
-        draw extension_line;
-        draw bar_line;
-        draw label_content shifted point 0.5 of bar_line;
+        res_line
+    enddef;
+
+    vardef get_ext_line_and_draw_label(expr init_point, ext_angle, label_str) =
+        save ext_line;
+        path ext_line;
+
+        ext_line := get_ext_line(init_point, ext_angle, label_str);
+        label.top(label_str, point 1.5 of ext_line);
+
+        ext_line
     enddef;
 
     % path trail -- путь
