@@ -38,36 +38,29 @@
 
     draw (O--(B2 - A2)) shifted A1;
 
-    mark_angle_with_label(
-        B1 - A1,
-        B2 - A2,
-        0.34,
-        A1,
-        1,
+    draw get_angle_mark_and_draw_label(
+        B1 - A1, B2 - A2,
+        A1, 0.34,
         "$\beta$"
     );
 
-    mark_angle_with_label(
-        (A1 - B1) + (B2 - A2),
-        A1 - B1,
-        0.33,
-        B1,
-        1,
+    draw get_angle_mark_and_draw_label(
+        (A1 - B1) + (B2 - A2), A1 - B1,
+        B1, 0.33,
         "$\gamma$"
     );
 
-    path dimension_line;
+    path dim_line;
 
-    dimension_line := draw_dimension_line(
-        A1,
-        B1,
+    dim_line := get_dim_line(
+        A1, B1,
         2 * (font_size + labeloffset),
-        -1,
-        true
+        -90, -90
     );
+    drawdblarrow dim_line;
 
     draw_extension_line(
-        point 0.5 of dimension_line,
+        point 0.5 of dim_line,
         -135,
         "$н.в.\ AB$"
     );

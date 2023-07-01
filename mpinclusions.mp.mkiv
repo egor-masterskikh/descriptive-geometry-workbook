@@ -15,8 +15,11 @@
     ahlength := 4u;  % длина стрелки
     setarrows(open);
 
+    arrow_width := 2 * ahlength * sind(ahangle / 2);
+    arrow_height := ahlength * cosd(ahangle / 2);
+
     path arrow_head;
-    arrow_head := (-ahlength * cosd(ahangle / 2), ahlength * sind(ahangle / 2))--(0, 0)--(-ahlength * cosd(ahangle / 2), -ahlength * sind(ahangle / 2));
+    arrow_head := (-arrow_height, arrow_width / 2)--(0, 0)--(-arrow_height, -arrow_width / 2);
 
     arcs_distance := 1u;  % расстояние между соседними дужками в обозначении угла
 
@@ -41,10 +44,9 @@
     point_circ := fullcircle scaled u;
 
     def draw_point_circ(expr pos) =
-        pickup thin_pen;
         if pair pos:
-            fill point_circ shifted pos withcolor white;
-            draw point_circ shifted pos;
+            fill point_circ shifted pos withcolor white withpen thin_pen;
+            draw point_circ shifted pos withpen thin_pen;
         fi
     enddef;
 
@@ -126,38 +128,24 @@
     enddef;
 
     % pair a_vec, b_vec -- векторы, угол между которыми будет обозначен
-    % numeric k -- отношение радиуса дуги к длине кратчайшего вектора
     % pair angle_point -- точка, около которой будет обозначен угол
-    % numeric n -- режим рисования дужки
-        % n = 1 -- только дужка
-        % n = 2 -- дужка со стрелкой вначале
-        % n = 3 -- дужка со стрелкой вконце
-        % n = 4 -- дужка со стрелками на обоих концах
-        % n = 5 -- дужка со стрелкой посередине
-    % boolean return_val определяет, нужно ли возвращать значение середины дуги
-    vardef mark_angle(expr a_vec, b_vec, k, angle_point, n, return_val) =
+    % numeric k -- отношение радиуса дуги к длине кратчайшего вектора
+    vardef get_angle_mark(expr a_vec, b_vec, angle_point, k) =
         save arc, r;
         path arc;
 
         r := k * min(length(a_vec), length(b_vec));
         arc := (unitvector(a_vec){a_vec rotated 90}..unitvector(b_vec)) scaled r;
 
-        if n = 1:
-            draw arc shifted angle_point;
-        fi
-
-        if return_val:
-            (point 0.5 of arc shifted angle_point)
-        fi
+        arc shifted angle_point
     enddef;
 
-    vardef mark_angle_with_label(expr a_vec, b_vec, k, angle_point, n, label_str) =
-        save arc_midpoint, bisector, arc_r, label_content, label_width, label_height, offset;
+    vardef get_point_for_angle_label(expr arc, label_str) =
+        save arc_midpoint, bisector, label_content, label_width, label_height, offset;
         pair arc_midpoint, bisector;
 
-        arc_midpoint := mark_angle(a_vec, b_vec, k, angle_point, n, true);
-        arc_r := length(arc_midpoint - angle_point);
-        bisector := unitvector(arc_midpoint - angle_point);
+        arc_midpoint := point 0.5 of arc;
+        bisector := unitvector(direction 0.5 of arc) rotated -90;
 
         picture label_content;
         label_content := thelabel(label_str, arc_midpoint);
@@ -172,33 +160,70 @@
             offset := offset + arcs_distance;
         fi
 
-        draw label_content shifted (bisector * offset);
+        arc_midpoint + bisector * offset
+    enddef;
+
+    vardef get_angle_mark_and_draw_label(expr a_vec, b_vec, angle_point, k, label_str) =
+        save arc, point_for_angle_label;
+        path arc;
+        pair point_for_angle_label;
+
+        arc := get_angle_mark(a_vec, b_vec, angle_point, k);
+        point_for_angle_label := get_point_for_angle_label(arc, label_str);
+
+        label(label_str, point_for_angle_label);
+
+        arc
+    enddef;
+
+    vardef get_perp_mark(expr a_vec, b_vec, angle_point, k) =
+        save mark, r;
+        path mark;
+
+        r := k * min(length(a_vec), length(b_vec));
+        mark := (unitvector(a_vec)--(unitvector(a_vec) + unitvector(b_vec))--unitvector(b_vec)) scaled r;
+
+        mark shifted angle_point
     enddef;
 
     % pair A, B -- координаты точек, от которых будет сделан вынос
-    % numeric extension_line_length -- длина выносной линии
-    % numeric direction -- 1 или -1, определяет, в какую сторону относительно базовой линии будет сделан вынос
-    % boolean return_val определяет, нужно ли возвращать размерную линию
-    vardef draw_dimension_line(expr A, B, extension_line_length, direction, return_val) =
-        save extension_line_vec, extension_line, dimension_line;
+    % numeric ext_line_len -- длина короткой выносной линии
+    % numeric ext_angle -- угол, соответствующий направлению выноса относительно базовой линии
+    % numeric dim_angle -- угол размерной линии относительно линии выноса
+    vardef get_dim_line(expr A, B, ext_line_len, ext_angle, dim_angle) =
+        save ext_line, dim_line, long_ext_line;
 
-        pair extension_line_vec;
-        extension_line_vec := unitvector(B - A) rotated (direction * 90) scaled extension_line_length;
+        pair ext_line_vec;
+        ext_line_vec := unitvector(B - A) rotated ext_angle scaled ext_line_len;
 
-        path extension_line;
-        extension_line := O--extension_line_vec scaled (1 + 2 * ahlength * sind(ahangle / 2) / extension_line_length);
+        pair dim_line_vec;
+        dim_line_vec := unitvector(ext_line_vec) rotated dim_angle scaled abs((B - A) * sind ext_angle / sind dim_angle);
 
-        draw extension_line shifted A;
-        draw extension_line shifted B;
+        pair primary_point, secondary_point;
 
-        path dimension_line;
-        dimension_line := (A--B) shifted extension_line_vec;
-
-        drawdblarrow dimension_line;
-
-        if return_val:
-            dimension_line
+        if abs(ext_angle) <= 90:
+            primary_point := B;
+            secondary_point := A;
+        else:
+            primary_point := A;
+            secondary_point := B;
         fi
+
+        path dim_line, ext_line_[];
+
+        dim_line := (O--dim_line_vec) shifted primary_point shifted ext_line_vec;
+        ext_line_1 := (O--ext_line_vec) scaled (1 + arrow_width / ext_line_len) shifted primary_point;
+
+        pair long_ext_line_vec;
+        long_ext_line_vec := (point 1 of dim_line) - secondary_point;
+        long_ext_line_len := length(long_ext_line_vec);
+
+        ext_line_2 := (O--long_ext_line_vec) scaled (1 + arrow_width / long_ext_line_len) shifted secondary_point;
+
+        draw ext_line_1;
+        draw ext_line_2;
+
+        dim_line
     enddef;
 
     % pair initial_point -- точка, от которой будет сделан вынос

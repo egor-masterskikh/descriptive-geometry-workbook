@@ -50,36 +50,29 @@
     draw (O--right * (G.x + G.y)) shifted G1;
     draw (O--down * (G.z + G.y)) shifted G3;
 
-    mark_angle_with_label(
-        E3 - G3,
-        (E1 - G1) rotated 90,
-        0.3,
-        G3,
-        1,
+    draw get_angle_mark_and_draw_label(
+        E3 - G3, (E1 - G1) rotated 90,
+        G3, 0.3,
         "$\alpha$"
     );
 
-    mark_angle_with_label(
-        G2 - E2,
-        G3 - E3,
-        0.33,
-        E3,
-        1,
+    draw get_angle_mark_and_draw_label(
+        G2 - E2, G3 - E3,
+        E3, 0.33,
         "$\beta$"
     );
 
-    path dimension_line;
+    path dim_line;
 
-    dimension_line := draw_dimension_line(
-        E3,
-        G3,
+    dim_line := get_dim_line(
+        E3, G3,
         2 * (font_size + labeloffset),
-        1,
-        true
+        90, 90
     );
+    drawdblarrow dim_line;
 
     draw_extension_line(
-        point 0.3 of dimension_line,
+        point 0.7 of dim_line,
         45,
         "$н.в.\ EG$"
     );
