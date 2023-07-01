@@ -78,14 +78,14 @@
 
     pickup thin_pen;
 
-    pair B~, B~[];
+    pair B̃, B̃[];
 
-    B - B~ = B2 - B~2 = (B - B1) - (A - A1);
+    B - B̃ = B2 - B̃2 = (B - B1) - (A - A1);
 
-    draw B~--B~2;
+    draw B̃--B̃2;
 
-    draw A--B~;
-    draw A2--B~2;
+    draw A--B̃;
+    draw A2--B̃2;
 
     path dim_line_[];
     picture delta_z_label;
@@ -93,16 +93,16 @@
     delta_z_label := thelabel.top("$\delta Z_{AB}$", O) rotated 90;
 
     dim_line_1 := get_dim_line(
-        B, B~,
-        length(B~ - B),
+        B, B̃,
+        length(B̃ - B),
         90, 90
     );
     drawdblarrow dim_line_1;
     draw delta_z_label shifted point 0.5 of dim_line_1;
 
     dim_line_2 := get_dim_line(
-        B2, B~2,
-        1.5 * length(B~2 - B2),
+        B2, B̃2,
+        1.5 * length(B̃2 - B2),
         90, 90
     );
     drawdblarrow dim_line_2;
@@ -119,19 +119,19 @@
     draw_point_circ_with_label(B2, "$B_2$", top);
     draw_point_circ_with_label(B, "$B$", urt);
 
-    picture B~_label;
-    B~_label := thelabel.urt("$\tilde{B}$", B~);
-    unfill boundingbox B~_label;
-    draw B~_label;
+    picture B̃_label;
+    B̃_label := thelabel.urt("$\tilde{B}$", B̃);
+    unfill boundingbox B̃_label;
+    draw B̃_label;
 
-    label.urt("$\tilde{B}_2$", B~2);
+    label.urt("$\tilde{B}_2$", B̃2);
 
     path alpha_mark;
     pair point_for_alpha_label;
     picture alpha_label;
 
     alpha_mark := get_angle_mark(
-        B~ - A, B - A,
+        B̃ - A, B - A,
         A, 0.28
     );
     draw alpha_mark;
@@ -144,12 +144,95 @@
 
 
     draw get_perp_mark(
-        B - B~, A - B~,
-        B~, 0.15
+        B - B̃, A - B̃,
+        B̃, 0.15
     );
     draw get_perp_mark(
-        B2 - B~2, A2 - B~2,
-        B~2, 0.15
+        B2 - B̃2, A2 - B̃2,
+        B̃2, 0.15
     );
+\stopuseMPgraphic
+
+\startuseMPgraphic{способ прямоугольного треугольника}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    % значения x_max и z_max берём из предыдущего рисунка
+    y1_max := fig_height - z_max;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    % координаты точек A и B по осям x и z берём из предыдущего рисунка
+    A.y := .2 * y1_max;
+    B.y := .4 * y1_max;
+
+    A1 := (-A.x, -A.y);
+    B1 := (-B.x, -B.y);
+
+    pair B̄;
+    (B̄ - B1) = unitvector(A1 - B1) rotated 90 scaled length(B2 - B̃2);
+
+    draw A1--A2;
+    draw B1--B2;
+
+    draw A1--B1 withpen base_pen;
+    draw A2--B2 withpen base_pen;
+
+    draw A2--B̃2;
+    draw B1--B̄;
+    draw A1--B̄ withpen base_pen;
+
+    draw get_perp_mark(
+        B2 - B̃2, A2 - B̃2,
+        B̃2, 0.15
+    );
+    draw get_perp_mark(
+        A1 - B1, B̄ - B1,
+        B1, 0.15
+    );
+    draw get_angle_mark_and_draw_label(
+        B̄ - A1, B1 - A1,
+        A1, 0.3,
+        "$\alpha$"
+    );
+
+    picture delta_z_label;
+    delta_z_label := thelabel.top("$\delta Z_{AB}$", O);
+
+    path ext_line;
+
+    dim_line_1 := get_dim_line(
+        B1, B̄,
+        0.49 * length(B̄ - B1),
+        90, 90
+    );
+    drawdblarrow dim_line_1;
+
+    ext_line := get_ext_line(
+        point 0.5 of dim_line_1,
+        angle(direction 0.5 of dim_line_1) - 90,
+        "$\delta Z_{AB}$"
+    );
+    draw ext_line;
+    unfill boundingbox delta_z_label shifted point 1.5 of ext_line;
+    draw delta_z_label shifted point 1.5 of ext_line;
+
+    dim_line_2 := get_dim_line(
+        B2, B̃2,
+        1.5 * length(B̃2 - B2),
+        90, 90
+    );
+    drawdblarrow dim_line_2;
+    draw delta_z_label rotated 90 shifted point 0.5 of dim_line_2;
+
+    draw_point_circ_with_label(A1, "$A_1$", llft);
+    draw_point_circ_with_label(A2, "$A_2$", ulft);
+
+    draw_point_circ_with_label(B1, "$B_1$", urt);
+    draw_point_circ_with_label(B2, "$B_2$", top);
+
+    label.urt("$\tilde{B}_2$", B̃2);
+
+    draw_point_circ_with_label(B̄, "$\bar{B}$", llft);
 \stopuseMPgraphic
 \stopcomponent
