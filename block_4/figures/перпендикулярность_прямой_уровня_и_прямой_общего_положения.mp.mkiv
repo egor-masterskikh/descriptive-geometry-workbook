@@ -1,0 +1,294 @@
+\startcomponent .
+\startuseMPgraphic{перпендикулярность горизонтали и прямой общего положения}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := .5 * fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(fig_width, y1_max, z_max, 0);
+
+    % ПЕРЕСЕКАЮЩИЕСЯ ПРЯМЫЕ
+
+    O := O + x_max * left;
+
+    pair A[];
+
+    A.x := .75 * x_max;
+    A.y := .25 * y1_max;
+    A.z := .2 * z_max;
+
+    A1 := O + (-A.x, -A.y);
+    A2 := O + (-A.x, A.z);
+
+    path a[], h[];
+
+    a1_inclination := 60;
+    a2_inclination := -50;
+    h1_inclination := a1_inclination - 90;
+
+    draw A1--A2;
+
+    pickup base_pen;
+
+    a1 := get_line_and_draw_label(
+        0.8 * min(
+            abs((x_max - A.x) / cosd a1_inclination),
+            abs((y1_max - A.y) / sind a1_inclination)
+        ), a1_inclination,
+        A1, 1,
+        0, "$a_1$", ulft
+    );
+    draw a1;
+
+    a2 := get_line_and_draw_label(
+        0.8 * min(
+            abs((x_max - A.x) / cosd a2_inclination),
+            abs((z_max - A.z) / sind a2_inclination)
+        ), a2_inclination,
+        A2, 1,
+        0, "$a_2$", top
+    );
+    draw a2;
+
+    h1 := get_line_and_draw_label(
+        0.8 * min(
+            abs(A.x / cosd h1_inclination),
+            abs((y1_max - A.y) / sind h1_inclination)
+        ), h1_inclination,
+        A1, 0,
+        1, "$h_1$", top
+    );
+    draw h1;
+
+    h2 := get_line_and_draw_label(
+        0.8 * A.x, 0,
+        A2, 0,
+        1, "$h_2$", top
+    );
+    draw h2;
+
+    pickup thin_pen;
+
+    draw get_perp_mark(
+        (point 0 of a1) - A1, (point 1 of h1) - A1,
+        A1, 0.15
+    );
+
+    draw_point_circ(A1);
+    draw_point_circ(A2);
+
+    % СКРЕЩИВАЮЩИЕСЯ ПРЯМЫЕ
+
+    O := O + x_max * right;
+    
+    pair K[], L[];
+
+    K.x := .4 * x_max;
+    K.y := .5 * y1_max;
+    
+    L.x := .6 * x_max;
+    L.z := .5 * z_max;
+
+    K1 := O + (-K.x, -K.y);
+    L2 := O + (-L.x, L.z);
+
+    path a[], h[];
+
+    a1_inclination := -70;
+    a2_inclination := -30;
+    h1_inclination := a1_inclination + 90;
+
+    pickup base_pen;
+
+    a1 := get_line_and_draw_label(
+        0.8 * min(
+            abs(x_max / cosd a1_inclination),
+            abs(y1_max / sind a1_inclination)
+        ), a1_inclination,
+        K1, 0.5,
+        1, "$a_1$", rt
+    );
+    draw a1;
+
+    a2 := get_line_and_draw_label(
+        0.7 * min(
+            abs(x_max / cosd a2_inclination),
+            abs(z_max / sind a2_inclination)
+        ), a2_inclination,
+        L2, 0.5,
+        0, "$a_2$", top
+    );
+    draw a2;
+
+    h1 := get_line_and_draw_label(
+        0.7 * min(
+            abs(x_max / cosd h1_inclination),
+            abs(y1_max / sind h1_inclination)
+        ), h1_inclination,
+        K1, 0.5,
+        0, "$h_1$", top
+    );
+    draw h1;
+
+    h2 := get_line_and_draw_label(
+        0.8 * x_max, 0,
+        L2, 0.4,
+        1, "$h_2$", ulft
+    );
+    draw h2;
+
+    pickup thin_pen;
+
+    draw get_perp_mark(
+        (point 1 of a1) - K1, (point 1 of h1) - K1,
+        K1, 0.2
+    );
+\stopuseMPgraphic
+
+\startuseMPgraphic{перпендикулярность фронтали и прямой общего положения}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := .5 * fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(fig_width, y1_max, z_max, 0);
+
+    % ПЕРЕСЕКАЮЩИЕСЯ ПРЯМЫЕ
+
+    O := O + x_max * left;
+
+    pair B[];
+
+    B.x := .75 * x_max;
+    B.y := .3 * y1_max;
+    B.z := .25 * z_max;
+
+    B1 := O + (-B.x, -B.y);
+    B2 := O + (-B.x, B.z);
+
+    path b[], f[];
+
+    b1_inclination := 50;
+    b2_inclination := -60;
+    f2_inclination := b2_inclination + 90;
+
+    draw B1--B2;
+
+    pickup base_pen;
+
+    b1 := get_line_and_draw_label(
+        0.8 * min(
+            abs((x_max - B.x) / cosd b1_inclination),
+            abs((y1_max - B.y) / sind b1_inclination)
+        ), b1_inclination,
+        B1, 1,
+        0, "$b_1$", ulft
+    );
+    draw b1;
+
+    b2 := get_line_and_draw_label(
+        0.8 * min(
+            abs((x_max - B.x) / cosd b2_inclination),
+            abs((z_max - B.z) / sind b2_inclination)
+        ), b2_inclination,
+        B2, 1,
+        0, "$b_2$", top
+    );
+    draw b2;
+
+    f1 := get_line_and_draw_label(
+        0.8 * B.x, 0,
+        B1, 0,
+        1, "$f_1$", top
+    );
+    draw f1;
+
+    f2 := get_line_and_draw_label(
+        0.8 * min(
+            abs(B.x / cosd f2_inclination),
+            abs((z_max - B.z) / sind f2_inclination)
+        ), f2_inclination,
+        B2, 0,
+        1, "$f_2$", top
+    );
+    draw f2;
+
+    pickup thin_pen;
+
+    draw get_perp_mark(
+        (point 0 of b2) - B2, (point 1 of f2) - B2,
+        B2, 0.15
+    );
+
+    draw_point_circ(B1);
+    draw_point_circ(B2);
+
+    % СКРЕЩИВАЮЩИЕСЯ ПРЯМЫЕ
+
+    O := O + x_max * right;
+    
+    pair M[], N[];
+
+    M.x := .6 * x_max;
+    M.y := .5 * y1_max;
+
+    N.x := .4 * x_max;
+    N.z := .5 * z_max;
+
+    M1 := (-M.x, -M.y);
+    N2 := (-N.x, N.z);
+
+    path b[], f[];
+
+    b1_inclination := -30;
+    b2_inclination := -70;
+    f2_inclination := b2_inclination + 90;
+
+    pickup base_pen;
+
+    b1 := get_line_and_draw_label(
+        0.7 * min(
+            abs(x_max / cosd b1_inclination),
+            abs(y1_max / sind b1_inclination)
+        ), b1_inclination,
+        M1, 0.5,
+        1, "$b_1$", rt
+    );
+    draw b1;
+
+    b2 := get_line_and_draw_label(
+        0.7 * min(
+            abs(x_max / cosd b2_inclination),
+            abs(z_max / sind b2_inclination)
+        ), b2_inclination,
+        N2, 0.5,
+        0, "$b_2$", top
+    );
+    draw b2;
+
+    f1 := get_line_and_draw_label(
+        0.8 * x_max, 0,
+        M1, 0.4,
+        1, "$f_1$", ulft
+    );
+    draw f1;
+
+    f2 := get_line_and_draw_label(
+        0.8 * x_max, f2_inclination,
+        N2, 0.6,
+        0, "$f_2$", top
+    );
+    draw f2;
+
+    pickup thin_pen;
+
+    draw get_perp_mark(
+        (point 1 of f2) - N2, (point 0 of b2) - N2,
+        N2, 0.22
+    );
+\stopuseMPgraphic
+\stopcomponent
