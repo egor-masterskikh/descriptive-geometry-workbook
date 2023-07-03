@@ -1,0 +1,161 @@
+\startcomponent .
+\startuseMPgraphic{перпендикулярность плоскостей}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := .5 * fig_height;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    pair A[], H[];
+
+    A.x := .35 * x_max;
+    A.y := .2 * y1_max;
+    A.z := .3 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    H.x := .65 * x_max;
+    H.y := .3 * y1_max;
+    H.z := .4 * z_max;
+
+    H1 := (-H.x, -H.y);
+    H2 := (-H.x, H.z);
+
+    draw A1--A2;
+    draw H1--H2;
+
+    path a[], b[], h[], f[];
+
+    a1_inclination := 55;
+    a2_inclination := -30;
+
+    b1_inclination := -15;
+    b2_inclination := 40;
+
+    h1_inclination := a1_inclination - 90;
+    f2_inclination := a2_inclination + 90;
+
+    pickup base_pen;
+
+    a1 := get_line_and_draw_label(
+        0.8 * min(
+            abs((x_max - A.x) / cosd a1_inclination),
+            abs((y1_max - A.y) / sind a1_inclination)
+        ), a1_inclination,
+        A1, 1,
+        0.7, "$a_1$", ulft
+    );
+    draw a1;
+
+    a2 := get_line_and_draw_label(
+        0.8 * min(
+            abs((x_max - A.x) / cosd a2_inclination),
+            abs((z_max - A.z) / sind a2_inclination)
+        ), a2_inclination,
+        A2, 1,
+        0.7, "$a_2$", top
+    );
+    draw a2;
+
+    b1 := get_line_and_draw_label(
+        0.8 * min(
+            abs(A.x / cosd b1_inclination),
+            abs((y1_max - A.y) / sind b1_inclination)
+        ), b1_inclination,
+        A1, 0,
+        1, "$b_1$", top
+    );
+    draw b1;
+
+    b2 := get_line_and_draw_label(
+        0.7 * min(
+            abs(A.x / cosd b2_inclination),
+            abs((z_max - A.z) / sind b2_inclination)
+        ), b2_inclination,
+        A2, 0,
+        0.7, "$b_2$", ulft
+    );
+    draw b2;
+
+    h1 := get_line_and_draw_label(
+        min(
+            abs(H.x / cosd h1_inclination),
+            abs((y1_max - H.y) / sind h1_inclination)
+        ), h1_inclination,
+        H1, 0.25,
+        1, "$h_1$", lrt
+    );
+    draw h1;
+
+    h2 := get_line_and_draw_label(
+        (x_max - H.x), 0,
+        H2, 0.75,
+        0, "$h_2$", urt
+    );
+    draw h2;
+
+    f1 := h2 shifted ((H.z + H.y) * down);
+    draw f1;
+    label.urt("$f_1$", point 0 of f1);
+
+    f2 := get_line_and_draw_label(
+        min(
+            abs(H.x / cosd f2_inclination),
+            abs((z_max - H.z) / sind f2_inclination)
+        ), f2_inclination,
+        H2, 0.25,
+        1, "$f_2$", top
+    );
+    draw f2;
+
+    pickup thin_pen;
+
+    draw get_perp_mark(
+        vec (1, 0) of h1, vec (1, 0) of a1,
+        h1 intersectionpoint a1, perp_mark_r
+    );
+
+    draw get_perp_mark(
+        vec (1, 0) of a2, vec (1, 0) of f2,
+        f2 intersectionpoint a2, perp_mark_r
+    );
+
+    draw_point_circ(A1);
+    draw_point_circ(A2);
+
+    draw_point_circ(H1);
+    draw_point_circ(H2);
+
+    path Lambda[]_closing_line, Lambda[];
+
+    Lambda1_closing_line := (point 1 of h1){dir (h1_inclination - 110)}..(point 0 of f1);
+    draw Lambda1_closing_line;
+
+    Lambda2_closing_line := (point 1 of f2){dir (f2_inclination + 90)}..(point 0 of h2){dir -60};
+    draw Lambda2_closing_line;
+
+    Lambda1 := buildcycle(h1, Lambda1_closing_line, f1);
+    Lambda2 := buildcycle(f2, Lambda2_closing_line, h2);
+
+    label("$\Lambda_1$", 0.5[point 0 of Lambda1, point 2.5 of Lambda1]);
+    label("$\Lambda_2$", 0.5[point 0 of Lambda2, point 2.5 of Lambda2]);
+
+    path Gamma[]_closing_line, Gamma[];
+
+    Gamma1_closing_line := (point 0.5 of a1){dir (a1_inclination - 90)}..(point 1 of b1){dir (b1_inclination + 90)};
+    draw Gamma1_closing_line;
+
+    Gamma2_closing_line := (point 0.5 of a2){dir (a2_inclination + 90)}..(point 1 of b2){dir (b2_inclination - 90)};
+    draw Gamma2_closing_line;
+
+    Gamma1 := buildcycle(a1, Gamma1_closing_line, b1);
+    Gamma2 := buildcycle(a2, Gamma2_closing_line, b2);
+
+    label("$\Gamma_1$", 0.5[point 0 of Gamma1, point 2.5 of Gamma1]);
+    label("$\Gamma_2$", 0.5[point 0 of Gamma2, point 2.5 of Gamma2]);
+\stopuseMPgraphic
+\stopcomponent

@@ -72,14 +72,14 @@
         }
 
         \startplacefigure[
-            title={Перпендикулярность горизонтали и прямой общего положения: $\angle(h, a) = 90\textdegree$},
+            title={Перпендикулярность горизонтали и прямой общего положения: $h \perp a$},
             reference={fig:перпендикулярность горизонтали и прямой общего положения},
         ]
             \LocalDrawing{перпендикулярность горизонтали и прямой общего положения}
         \stopplacefigure
 
         \startplacefigure[
-            title={Перпендикулярность фронтали и прямой общего положения: $\angle(f, b) = 90\textdegree$},
+            title={Перпендикулярность фронтали и прямой общего положения: $f \perp b$},
             reference={fig:перпендикулярность фронтали и прямой общего положения},
         ]
             \LocalDrawing{перпендикулярность фронтали и прямой общего положения}
@@ -92,24 +92,49 @@
 \startsubsubject[title={Перпендикулярность прямой и плоскости}]
 
 \bold{Теорема.}
-Если прямая~$l$ перпендикулярна плоскости~$\Theta$, то горизонтальная проекция прямой~$l$ перпендикулярна горизонтальной проекции горизонтали ($l_1 \perp h_1$), а фронтальная проекция~--- фронтальной проекции фронтали ($l_2 \perp f_2$) плоскости $\Theta$:
+Если прямая~$l$ перпендикулярна плоскости~$\Theta$ (\in{рис.}[fig:перпендикулярность прямой и плоскости]), то горизонтальная проекция прямой~$l$ перпендикулярна горизонтальной проекции горизонтали ($l_1 \perp\nobreak h_1$), а фронтальная проекция~--- фронтальной проекции фронтали ($l_2 \perp f_2$) плоскости $\Theta$:
 
 \page[no]
 
-$l \perp \Theta(h \cap f) \Longleftrightarrow l_1 \perp h_1,\ l_2 \perp h_2$.
+$l \perp \Theta(h \cap f) \Longleftrightarrow l_1 \perp h_1,\ l_2 \perp f_2$.
 
 \stopsubsubject
 
 \startsubsubject[title={Перпендикулярность плоскостей}]
 
-Две плоскости взаимно перпендикулярны, если одна из них проходит через перпендикуляр к другой.
-Через точку можно провести сколь угодно много плоскостей, перпендикулярных другой плоскости; через прямую~--- только одну.
+Две плоскости взаимно перпендикулярны, если одна из них проходит через перпендикуляр к другой:
 
 \page[no]
 
-$a_1 \perp h_1, a_2 \perp f_2 \Longrightarrow \Lambda(h \cap f) \perp \Gamma(a \cap b)$
+$a_1 \perp h_1, a_2 \perp f_2 \Longrightarrow \Lambda(h \cap f) \perp \Gamma(a \cap b)$ \enspace (\in{рис.}[fig:перпендикулярность плоскостей])
 
 \stopsubsubject
+
+\startplacefigure[location=none]
+    \startfloatcombination
+        \def\LocalDrawing#1{%
+            \Drawing[
+                width=\measure{combination},
+                height=.25\textheight,
+                roffset=5.5mm,
+            ]{#1}%
+        }
+
+        \startplacefigure[
+            title={Перпендикулярность прямой и плоскости: $l \perp \Theta(h \cap f)$},
+            reference={fig:перпендикулярность прямой и плоскости},
+        ]
+            \LocalDrawing{перпендикулярность прямой и плоскости}
+        \stopplacefigure
+
+        \startplacefigure[
+            title={Перпендикулярность плоскостей: $\Lambda(h \cap f) \perp \Gamma(a \cap b)$},
+            reference={fig:перпендикулярность плоскостей},
+        ]
+            \LocalDrawing{перпендикулярность плоскостей}
+        \stopplacefigure
+    \stopfloatcombination
+\stopplacefigure
 
 \startsubsubject[title={Линии наибольшего наклона}]
 

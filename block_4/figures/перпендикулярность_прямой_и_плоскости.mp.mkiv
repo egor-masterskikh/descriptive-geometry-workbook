@@ -1,0 +1,113 @@
+\startcomponent .
+\startuseMPgraphic{перпендикулярность прямой и плоскости}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := .5 * fig_height;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    pair A[];
+
+    A.x := .6 * x_max;
+    A.y := .3 * y1_max;
+    A.z := .2 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    path l[], h[], f[];
+
+    l1_inclination := 55;
+    l2_inclination := -55;
+
+    h1_inclination := l1_inclination - 90;
+    f2_inclination := l2_inclination + 90;
+
+    draw A1--A2;
+
+    pickup base_pen;
+
+    l1 := get_line_and_draw_label(
+        0.9 * min(
+            abs((x_max - A.x) / cosd l1_inclination),
+            abs((y1_max - A.y) / sind l1_inclination)
+        ), l1_inclination,
+        A1, 1,
+        0, "$l_1$", ulft
+    );
+    draw l1;
+
+    l2 := get_line_and_draw_label(
+        0.85 * min(
+            abs((x_max - A.x) / cosd l2_inclination),
+            abs((z_max - A.z) / sind l2_inclination)
+        ), l2_inclination,
+        A2, 1,
+        0, "$l_2$", top
+    );
+    draw l2;
+
+    h1 := get_line_and_draw_label(
+        0.9 * min(
+            abs(A.x / cosd h1_inclination),
+            abs((y1_max - A.y) / sind h1_inclination)
+        ), h1_inclination,
+        A1, 0,
+        1, "$h_1$", top
+    );
+    draw h1;
+
+    h2 := get_line_and_draw_label(
+        0.8 * A.x, 0,
+        A2, 0,
+        1, "$h_2$", ulft
+    );
+    draw h2;
+
+    f1 := h2 shifted ((A.z + A.y) * down);
+    draw f1;
+    label.ulft("$f_1$", point 1 of f1);
+
+    f2 := get_line_and_draw_label(
+        0.8 * min(
+            abs(A.x / cosd f2_inclination),
+            abs((z_max - A.z) / sind f2_inclination)
+        ), f2_inclination,
+        A2, 0,
+        1, "$f_2$", top
+    );
+    draw f2;
+
+    pickup thin_pen;
+
+    draw get_perp_mark(
+        vec (1, 0) of l1, vec (0, 1) of h1,
+        A1, perp_mark_r
+    );
+
+    draw get_perp_mark(
+        vec (1, 0) of l2, vec (0, 1) of f2,
+        A2, perp_mark_r
+    );
+
+    draw_point_circ(A1);
+    draw_point_circ(A2);
+
+    path Theta[]_closing_line, Theta[];
+
+    Theta1_closing_line := (point 1 of h1){dir (h1_inclination + 45)}..(point 1 of f1);
+    draw Theta1_closing_line;
+
+    Theta2_closing_line := (point 1 of h2){dir 60}..(point 1 of f2);
+    draw Theta2_closing_line;
+
+    Theta1 := buildcycle(h1, Theta1_closing_line, f1);
+    Theta2 := buildcycle(h2, Theta2_closing_line, f2);
+
+    label("$\Theta_1$", 0.5[point 0 of Theta1, point 2.5 of Theta1]);
+    label("$\Theta_2$", 0.5[point 0 of Theta2, point 2.5 of Theta2]);
+\stopuseMPgraphic
+\stopcomponent
