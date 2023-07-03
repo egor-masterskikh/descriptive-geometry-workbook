@@ -25,6 +25,8 @@
 
     font_size := 3.5u;
 
+    perp_mark_r := .7 * font_size;
+
     % диметрические трансформации
     transform cabinet_scaled_[], cabinet_slanted_[], cabinet_persp_[];
 
@@ -176,11 +178,10 @@
         arc
     enddef;
 
-    vardef get_perp_mark(expr a_vec, b_vec, angle_point, k) =
-        save mark, r;
+    vardef get_perp_mark(expr a_vec, b_vec, angle_point, r) =
+        save mark;
         path mark;
 
-        r := k * min(length(a_vec), length(b_vec));
         mark := (unitvector(a_vec)--(unitvector(a_vec) + unitvector(b_vec))--unitvector(b_vec)) scaled r;
 
         mark shifted angle_point
@@ -266,6 +267,11 @@
     vardef draw_path_with_arrow(expr trail, arrow_k) =
         drawarrow subpath(0, arrow_k) of trail;
         draw subpath(arrow_k, 1) of trail;
+    enddef;
+
+    % pair t -- начальный и конечный моменты времени пути
+    def vec expr t of trail =
+        (point ypart t of trail) - (point xpart t of trail)
     enddef;
     \stopMPinclusions
 \stopenvironment
