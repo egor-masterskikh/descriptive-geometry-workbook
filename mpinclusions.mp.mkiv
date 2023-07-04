@@ -264,9 +264,13 @@
 
     % path trail -- путь
     % numeric arrow_k определяет, на какой части пути разместить стрелку
-    vardef draw_path_with_arrow(expr trail, arrow_k) =
-        drawarrow subpath(0, arrow_k) of trail;
-        draw subpath(arrow_k, 1) of trail;
+    vardef drawinnerarrow(expr trail, k) =
+        drawarrow subpath(0, k) of trail;
+        draw subpath(k, 1) of trail;
+    enddef;
+
+    vardef drawarrowhead(expr trail, k) =
+        draw arrow_head rotated angle(direction k of trail) shifted (point k of trail);
     enddef;
 
     % pair t -- начальный и конечный моменты времени пути

@@ -1,0 +1,273 @@
+\startcomponent .
+\startuseMPgraphic{линия наибольшего наклона плоскости к П1}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    pair A[], B[], C[];
+
+    A.x := .45 * x_max;
+    A.y := .7 * y1_max;
+    A.z := .9 * z_max;
+
+    A1 := (-A.x, -A.y);
+    A2 := (-A.x, A.z);
+
+    B.x := .1 * x_max;
+    B.y := 0;
+    B.z := .45 * z_max;
+
+    B1 := (-B.x, -B.y);
+    B2 := (-B.x, B.z);
+
+    C.x := .85 * x_max;
+    C.y := .3 * y1_max;
+    C.z := .2 * z_max;
+
+    C1 := (-C.x, -C.y);
+    C2 := (-C.x, C.z);
+
+    draw A1--A2;
+    draw B1--B2;
+    draw C1--C2;
+
+    pickup base_pen;
+
+    draw A1--B1--C1--cycle;
+    draw A2--B2--C2--cycle;
+
+    pickup thin_pen;
+
+    pair P[]_[];
+
+    P1_2 = whatever[A2, C2];
+    ypart P1_2 = ypart B2;
+
+    P1_1 = whatever[A1, C1];
+    xpart P1_1 = xpart P1_2;
+
+    draw P1_2--P1_1;
+    drawarrowhead((P1_2--P1_1) cutbefore (O--X) cutafter (B1--C1), 0.6);
+
+    path h[];
+
+    h1 := (O--(P1_1 - B1) scaled (1 + 4 * font_size / length(P1_1 - B1))) shifted B1;
+    h2 := (O--(P1_2 - B2) scaled (1 + 3 * font_size / length(P1_2 - B2))) shifted B2;
+
+    draw h1;
+    label.top("$h_1$", point 1 of h1);
+
+    draw h2;
+    label.top("$h_2$", point 1 of h2);
+
+    pair H[];
+
+    H1 = whatever[B1, C1];
+    (H1 - A1) dotprod (P1_1 - B1) = 0;
+
+    H2 = whatever[B2, C2];
+    xpart H2 = xpart H1;
+
+    draw H1--H2;
+    drawarrowhead((H1--H2) cutbefore (O--X), 0.6);
+
+    draw A1--H1;
+    draw A2--H2;
+
+    draw get_perp_mark(
+        A1 - H1, B1 - P1_1,
+        (A1--H1) intersectionpoint (B1--P1_1), perp_mark_r
+    );
+
+    pair Ā;
+
+    Ā - A1 = unitvector(H1 - A1) rotated 90 scaled abs(ypart A2 - ypart H2);
+
+    draw A1--Ā;
+    draw get_perp_mark(
+        H1 - A1, Ā - A1,
+        A1, perp_mark_r
+    );
+
+    draw H1--Ā;
+    draw get_angle_mark_and_draw_label(
+        Ā - H1, A1 - H1,
+        H1, 0.45,
+        "$\alpha$"
+    );
+
+    picture delta_z_label;
+
+    delta_z_label := thelabel.top("$\delta Z_{AH}$", O);
+
+    path dim_line_[], ext_line;
+
+    dim_line_1 := get_dim_line(
+        A1, Ā, 1.2 * font_size,
+        90, 90
+    );
+    drawdblarrow dim_line_1;
+
+    ext_line := get_ext_line(point 0.5 of dim_line_1, angle(A1 - Ā) - 90, "$\delta Z_{AH}$");
+    draw ext_line;
+    draw delta_z_label shifted point 1.5 of ext_line;
+
+    dim_line_2 := get_dim_line(
+        A2, H2, 
+        x_max - abs(xpart H2) - font_size,
+        -angle(A2 - H2), -90
+    );
+    drawdblarrow dim_line_2;
+    draw delta_z_label rotated 90 shifted point 0.5 of dim_line_2;
+
+
+    draw_point_circ_with_label(A1, "$A_1$", rt);
+    draw_point_circ_with_label(A2, "$A_2$", top);
+
+    draw_point_circ_with_label(B1, "$B_1$", bot);
+    draw_point_circ_with_label(B2, "$B_2$", top);
+
+    draw_point_circ_with_label(C1, "$C_1$", lft);
+    draw_point_circ_with_label(C2, "$C_2$", llft);
+
+    draw_point_circ_with_label(P1_1, "$1_1$", bot);
+    draw_point_circ_with_label(P1_2, "$1_2$", ulft);
+
+    draw_point_circ_with_label(H1, "$H_1$", ulft);
+    draw_point_circ_with_label(H2, "$H_2$", lrt);
+
+    draw_point_circ_with_label(Ā, "$\bar{A}$", ulft);
+\stopuseMPgraphic
+
+\startuseMPgraphic{линия наибольшего наклона плоскости к П2}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := fig_width;
+    y1_max := .5 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(x_max, y1_max, z_max, 0);
+
+    % используем данные предыдущего рисунка
+
+    draw A1--A2;
+    draw B1--B2;
+    draw C1--C2;
+
+    pickup base_pen;
+
+    draw A1--B1--C1--cycle;
+    draw A2--B2--C2--cycle;
+
+    pickup thin_pen;
+
+    pair P[]_[];
+
+    P1_1 = whatever[A1, B1];
+    ypart P1_1 = ypart C1;
+
+    P1_2 = whatever[A2, B2];
+    xpart P1_2 = xpart P1_1;
+
+    draw P1_1--P1_2;
+    drawarrowhead((P1_1--P1_2) cutbefore (O--X) cutafter (B2--C2), 0.6);
+
+    pair f[]_vec;
+    path f[];
+
+    f1_vec := P1_1 - C1;
+    f2_vec := P1_2 - C2;
+
+    f1 := (O--f1_vec scaled (1 + 3 * font_size / length f1_vec)) shifted C1;
+    f2 := (O--f2_vec scaled (1 + 3 * font_size / length f2_vec)) shifted C2;
+
+    draw f1;
+    label.rt("$f_1$", point 1 of f1);
+
+    draw f2;
+    label.top("$f_2$", point 1 of f2);
+
+    pair F[];
+
+    F2 = whatever[B2, C2];
+    (F2 - A2) dotprod (P1_2 - C2) = 0;
+
+    F1 = whatever[B1, C1];
+    xpart F1 = xpart F2;
+
+    draw F2--F1;
+    drawarrowhead((F2--F1) cutafter (O--X), 0.7);
+
+    draw A1--F1;
+    draw A2--F2;
+
+    draw get_perp_mark(
+        A2 - F2, P1_2 - C2,
+        (A2--F2) intersectionpoint (C2--P1_2), perp_mark_r
+    );
+
+    pair Ā;
+
+    Ā - A2 = unitvector(F2 - A2) rotated -90 scaled abs(ypart A1 - ypart F1);
+
+    draw A2--Ā;
+    draw get_perp_mark(
+        F2 - A2, Ā - A2,
+        A2, 1.4 * perp_mark_r
+    );
+
+    draw F2--Ā;
+    draw get_angle_mark_and_draw_label(
+        A2 - F2, Ā - F2,
+        F2, 0.57,
+        "$\beta$"
+    );
+
+    picture delta_y_label;
+
+    delta_y_label := thelabel.top("$\delta Y_{AF}$", O);
+
+    path dim_line_[], ext_line;
+
+    dim_line_1 := get_dim_line(
+        A1, F1, x_max - abs(xpart A1) - font_size,
+        -angle(A1 - F1), -90
+    );
+    drawdblarrow dim_line_1;
+    draw delta_y_label rotated 90 shifted point 0.5 of dim_line_1;
+
+    dim_line_2 := get_dim_line(
+        Ā, A2, 1.2 * font_size,
+        90, 90
+    );
+    drawdblarrow dim_line_2;
+
+    ext_line := get_ext_line(point 0.7 of dim_line_2, angle(A2 - Ā) + 135, "$\delta Y_{AF}$");
+    draw ext_line;
+    draw delta_y_label shifted point 1.5 of ext_line;
+
+
+    draw_point_circ_with_label(A1, "$A_1$", rt);
+    draw_point_circ_with_label(A2, "$A_2$", urt);
+
+    draw_point_circ_with_label(B1, "$B_1$", bot);
+    draw_point_circ_with_label(B2, "$B_2$", top);
+
+    draw_point_circ_with_label(C1, "$C_1$", lft);
+    draw_point_circ_with_label(C2, "$C_2$", llft);
+
+    draw_point_circ_with_label(P1_1, "$1_1$", bot);
+    draw_point_circ_with_label(P1_2, "$1_2$", top);
+
+    draw_point_circ_with_label(F1, "$F_1$", lrt);
+    draw_point_circ_with_label(F2, "$F_2$", lrt);
+
+    draw_point_circ_with_label(Ā, "$\bar{A}$", llft);
+\stopuseMPgraphic
+\stopcomponent

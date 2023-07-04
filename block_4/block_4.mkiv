@@ -141,13 +141,33 @@ $a_1 \perp h_1, a_2 \perp f_2 \Longrightarrow \Lambda(h \cap f) \perp \Gamma(a \
 \italic{Линии наибольшего наклона} данной плоскости к плоскости проекций~--- прямые, лежащие в плоскости и составляющие с плоскостями проекций наибольшие углы.
 
 \bold{Теорема.}
-Прямые, лежащие в плоскости и перпендикулярные линиям уровня этой плоскости, являются линиями наибольшего наклона.
+Прямые, лежащие в плоскости и перпендикулярные линиям уровня этой плоскости, являются линиями наибольшего наклона (рис. \in[fig:линия наибольшего наклона плоскости к П1], \in[fig:линия наибольшего наклона плоскости к П2]).
 
-$AH \perp h$~--- линия наибольшего наклона плоскости~$\Psi(A, B, C)$ к плоскости~$\Pi_1$, \crlf
-$\alpha = \angle{(\Psi, \Pi_1)}$;
+\startplacefigure[location=none]
+    \startfloatcombination
+        \def\LocalDrawing#1{%
+            \Drawing[
+                width=\measure{combination},
+                height=.33\textheight,
+                roffset=5.5mm,
+            ]{#1}%
+        }
 
-$KF \perp f$~--- линия наибольшего наклона плоскости~$\Omega(K, L, M)$ к плоскости~$\Pi_2$, \crlf
-$\beta = \angle{(\Omega, \Pi_2)}$.
+        \startplacefigure[
+            title={\crlf $AH \perp h$~--- линия наибольшего наклона плоскости~$\Psi(A, B, C)$ к~$\Pi_1$; \crlf $\alpha = \angle{(\Psi, \Pi_1)}$},
+            reference={fig:линия наибольшего наклона плоскости к П1},
+        ]
+            \LocalDrawing{линия наибольшего наклона плоскости к П1}
+        \stopplacefigure
+
+        \startplacefigure[
+            title={\crlf $AF \perp f$~--- линия наибольшего наклона плоскости~$\Psi(A, B, C)$ к~$\Pi_2$; \crlf $\beta = \angle{(\Psi, \Pi_2)}$},
+            reference={fig:линия наибольшего наклона плоскости к П2},
+        ]
+            \LocalDrawing{линия наибольшего наклона плоскости к П2}
+        \stopplacefigure
+    \stopfloatcombination
+\stopplacefigure
 
 \stopsubsubject
 
