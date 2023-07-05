@@ -79,20 +79,14 @@
     draw A1--H1;
     draw A2--H2;
 
-    draw get_perp_mark(
-        A1 - H1, B1 - P1_1,
-        (A1--H1) intersectionpoint (B1--P1_1), perp_mark_r
-    );
+    draw_perp_mark(A1 - H1, B1 - P1_1, (A1--H1) intersectionpoint (B1--P1_1));
 
     pair Ā;
 
     Ā - A1 = unitvector(H1 - A1) rotated 90 scaled abs(ypart A2 - ypart H2);
 
     draw A1--Ā;
-    draw get_perp_mark(
-        H1 - A1, Ā - A1,
-        A1, perp_mark_r
-    );
+    draw_perp_mark(H1 - A1, Ā - A1, A1);
 
     draw H1--Ā;
     draw get_angle_mark_and_draw_label(
@@ -207,20 +201,14 @@
     draw A1--F1;
     draw A2--F2;
 
-    draw get_perp_mark(
-        A2 - F2, P1_2 - C2,
-        (A2--F2) intersectionpoint (C2--P1_2), perp_mark_r
-    );
+    draw_perp_mark(A2 - F2, P1_2 - C2, (A2--F2) intersectionpoint (C2--P1_2));
 
     pair Ā;
 
     Ā - A2 = unitvector(F2 - A2) rotated -90 scaled abs(ypart A1 - ypart F1);
 
     draw A2--Ā;
-    draw get_perp_mark(
-        F2 - A2, Ā - A2,
-        A2, 1.4 * perp_mark_r
-    );
+    draw_perp_mark(F2 - A2, Ā - A2, A2);
 
     draw F2--Ā;
     draw get_angle_mark_and_draw_label(

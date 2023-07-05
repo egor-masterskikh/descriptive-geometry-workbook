@@ -12,7 +12,7 @@
     thin_pen := pencircle scaled thin_line_thickness;
 
     ahangle := 20;  % угол раствора стрелки
-    ahlength := 4u;  % длина стрелки
+    ahlength := 3.5u;  % длина стрелки
     setarrows(open);
 
     arrow_width := 2 * ahlength * sind(ahangle / 2);
@@ -178,13 +178,16 @@
         arc
     enddef;
 
-    vardef get_perp_mark(expr a_vec, b_vec, angle_point, r) =
-        save mark;
-        path mark;
+    vardef get_perp_mark(expr a_vec, b_vec, ang_point) =
+        save perp_mark; path perp_mark;
 
-        mark := (unitvector(a_vec)--(unitvector(a_vec) + unitvector(b_vec))--unitvector(b_vec)) scaled r;
+        perp_mark := (unitvector(a_vec)--(unitvector(a_vec) + unitvector(b_vec))--unitvector(b_vec)) scaled perp_mark_r;
 
-        mark shifted angle_point
+        perp_mark shifted ang_point
+    enddef;
+
+    def draw_perp_mark(expr a_vec, b_vec, ang_point) =
+        draw get_perp_mark(a_vec, b_vec, ang_point);
     enddef;
 
     % pair A, B -- координаты точек, от которых будет сделан вынос
@@ -264,12 +267,12 @@
 
     % path trail -- путь
     % numeric arrow_k определяет, на какой части пути разместить стрелку
-    vardef drawinnerarrow(expr trail, k) =
+    def drawinnerarrow(expr trail, k) =
         drawarrow subpath(0, k) of trail;
         draw subpath(k, 1) of trail;
     enddef;
 
-    vardef drawarrowhead(expr trail, k) =
+    def drawarrowhead(expr trail, k) =
         draw arrow_head rotated angle(direction k of trail) shifted (point k of trail);
     enddef;
 

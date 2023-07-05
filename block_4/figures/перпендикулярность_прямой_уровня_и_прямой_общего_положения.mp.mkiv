@@ -70,10 +70,7 @@
 
         pickup thin_pen;
 
-        draw get_perp_mark(
-            (point 0 of a1) - A1, (point 1 of h1) - A1,
-            A1, perp_mark_r
-        );
+        draw_perp_mark((point 0 of a1) - A1, (point 1 of h1) - A1, A1);
 
         draw_point_circ(A1);
         draw_point_circ(A2);
@@ -134,10 +131,7 @@
 
         pickup thin_pen;
 
-        draw get_perp_mark(
-            (point 1 of a1) - K1, (point 1 of h1) - K1,
-            K1, perp_mark_r
-        );
+        draw_perp_mark((point 1 of a1) - K1, (point 1 of h1) - K1, K1);
     );
 
     draw pic;

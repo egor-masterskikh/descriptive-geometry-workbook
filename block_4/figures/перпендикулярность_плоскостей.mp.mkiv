@@ -114,15 +114,9 @@
 
     pickup thin_pen;
 
-    draw get_perp_mark(
-        vec (1, 0) of h1, vec (1, 0) of a1,
-        h1 intersectionpoint a1, perp_mark_r
-    );
+    draw_perp_mark(vec (1, 0) of h1, vec (1, 0) of a1, h1 intersectionpoint a1);
 
-    draw get_perp_mark(
-        vec (1, 0) of a2, vec (1, 0) of f2,
-        f2 intersectionpoint a2, perp_mark_r
-    );
+    draw_perp_mark(vec (1, 0) of a2, vec (1, 0) of f2, f2 intersectionpoint a2);
 
     draw_point_circ(A1);
     draw_point_circ(A2);
