@@ -1,0 +1,28 @@
+\startcomponent .
+\startuseMPgraphic{замена двух плоскостей проекций}
+    \includeMPgraphic{замена одной плоскости проекций}
+
+    A45 - A4 = .5 * length(A4 - A14) * dir -45;
+
+    OX45 := get_line(0.75 * x_max, angle(A45 - A4) + 90, A45, 0.3);
+
+    drawarrow OX45;
+    label.top("$X_{45}$", point 1 of OX45);
+
+    draw A4--A45;
+
+    A5 - A45 = unitvector(A45 - A4) * length(A14 - A1);
+
+    draw_mark(A1--A14, 1);
+
+    draw_marked(A45--A5, 1);
+    draw_point_circ(A4);
+
+    draw_point_circ(A45);
+    label.rt("$A_{45}$", A45 + .25 * font_size * right);
+
+    draw_point_circ_with_label(A5, "$A_5$", rt);
+
+    draw_perp_mark(A4 - A45, vec (0, 1) of OX45, A45);
+\stopuseMPgraphic
+\stopcomponent

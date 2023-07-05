@@ -135,12 +135,22 @@
     y1_max := .6 * fig_height;
     z_max := fig_height - y1_max;
 
-    draw_axes(x_max, 0, 0, 0);
+    O := (0, 0);
 
-    % берём данные из предыдущего рисунка
+    pickup thin_pen;
 
     pair X[];
     path OX[];
+
+    % берём данные из предыдущего рисунка
+
+    OX12 := OX12_tf transformed inverse military_persp_1;
+    OX12 := OX12 scaled (x_max / arclength OX12);
+
+    X12 := vec (0, 1) of OX12;
+
+    drawarrow OX12;
+    label.top("$X_{12}$", point 1 of OX12);
 
     OX14 := OX14_tf transformed inverse military_persp_1;
     OX14 := (
@@ -160,11 +170,11 @@
     A1 := A1_tf transformed inverse military_persp_1;
     A2 := A2_tf transformed inverse military_persp_2;
 
-    A12 = whatever[A1, A2] = whatever[O, X];
+    A12 = whatever[A1, A2] = whatever[O, X12];
 
     (A14 - A1) dotprod X14 = 0;
     A14 = whatever[point 0 of OX14, point 1 of OX14];
-    
+
     A4 - A14 = unitvector(A14 - A1) * length(A2 - A12);
 
     draw A1--A12;
@@ -180,7 +190,7 @@
     draw_point_circ(A14);
     label.rt("$A_{14}$", A14 + .25 * font_size * dir -45);
 
-    draw_perp_mark(A1 - A12, -X, A12);
+    draw_perp_mark(A1 - A12, -X12, A12);
     draw_perp_mark(A1 - A14, X14, A14);
 \stopuseMPgraphic
 \stopcomponent
