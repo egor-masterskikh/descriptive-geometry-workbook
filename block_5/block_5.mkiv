@@ -1,6 +1,3 @@
-% \environment[env.mkiv]
-% \environment[mpinclusions.mp.mkiv]
-
 \startcomponent .
 \starttext
 \startchapter[
@@ -20,6 +17,29 @@
 Пусть точка~$A(A_1, A_2)$ определена в системе плоскостей проекций ($\Pi_1, \Pi_2$) (\in{рис.}[fig:замена одной плоскости проекций]).
 Введём новую плоскость проекций $\Pi_4 \perp \Pi_1$, и спроецируем на неё точку~$A$.
 Теперь точка~$A(A_1, A_4)$ определена в новой системе плоскостей проекций ($\Pi_1, \Pi_4$), причём её высота остаётся неизменной: $AA_1 = A_2 A_{12} = A_4 A_{14}$.
+
+\startplacefigure[
+    title={Замена одной плоскости проекций},
+    reference={fig:замена одной плоскости проекций},
+]
+    \def\LocalDrawing[#1]#2{%
+        \Drawing[
+            height=.33\textheight,
+            #1,
+        ]{#2}%
+    }
+    \startcombination[distance=0pt]
+        \startcontent
+            \LocalDrawing[width=.55\textwidth]{изометрия:замена одной плоскости проекций}
+        \stopcontent
+        \startcaption\stopcaption
+
+        \startcontent
+            \LocalDrawing[width=.45\textwidth]{замена одной плоскости проекций}
+        \stopcontent
+        \startcaption\stopcaption
+    \stopcombination
+\stopplacefigure
 
 Новая система плоскостей проекций представляет собой две взаимно перпендикулярные плоскости, одна из которых взята из старой системы, а вторая выбирается так, чтобы проекция объекта на неё давала наилучшее представление нём для получения решения.
 

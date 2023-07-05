@@ -25,7 +25,16 @@
 
     font_size := 3.5u;
 
-    perp_mark_r := .7 * font_size;
+    perp_mark_r := 2.5u;
+
+    path stick_mark, tilde_mark;
+
+    stick_mark_size := 2u;
+    marks_distance := .75u;
+    stick_mark := (.5 * stick_mark_size * down)--(.5 * stick_mark_size * up);
+
+    tilde_mark_size := 1.6u;
+    tilde_mark := ((-1, -0.5){up}..(-.5, .5)..(0, 0)..(.5, -.5)..(1, .5){up}) scaled tilde_mark_size;
 
     % диметрические трансформации
     transform cabinet_scaled_[], cabinet_slanted_[], cabinet_persp_[];
@@ -37,6 +46,35 @@
     cabinet_scaled_3 := identity xscaled (0.5 * cosd 45);
     cabinet_slanted_3 := identity rotated 90 slanted tand 45 rotated -90;
     cabinet_persp_3 := cabinet_scaled_3 transformed cabinet_slanted_3;
+
+    % изометрические трансформации
+    transform military_scaled_[], military_slanted_[], military_persp_[];
+
+    military_persp_1 := (
+        identity    % (-x, -y)
+        slanted -1  % (-x + y, -y)
+        rotated 90  % (y, -x + y)
+        xscaled 2   % (2y, -x + y)
+        slanted -1  % (x + y, -x + y)
+        rotated -90 % (-x + y, -(x + y))
+        xscaled cosd 30 yscaled sind 30  % ((-x + y) * cos 30, -(x + y) * sin 30)
+    );
+
+    military_persp_2 := (
+        identity         % (-x, y)
+        rotated 90       % (-y, -x)
+        slanted sind -30 % (-y + x * sin 30, -x)
+        rotated -90      % (-x, y - x * sin 30)
+        xscaled cosd 30   % (-x * cos 30, y - x * sin 30)
+    );
+
+    military_persp_3 := (
+        identity        % (x, y)
+        rotated 90      % (-y, x)
+        slanted sind 30 % (-y + x * sin 30, x)
+        rotated -90     % (x, y - x * sin 30)
+        xscaled cosd 30  % (x * cos 30, y - x * sin 30)
+    );
     
     picture gost_dashpattern;
     gost_dashpattern := dashpattern(off 1.2u on 3u);
@@ -279,6 +317,50 @@
     % pair t -- начальный и конечный моменты времени пути
     def vec expr t of trail =
         (point ypart t of trail) - (point xpart t of trail)
+    enddef;
+
+    vardef get_mark(expr p, n) =
+        save mid, mark, full_mark;
+        pair mid;
+
+        if path p:
+            mid := point .5 of p;
+            mid_ang := angle(direction .5 of p);
+        elseif pair p:
+            mid := p;
+            mid_ang := 0;
+        fi
+
+        draw p;
+
+        path mark;
+        picture full_mark;
+
+        full_mark := image(
+            if (1 <= n) and (n <= 3):
+                mark := stick_mark rotated mid_ang shifted mid;
+                if n = 1:
+                    draw mark;
+                elseif n = 2:
+                    draw mark shifted -(.5 * marks_distance * dir mid_ang);
+                    draw mark shifted (.5 * marks_distance * dir mid_ang);
+                else:
+                    draw mark;
+                    draw mark shifted -(marks_distance * dir mid_ang);
+                    draw mark shifted (marks_distance * dir mid_ang);
+                fi
+            elseif n = 4:
+                mark := tilde_mark rotated mid_ang shifted mid;
+                draw mark;
+            fi
+        );
+
+        full_mark
+    enddef;
+
+    vardef draw_marked(expr p, n) =
+        draw get_mark(p, n);
+        draw p;
     enddef;
     \stopMPinclusions
 \stopenvironment

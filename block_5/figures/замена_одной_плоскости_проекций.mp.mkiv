@@ -1,0 +1,186 @@
+\startcomponent .
+\startuseMPgraphic{изометрия:замена одной плоскости проекций}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    z_max := .5 * fig_height;
+    x_max := min(
+        .5 * fig_width / cosd 30,
+        (1 / 0.85) * (fig_height - z_max)
+    );
+    y_max := x_max;
+
+    pair O, X[], Y[], Z, X[]_tf, Y_tf;
+
+    X14_ang := -60;
+
+    O := (0, 0);
+    X12 := x_max * left;
+    X14 := x_max * dir X14_ang;
+    Y1 := y_max * down;
+    Y3 := y_max * right;
+    Z := z_max * up;
+
+    X12_tf := X12 transformed military_persp_1;
+
+    X14_tf := X14 transformed military_persp_1;
+    X14_tf_ang := angle(X14_tf);
+
+    Y_tf := Y1 transformed military_persp_1;
+
+    military_persp_4 := (
+        identity
+        rotated 90
+        slanted sind -X14_tf_ang
+        rotated -90
+        xscaled cosd X14_tf_ang
+    );
+
+    path OX[]_tf, OY_tf, OZ, Pi[];
+
+    OX12_tf := O--X12_tf;
+    OX14_tf := (O--X14_tf) shifted (.37 * X12_tf);
+    OY_tf := O--Y_tf;
+    OZ := O--Z;
+
+    Pi1 := (X12_tf--(X12_tf + Y_tf)--Y_tf) scaled 0.85;
+    Pi2 := (X12_tf--(X12_tf + Z)--Z) scaled 0.85;
+    Pi4 := (O--Z--(Z + X14_tf)--X14_tf) scaled 0.85 shifted (point 0 of OX14_tf);
+
+    pickup thin_pen;
+
+    draw OX12_tf cutafter OX14_tf dashed gost_dashpattern;
+    draw OX12_tf cutbefore OX14_tf;
+    draw arrow_head rotated 180 transformed military_persp_1 shifted X12_tf;
+    draw thelabel.top("$X_{12}$", O) transformed military_persp_2 shifted X12_tf;
+
+    draw OX14_tf;
+    draw arrow_head rotated X14_ang transformed military_persp_1 shifted (point 1 of OX14_tf);
+    draw thelabel.top("$X_{14}$", O) transformed military_persp_4 shifted (point 1 of OX14_tf);
+
+    draw OY_tf cutafter OX14_tf dashed gost_dashpattern;
+    draw OY_tf cutbefore OX14_tf;
+    draw arrow_head rotated -90 shifted Y1 transformed military_persp_1;
+    draw thelabel.rt("$Y_{13}$", O) shifted Y3 transformed military_persp_3;
+
+    draw OZ cutafter Pi4 dashed gost_dashpattern;
+    drawarrow OZ cutbefore Pi4;
+    label.lft("$Z_{23}$", Z);
+
+    draw Pi1;
+    draw thelabel.urt(btex П₁ etex, O) transformed military_persp_1 shifted (point 1 of Pi1);
+
+    draw Pi2;
+    draw thelabel.lrt(btex П₂ etex, O) transformed military_persp_2 shifted (point 1 of Pi2);
+
+    draw Pi4;
+    draw thelabel.llft(btex П₄ etex, O) transformed military_persp_4 shifted (point 2 of Pi4);
+
+    pair A, A[]_tf;
+
+    A.x := .6 * x_max;
+    A.y := .6 * y_max;
+    A.z := .35 * z_max;
+
+    A1_tf := (-A.x, -A.y) transformed military_persp_1;
+    A2_tf := (-A.x, A.z) transformed military_persp_2;
+    A12_tf := A2_tf + A.z * down;
+
+    A14_tf = whatever[point 0 of OX14_tf, point 1 of OX14_tf];
+    ((A14_tf - A1_tf) transformed inverse military_persp_1) dotprod X14 = 0;
+    A4_tf := A14_tf + A.z * up;
+
+    A := A1_tf + A.z * up;
+
+    draw A12_tf--A1_tf--A14_tf;
+    draw A2_tf--A--A4_tf;
+
+    draw A12_tf--A2_tf;
+    draw get_mark(O, 2) rotated 90 transformed military_persp_2 shifted point .5 of (A12_tf--A2_tf);
+
+    draw_marked(A1_tf--A, 2);
+
+    draw A14_tf--A4_tf;
+    draw get_mark(O, 2) rotated 90 transformed military_persp_4 shifted point .5 of (A14_tf--A4_tf);
+
+    draw_point_circ(A1_tf);
+    draw thelabel.bot("$A_1$", O) transformed military_persp_1 shifted A1_tf;
+
+    draw_point_circ(A2_tf);
+    draw thelabel.top("$A_2$", O) transformed military_persp_2 shifted A2_tf;
+
+    draw_point_circ(A4_tf);
+    draw thelabel.top("$A_4$", O) transformed military_persp_4 shifted A4_tf;
+
+    draw_point_circ(A12_tf);
+    draw thelabel.ulft("$A_{12}$", O) transformed military_persp_2 shifted A12_tf;
+
+    draw_point_circ(A14_tf);
+    draw thelabel.urt("$A_{14}$", O) transformed military_persp_4 shifted A14_tf;
+
+    draw_point_circ(A);
+    draw thelabel.llft("$A$", A);
+
+    draw_perp_mark(vec (1, 0) of Pi4, vec (2, 1) of Pi2, point 1 of Pi4);
+
+    draw_perp_mark(A1_tf - A12_tf, -X12_tf, A12_tf);
+    draw_perp_mark(A1_tf - A14_tf, X14_tf, A14_tf);
+\stopuseMPgraphic
+
+\startuseMPgraphic{замена одной плоскости проекций}
+    fig_width := \framedwidth;
+    fig_height := \framedheight;
+
+    x_max := .6 * fig_width;
+    y1_max := .6 * fig_height;
+    z_max := fig_height - y1_max;
+
+    draw_axes(x_max, 0, 0, 0);
+
+    % берём данные из предыдущего рисунка
+
+    pair X[];
+    path OX[];
+
+    OX14 := OX14_tf transformed inverse military_persp_1;
+    OX14 := (
+        OX14
+        shifted -(point 0 of OX14)
+        scaled (x_max / arclength OX14)
+        shifted (point 0 of OX14)
+    );
+
+    X14 := vec (0, 1) of OX14;
+
+    drawarrow OX14;
+    label.lrt("$X_{14}$", point 1 of OX14);
+
+    pair A[];
+
+    A1 := A1_tf transformed inverse military_persp_1;
+    A2 := A2_tf transformed inverse military_persp_2;
+
+    A12 = whatever[A1, A2] = whatever[O, X];
+
+    (A14 - A1) dotprod X14 = 0;
+    A14 = whatever[point 0 of OX14, point 1 of OX14];
+    
+    A4 - A14 = unitvector(A14 - A1) * length(A2 - A12);
+
+    draw A1--A12;
+    draw_marked(A12--A2, 2);
+    draw A1--A14;
+    draw_marked(A14--A4, 2);
+
+    draw_point_circ_with_label(A1, "$A_1$", bot);
+    draw_point_circ_with_label(A2, "$A_2$", top);
+    draw_point_circ_with_label(A12, "$A_{12}$", ulft);
+
+    draw_point_circ_with_label(A4, "$A_4$", top);
+    draw_point_circ(A14);
+    label.rt("$A_{14}$", A14 + .25 * font_size * dir -45);
+
+    draw_perp_mark(A1 - A12, -X, A12);
+    draw_perp_mark(A1 - A14, X14, A14);
+\stopuseMPgraphic
+\stopcomponent
