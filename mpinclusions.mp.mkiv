@@ -83,6 +83,7 @@
     path point_circ;
     point_circ := fullcircle scaled u;
 
+
     def draw_point_circ(expr pos) =
         if pair pos:
             fill point_circ shifted pos withcolor white withpen thin_pen;
@@ -90,10 +91,12 @@
         fi
     enddef;
 
+
     def draw_point_circ_with_label(expr pos, label_str)(suffix label_pos) =
         draw_point_circ(pos);
         label.label_pos(label_str, pos);
     enddef;
+
 
     def draw_axes(expr x_max, yi_max, z_max, yiii_max) =
         pair O, X, Z, Y[];
@@ -142,6 +145,7 @@
         fi
     enddef;
 
+
     % numeric len -- длина отображаемого отрезка прямой
     % pair point_on -- точка, принадлежащая прямой
     % numeric point_on_k определяет, какую часть всего отрезка прямой составляет отрезок между начальной координатой отрезка и контрольной точкой
@@ -157,6 +161,7 @@
         start_point--end_point
     enddef;
 
+
     % numeric label_k определяет, какую часть всего отрезка прямой составляет отрезок между начальной координатой отрезка и координатой метки
     % string label_str -- собственно содержимое метки
     % suffix label_pos -- расположение метки относительно её координаты
@@ -166,6 +171,7 @@
         label.label_pos(label_str, point label_k of line);
         line
     enddef;
+
 
     % pair a_vec, b_vec -- векторы, угол между которыми будет обозначен
     % pair angle_point -- точка, около которой будет обозначен угол
@@ -179,6 +185,7 @@
 
         arc shifted angle_point
     enddef;
+
 
     vardef get_point_for_angle_label(expr arc, label_str) =
         save arc_midpoint, bisector, label_content, label_width, label_height, offset;
@@ -203,6 +210,7 @@
         arc_midpoint + bisector * offset
     enddef;
 
+
     vardef get_angle_mark_and_draw_label(expr a_vec, b_vec, angle_point, k, label_str) =
         save arc, point_for_angle_label;
         path arc;
@@ -216,6 +224,7 @@
         arc
     enddef;
 
+
     vardef get_perp_mark(expr a_vec, b_vec, ang_point) =
         save perp_mark; path perp_mark;
 
@@ -224,9 +233,11 @@
         perp_mark shifted ang_point
     enddef;
 
+
     def draw_perp_mark(expr a_vec, b_vec, ang_point) =
-        draw get_perp_mark(a_vec, b_vec, ang_point);
+        draw get_perp_mark(a_vec, b_vec, ang_point) withpen thin_pen;
     enddef;
+
 
     % pair A, B -- координаты точек, от которых будет сделан вынос
     % numeric ext_line_len -- длина короткой выносной линии
@@ -268,6 +279,7 @@
         dim_line
     enddef;
 
+
     % pair init_point -- точка, от которой будет сделан вынос
     % numeric ext_angle -- угол, под которым будет выноситься полка
     vardef get_ext_line(expr init_point, ext_angle, label_str) =
@@ -293,6 +305,7 @@
         res_line
     enddef;
 
+
     vardef get_ext_line_and_draw_label(expr init_point, ext_angle, label_str) =
         save ext_line;
         path ext_line;
@@ -302,6 +315,12 @@
 
         ext_line
     enddef;
+
+
+    def draw_ext_line_with_label(expr init_point, ext_angle, label_str) =
+        draw get_ext_line_and_draw_label(init_point, ext_angle, label_str);
+    enddef;
+
 
     % path trail -- путь
     % numeric arrow_k определяет, на какой части пути разместить стрелку
@@ -314,10 +333,12 @@
         draw arrow_head rotated angle(direction k of trail) shifted (point k of trail);
     enddef;
 
+
     % pair t -- начальный и конечный моменты времени пути
     def vec expr t of trail =
         (point ypart t of trail) - (point xpart t of trail)
     enddef;
+
 
     vardef get_mark(expr p, n) =
         save mid, mark, full_mark;
@@ -330,8 +351,6 @@
             mid := p;
             mid_ang := 0;
         fi
-
-        draw p;
 
         path mark;
         picture full_mark;
@@ -358,9 +377,43 @@
         full_mark
     enddef;
 
-    vardef draw_marked(expr p, n) =
+
+    def draw_mark(expr p, n) =
+        draw get_mark(p, n) withpen thin_pen;
+    enddef;
+
+
+    def draw_marked(expr p, n) =
         draw get_mark(p, n);
         draw p;
+    enddef;
+
+
+    % numeric start_ext, end_ext -- величины удлинения у начала и конца линии соответственно
+    vardef get_line_by_two_pts(expr A, B, start_ext, end_ext) =
+        save len;
+        len := length(B - A);
+
+        (1 + start_ext / len)[B, A]--(1 + end_ext / len)[A, B]
+    enddef;
+
+
+    vardef get_line_by_two_pts_and_draw_label(expr A, B, start_ext, end_ext, label_k, label_str)(suffix label_pos) =
+        save line; path line;
+        line := get_line_by_two_pts(A, B, start_ext, end_ext);
+        label.label_pos(label_str, point label_k of line);
+
+        line
+    enddef;
+
+
+    def draw_line_by_two_pts(expr A, B, start_ext, end_ext) =
+        draw get_line_by_two_points(A, B, start_ext, end_ext);
+    enddef;
+
+
+    def draw_line_by_two_pts_with_label(expr A, B, start_ext, end_ext, label_k, label_str)(suffix label_pos) =
+        draw get_line_by_two_pts_and_draw_label(A, B, start_ext, end_ext, label_k, label_str, label_pos);
     enddef;
     \stopMPinclusions
 \stopenvironment
