@@ -113,7 +113,7 @@
     draw thelabel.top("$A_4$", O) transformed military_persp_4 shifted A4_tf;
 
     draw_point_circ(A12_tf);
-    draw thelabel.ulft("$A_{12}$", O) transformed military_persp_2 shifted A12_tf;
+    draw thelabel.urt("$A_{12}$", O) transformed military_persp_2 shifted A12_tf;
 
     draw_point_circ(A14_tf);
     draw thelabel.urt("$A_{14}$", O) transformed military_persp_4 shifted A14_tf;
@@ -141,6 +141,7 @@
 
     pair X[];
     path OX[];
+    pair Pi_label_point;
 
     % берём данные из предыдущего рисунка
 
@@ -151,6 +152,10 @@
 
     drawarrow OX12;
     label.top("$X_{12}$", point 1 of OX12);
+
+    Pi_label_point := point (1 - 1.5 * ahlength / arclength OX12) of OX12;
+    label.lrt(btex П₁ etex, Pi_label_point);
+    label.urt(btex П₂ etex, Pi_label_point);
 
     OX14 := OX14_tf transformed inverse military_persp_1;
     OX14 := (
@@ -164,6 +169,10 @@
 
     drawarrow OX14;
     label.lrt("$X_{14}$", point 1 of OX14);
+
+    Pi_label_point := point (1 - 1.5 * ahlength / arclength OX14) of OX14;
+    label.llft(btex П₁ etex, Pi_label_point);
+    label.urt(btex П₄ etex, Pi_label_point);
 
     pair A[];
 
@@ -184,7 +193,7 @@
 
     draw_point_circ_with_label(A1, "$A_1$", bot);
     draw_point_circ_with_label(A2, "$A_2$", top);
-    draw_point_circ_with_label(A12, "$A_{12}$", ulft);
+    draw_point_circ_with_label(A12, "$A_{12}$", urt);
 
     draw_point_circ_with_label(A4, "$A_4$", top);
     draw_point_circ(A14);

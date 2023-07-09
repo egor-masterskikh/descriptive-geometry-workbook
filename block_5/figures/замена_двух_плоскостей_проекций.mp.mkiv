@@ -9,6 +9,10 @@
     drawarrow OX45;
     label.top("$X_{45}$", point 1 of OX45);
 
+    Pi_label_point := point (1 - 1.5 * ahlength / arclength OX45) of OX45;
+    label.ulft(btex П₄ etex, Pi_label_point);
+    label.lrt(btex П₅ etex, Pi_label_point);
+
     draw A4--A45;
 
     A5 - A45 = unitvector(A45 - A4) * length(A14 - A1);

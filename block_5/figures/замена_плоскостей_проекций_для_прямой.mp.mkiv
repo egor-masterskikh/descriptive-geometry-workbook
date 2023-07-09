@@ -9,6 +9,12 @@
 
     draw_axes(x_max, 0, 0, 0);
 
+    pair Pi_label_point;
+
+    Pi_label_point := point 0 of (O--X);
+    label.llft(btex П₁ etex, Pi_label_point);
+    label.ulft(btex П₂ etex, Pi_label_point);
+
     pair A[], B[];
 
     A.x := .7 * x_max;
@@ -39,7 +45,7 @@
     path l[];
 
     l1 := get_line_by_two_pts_and_draw_label(
-        A1, B1, A.y, 2 * font_size,
+        A1, B1, A.y, 2.5 * font_size,
         0.5, "$l_1$", top
     );
     draw l1;
@@ -56,11 +62,15 @@
     path OX[];
 
     X14 := B1 - A1;
-    OX14 := reverse l1 shifted (unitvector X14 rotated -90 scaled (2 * font_size));
+    OX14 := reverse l1 shifted (unitvector X14 rotated -90 scaled (2.2 * font_size));
     O14 := point 0 of OX14;
 
     drawarrow OX14;
     label.top("$X_{14}$", point 1 of OX14);
+
+    Pi_label_point := point 0 of OX14;
+    label.top(btex П₁ etex, Pi_label_point);
+    label.llft(btex П₄ etex, Pi_label_point);
 
     (A14 - A1) dotprod X14 = 0;
     A14 = O14 + whatever * X14;
@@ -105,6 +115,10 @@
     );
     drawarrow OX45;
 
+    Pi_label_point := point 0 of OX45;
+    label.ulft(btex П₄ etex, Pi_label_point);
+    label.lrt(btex П₅ etex, Pi_label_point);
+
     X45 := vec (0, 1) of OX45;
 
     A5 - A45 = unitvector(A45 - A4) * length(A1 - A14);
@@ -122,6 +136,6 @@
     draw_point_circ_with_label(A4, "$A_4$", bot);
     draw_point_circ_with_label(B4, "$B_4$", bot);
 
-    draw_point_circ_with_label(A5, "$A_5 \equiv (B_5) \equiv l_5$", rt);
+    draw_point_circ_with_label(A5, "$B_5 \equiv (A_5) \equiv l_5$", rt);
 \stopuseMPgraphic
 \stopcomponent
