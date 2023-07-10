@@ -15,15 +15,40 @@ texpreamble(
 """
 );
 
-real
-paperwidth = 210mm,
-paperheight = 297mm,  // A4
-topspace = 2.5cm,
-backspace = 2.5cm;
+// Convert string "<real><unit>" to real pt
+real pt(string s) {
+    string unit = substr(s, pos=length(s) - 2);
+    real val = (real)replace(s, before=unit, after="");
+
+    if (unit == "mm") val *= 2.84528;
+
+    return val*pt;
+}
 
 real
-textwidth = paperwidth - 2 * backspace,
-textheight = paperheight - 2 * topspace;
+defaulttextwidth = 200mm,
+defaulttextheight = 250mm;
+
+real
+textwidth = defaulttextwidth,
+textheight = defaulttextheight;
+
+// Считываем размеры текстовой области документа
+file fin = input("textarea.txt");
+string line;
+string[] keyval;
+string key, val;
+while (!eof(fin)) {
+    line = fin;  // считываем строку
+    keyval = split(line, delimiter="=");
+    if (keyval.length != 2) continue;
+
+    key = keyval[0]; val = keyval[1];
+    if (key == "textwidth")
+        textwidth = pt(val);
+    else if (key == "textheight")
+        textheight = pt(val);
+}
 
 real
 baselinewidth = .5mm,
