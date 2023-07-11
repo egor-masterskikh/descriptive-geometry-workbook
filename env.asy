@@ -8,10 +8,17 @@ settings.tex = "lualatex";
 
 texpreamble(
 """
-\usepackage{fontspec}
-\setmainfont[
-    Scale=1.27,   % => размер шрифта 3.5мм (коэффициент подобран экспериментально)
-]{GOST 2.304-81}  % шрифт должен быть установлен в системе
+\usepackage{calc}
+
+\newlength{\realfsize}  % реальный размер шрифта
+\setlength{\realfsize}{3.5mm}
+\newcommand\fsizefactor{1.57}
+\newlength{\fsize}
+\setlength{\fsize}{\realfsize * \real\fsizefactor}
+
+% luaotfload
+\font\gostrm = name:gost230481typea at \fsize
+\font\gostsl = name:gost230481typeaslanted at \fsize
 """
 );
 
@@ -141,12 +148,17 @@ arrowbar MyArrow = MyArrow();
 
 
 Label MyLabel(
-    string s="", bool italic=true, string size="", position position=0,
+    string s,
+    bool sl=true,  // bool slanted
+    string size="", position position=(inf, inf),
     align align=NoAlign, pen p=nullpen,
     embed embed=Rotate, filltype filltype=NoFill
 ) {
-    string res = "$\math" + (italic ? "it" : "rm") + "{" + s + "}$";
-    return Label(res, size, position, align, p, embed, filltype);
+    string res = "\gost" + (sl ? "sl" : "rm") + " " + s;
+    if ((pair)position == (inf, inf))
+        return Label(res, size, align, p, embed, filltype);
+    else
+        return Label(res, size, position, align, p, embed, filltype);
 }
 
 
@@ -231,14 +243,14 @@ transform shiftPerp(pair vec, real distance) {
 
 
 // Найти точку на пространственной прямой AB, если задана какая-либо из её координат.
-triple findPoint(triple A, triple B, real x=infinity, real y=infinity, real z=infinity) {
+triple findPoint(triple A, triple B, real x=nan, real y=nan, real z=nan) {
     real t;  // параметр в уравнении прямой
     triple q = B - A;  // направляющий вектор
-    if (x != infinity && (y, z) == (infinity, infinity))
+    if (!isnan(x) && isnan(y) && isnan(z))
         t = (x - A.x) / q.x;
-    else if (y != infinity && (x, z) == (infinity, infinity))
+    else if (!isnan(y) && isnan(x) && isnan(z))
         t = (y - A.y) / q.y;
-    else if (z != infinity && (x, y) == (infinity, infinity))
+    else if (!isnan(z) && isnan(x) && isnan(y))
         t = (z - A.z) / q.z;
 
     return A + q * t;

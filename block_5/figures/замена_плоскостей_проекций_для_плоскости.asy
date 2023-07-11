@@ -123,9 +123,9 @@ O45 = shiftParallel(X45 - O45, -length(O45 - B45) - fontsize) * O45;
 X45 = shiftParallel(X45 - O45, -length(X45 - C45) + 4 * fontsize) * X45;
 
 
-draw(O12--X12, L=MyLabel("X_{12}", position=EndPoint, align=N), arrow=MyArrow);
-label(MyLabel("Π_1", italic=false, position=arcpoint(X12--O12, 1.6 * ahsize), align=SSE));
-label(MyLabel("Π_2", italic=false, position=arcpoint(X12--O12, 1.6 * ahsize), align=NNE));
+draw(O12--X12, L=MyLabel("X₁₂", position=EndPoint, align=N), arrow=MyArrow);
+label(MyLabel("Π₁", sl=false, position=arcpoint(X12--O12, 1.6 * ahsize), align=SSE));
+label(MyLabel("Π₂", sl=false, position=arcpoint(X12--O12, 1.6 * ahsize), align=NNE));
 
 draw(A1--A12);
 draw(A12--A2, marker=StickMarker(n=3));
@@ -139,20 +139,20 @@ draw(C12--C2, marker=StickMarker(n=1));
 draw(H1--H2);
 
 draw(A1--B1--C1--cycle, p=linewidth(baselinewidth));
-label(MyLabel("h_1", position=point(A1--H1, .9), align=N));
+label(MyLabel("h₁", position=point(A1--H1, .9), align=N));
 
 draw(A2--B2--C2--cycle, p=linewidth(baselinewidth));
 draw(
     shift(A2) * 
     scale(length(H2 - A2) + abs(B.x - H.x) + fontsize) * 
     (O12--unit(H2 - A2)),
-    L=MyLabel("h_2", position=EndPoint, align=N)
+    L=MyLabel("h₂", position=EndPoint, align=N)
 );
 
 
-draw(O14--X14, L=MyLabel("X_{14}", position=EndPoint, align=W), arrow=MyArrow);
-label(MyLabel("Π_1", italic=false, position=arcpoint(X14--O14, 1.6 * ahsize), align=WNW));
-label(MyLabel("Π_4", italic=false, position=arcpoint(X14--O14, 1.6 * ahsize), align=SE));
+draw(O14--X14, L=MyLabel("X₁₄", position=EndPoint, align=W), arrow=MyArrow);
+label(MyLabel("Π₁", sl=false, position=arcpoint(X14--O14, 1.6 * ahsize), align=WNW));
+label(MyLabel("Π₄", sl=false, position=arcpoint(X14--O14, 1.6 * ahsize), align=SE));
 
 draw(A1--A14, marker=TildeMarker());
 draw(A14--A4, marker=StickMarker(n=3));
@@ -169,11 +169,11 @@ draw(A4--B4--C4--cycle, p=linewidth(baselinewidth));
 pair anglevec = scale(markangleradius() + fontsize) * unit(O14 - X14);
 path angleline = shift(C4) * ((0, 0)--anglevec);
 draw(angleline);
-markangle(L="\textit{α}", B4, C4, point(angleline, 1));
+markangle(L=MyLabel("α"), B4, C4, point(angleline, 1));
 
 
-draw(O45--X45, L=MyLabel("X_{45}", position=EndPoint, align=S), arrow=MyArrow);
-label("$\mathrm{Π_5}$", position=arcpoint(X45--O45, 1.6 * ahsize), align=SE);
+draw(O45--X45, L=MyLabel("X₄₅", position=EndPoint, align=S), arrow=MyArrow);
+label(MyLabel("Π₅", sl=false, position=arcpoint(X45--O45, 1.6 * ahsize), align=SE));
 
 draw(A4--A45);
 draw(A45--A5, marker=TildeMarker());
@@ -185,31 +185,31 @@ draw(C4--C45);
 draw(C45--C5, marker=CrossMarker(n=4));
 
 draw(A5--B5--C5--cycle, p=linewidth(baselinewidth));
-label(MyLabel("h_5", position=point(A5--H5, .7), align=NNE));
+label(MyLabel("h₅", position=point(A5--H5, .7), align=NNE));
 
 
-dot(A1, L=MyLabel("A_1", align=W));
-dot(B1, L=MyLabel("B_1", align=SSE));
-dot(C1, L=MyLabel("C_1", align=S));
-dot(H1, L=MyLabel("1_1", align=SSE));
+dot(A1, L=MyLabel("A₁", align=W));
+dot(B1, L=MyLabel("B₁", align=SSE));
+dot(C1, L=MyLabel("C₁", align=S));
+dot(H1, L=MyLabel("1₁", align=SSE));
 
-dot(A2, L=MyLabel("A_2", align=W));
-dot(B2, L=MyLabel("B_2", align=N));
-dot(C2, L=MyLabel("C_2", align=E));
-dot(H2, L=MyLabel("1_2", align=NW));
+dot(A2, L=MyLabel("A₂", align=W));
+dot(B2, L=MyLabel("B₂", align=N));
+dot(C2, L=MyLabel("C₂", align=E));
+dot(H2, L=MyLabel("1₂", align=NW));
 
 extensionLine(
     pFrom=A4,
     angle=degrees(B4 - A4) + 25,
     length=length(B4 - A4) + fontsize,
-    L=MyLabel("A_4 \mathop{≡} h_4")
+    L=MyLabel("A₄ ≡ h₄")
 );
 dot(A4);
-dot(B4, L=MyLabel("B_4", align=N));
-dot(C4, L=MyLabel("C_4", align=SSW));
+dot(B4, L=MyLabel("B₄", align=N));
+dot(C4, L=MyLabel("C₄", align=SSW));
 
 draw(A5--H5);
-dot(A5, L=MyLabel("A_5", align=E));
-dot(B5, L=MyLabel("B_5", align=ENE));
-dot(C5, L=MyLabel("C_5", align=SSW));
-dot(H5, L=MyLabel("1_5", align=W));
+dot(A5, L=MyLabel("A₅", align=E));
+dot(B5, L=MyLabel("B₅", align=ENE));
+dot(C5, L=MyLabel("C₅", align=SSW));
+dot(H5, L=MyLabel("1₅", align=W));
