@@ -1,4 +1,7 @@
-import "../../env.asy" as env;
+string wd = cd("./");
+cd("../../");
+import env;
+cd(wd);
 
 real
 figwidth = .5 * textwidth,

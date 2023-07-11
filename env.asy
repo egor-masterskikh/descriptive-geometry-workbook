@@ -26,7 +26,7 @@ real pt(string s) {
 }
 
 real
-defaulttextwidth = 200mm,
+defaulttextwidth = 160mm,
 defaulttextheight = 250mm;
 
 real
