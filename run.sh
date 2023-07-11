@@ -16,13 +16,12 @@ if ! $project_fonts_are_loaded; then
   export OSFONTDIR
 fi
 
-# при первом запуске необходимо обновить базу данных шрифтов
-# для этого раскомментируйте следующие две строчки
-#  mtxrun --generate
-#  mtxrun --script font --reload
-# после первого запуска их можно закомментировать
+if [ "$1" == "--setup" ]; then
+  mtxrun --generate
+  mtxrun --script font --reload
+fi
 
-# TODO: скомпилировать все .asy файлы
-# TODO: добавить аргументы скрипта
+# compile all .asy files
+find ./ -mindepth 2 -type f -regex '.*/figures/[A-Za-zА-Яа-я0-9_\-]+\.asy' -execdir asy -verbose '{}' \;
 
 context main.mkiv --luatex --result="Рабочая_тетрадь_по_начерту"
