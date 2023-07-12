@@ -9,6 +9,7 @@ settings.tex = "lualatex";
 texpreamble(
 """
 \usepackage{calc}
+\usepackage{stackengine}
 
 \newlength{\realfsize}  % реальный размер шрифта
 \setlength{\realfsize}{3.5mm}
@@ -19,6 +20,22 @@ texpreamble(
 % luaotfload
 \font\gostrm = name:gost230481typea at \fsize
 \font\gostsl = name:gost230481typeaslanted at \fsize
+\font\gostsls = name:gost230481typeaslanted at .7\fsize  % script size
+
+\def\stacktype{L}
+
+\renewcommand\bar[1]{%
+    \setstackgap{L}{.75mm}%
+    \stackon{#1}{¯}%
+}
+
+\newcommand\Bar[1]{%
+    \setstackgap{L}{.75mm}%
+    \stackon{#1}{%
+        \setstackgap{L}{.5mm}%
+        \stackon{¯}{¯}%
+    }%
+}
 """
 );
 
@@ -154,11 +171,34 @@ Label MyLabel(
     align align=NoAlign, pen p=nullpen,
     embed embed=Rotate, filltype filltype=NoFill
 ) {
-    string res = "\gost" + (sl ? "sl" : "rm") + " " + s;
+    string fontcmd = "\gost" + (sl ? "sl" : "rm");
+    // string res_s = fontcmd + " " + s;
+
+    // parse string s
+    string[] parts = {""};
+    int cur_i = 0;
+    bool mathmode = false;
+    for (var ch : array(s)) {
+        if (ch == "^" || ch == "_") {
+            mathmode = true;
+            parts[cur_i] = "{\hbox{" + parts[cur_i] + "}}" + ch;
+            ++cur_i;
+            parts.push(fontcmd + "s ");
+        }
+        else
+            parts[cur_i] += ch;
+    }
+    parts[cur_i] = "{\hbox{" + parts[cur_i] + "}}";
+
+    string res_s = operator +(... parts);
+    if (mathmode)
+        res_s = "$" + res_s + "$";
+    res_s = fontcmd + " " + res_s;
+
     if ((pair)position == (inf, inf))
-        return Label(res, size, align, p, embed, filltype);
+        return Label(res_s, size, align, p, embed, filltype);
     else
-        return Label(res, size, position, align, p, embed, filltype);
+        return Label(res_s, size, position, align, p, embed, filltype);
 }
 
 
@@ -257,11 +297,11 @@ triple findPoint(triple A, triple B, real x=nan, real y=nan, real z=nan) {
 }
 
 
-void extensionLine(pair pFrom, real angle=0, real length, Label L="") {
+void extensionLine(pair pFrom, real angle=0, real length, int bardir=1, Label L="") {
     real barwidth = width(texpath(L));
 
     pair
-    barvec = scale(barwidth) * right,
+    barvec = scale(barwidth * sgn(bardir)) * right,
     extvec = scale(length) * rotate(angle) * right;
 
     path
@@ -271,3 +311,5 @@ void extensionLine(pair pFrom, real angle=0, real length, Label L="") {
     draw(extline--barline);
     label(L, position=point(barline, .5), align=N);
 }
+
+triple O = (0, 0, 0);

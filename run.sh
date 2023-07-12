@@ -1,3 +1,5 @@
+set -e  # exit immediately if a command exits with a non-zero status.
+
 project_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 readarray -d : -t font_dirs_arr <<<"$OSFONTDIR"
@@ -22,6 +24,6 @@ if [ "$1" == "--setup" ]; then
 fi
 
 # compile all .asy files
-find ./ -mindepth 2 -type f -regex '.*/figures/[A-Za-zА-Яа-я0-9_\-]+\.asy' -execdir asy -verbose '{}' \;
+find ./ -mindepth 2 -type f -regex '.*/figures/[A-Za-zА-Яа-я0-9_\-]+\.asy' -execdir asy -verbose '{}' +
 
 context main.mkiv --luatex --result="Рабочая_тетрадь_по_начерту"

@@ -77,9 +77,8 @@ Pairs[] planes = {plane1, plane2, plane4, plane5};
 for (int i = 0; i < planes.length; ++i) {
     if (i == 1) continue;
 
-    if (i >= 0) {
-        reflect(O12, X12) * planes[i];
-    }
+    reflect(O12, X12) * planes[i];
+
     if (i == 2) {
         rotate(degrees(A1 - H1) - 90) * planes[i];
         shiftPerp(X14 - O14, -fontsize) * planes[i];
@@ -212,4 +211,4 @@ draw(A5--H5);
 dot(A5, L=MyLabel("A₅", align=E));
 dot(B5, L=MyLabel("B₅", align=ENE));
 dot(C5, L=MyLabel("C₅", align=SSW));
-dot(H5, L=MyLabel("1₅", align=W));
+dot(H5, L=MyLabel("1₅", align=1.5W));
