@@ -143,6 +143,8 @@ struct Pairs {
 
     void operator init(... Pair[] arr) { this.arr = arr; }
 
+    void operator init(Pair[] arr) { this.arr = arr; }
+
     int length() { return this.arr.length; }
 
     Pair get(int i) { return this.arr[i]; }
@@ -152,6 +154,8 @@ void operator *(transform tf, Pairs ps) {
     for (int i = 0; i < ps.length(); ++i)
         ps.get(i).set(tf * ps.get(i));
 }
+
+Pair[] operator cast(Pairs ps) { return ps.arr; }
 
 
 arrowhead ahtype = SimpleHead;
