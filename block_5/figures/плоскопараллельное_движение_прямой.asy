@@ -86,13 +86,18 @@ draw(
     D2--shiftParallel(D2_tf1 - D2, abs((E2_tf1 - D2_tf1).x) + 2 * fontsize) * D2_tf1,
     L=MyLabel("Σ^D_2", position=EndPoint, align=NNW)
 );
+drawMyArrowHead(firstcut(D2--D2_tf1, E1--E2).before, position=.75);
+
 draw(
     E2--shiftParallel(E2_tf1 - E2, 2 * fontsize) * E2_tf1,
     L=MyLabel("Σ^E_2", position=EndPoint, align=NNW)
 );
+drawMyArrowHead(E2--E2_tf1, position=.3);
 
 draw(D1_tf1--D2_tf1);
+drawMyArrowHead(D1_tf1--extension(D1_tf1, D2_tf1, (0, 0), right), position=.75);
 draw(E1_tf1--E2_tf1);
+drawMyArrowHead(E1_tf1--extension(E1_tf1, E2_tf1, (0, 0), right), position=.75);
 
 draw(D1_tf1--E1_tf1, p=linewidth(baselinewidth), marker=StickMarker());
 draw(D2_tf1--E2_tf1, p=linewidth(baselinewidth), marker=TildeMarker(offset=fontsize));
@@ -107,8 +112,9 @@ draw(
     E1_tf1--shiftParallel(E1_tf2 - E1_tf1, 3 * fontsize) * E1_tf2,
     L=MyLabel("Δ^{A,B}_1", position=EndPoint, align=NNW)
 );
+drawMyArrowHead(E1_tf1--E1_tf2, position=.6);
 
-draw(E1_tf2--E2_tf2);
+draw(D2_tf2--D1_tf2, arrow=MyArrow(position=.75));
 
 dot(D1_tf2);
 draw(D2_tf2--E2_tf2, p=linewidth(baselinewidth), marker=TildeMarker());

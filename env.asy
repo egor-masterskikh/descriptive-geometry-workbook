@@ -119,6 +119,10 @@ pair operator cast(Pair p) { return (p.x, p.y); }
 
 path operator --(Pair p1, Pair p2) { return (pair)p1--(pair)p2; }
 
+path operator --(Pair p1, pair p2) { return (pair)p1--p2; }
+
+path operator --(pair p1, Pair p2) { return p1--(pair)p2; }
+
 path operator --(path p1, Pair p2) { return p1--(pair)p2; }
 
 Pair operator -(Pair p1, Pair p2) { return Pair((pair)p1 - (pair)p2); }
@@ -156,18 +160,30 @@ real ahangle = 10;
 
 arrowbar MyArrow(
     arrowhead arrowhead=ahtype,
-    real size=ahsize,
-    real angle=ahangle,
-    real position=1
-) { return Arrow(arrowhead, size, angle, position); }
+    real size=ahsize, real angle=ahangle,
+    filltype filltype=null, position position=EndPoint
+) { return Arrow(arrowhead, size, angle, filltype, position); }
 
 arrowbar MyArrow = MyArrow();
+
+path MyArrowHead(
+    path g, position position=EndPoint,
+    pen p=currentpen, arrowhead arrowhead=ahtype,
+    real size=ahsize, real angle=ahangle
+) { return arrowhead.head(g, position, p, size, angle); }
+
+void drawMyArrowHead(
+    picture pic=currentpicture,
+    path g, position position=EndPoint,
+    pen p=currentpen, arrowhead arrowhead=ahtype,
+    real size=ahsize, real angle=ahangle
+) { draw(pic, MyArrowHead(g, position, p, arrowhead, size, angle)); }
 
 
 Label MyLabel(
     string s,
     bool sl=true,  // bool slanted
-    string size="", position position=(inf, inf),
+    string size="", position position=null,
     align align=NoAlign, pen p=nullpen,
     embed embed=Rotate, filltype filltype=NoFill
 ) {
@@ -195,7 +211,7 @@ Label MyLabel(
         res_s = "$" + res_s + "$";
     res_s = fontcmd + " " + res_s;
 
-    if ((pair)position == (inf, inf))
+    if (position == null)
         return Label(res_s, size, align, p, embed, filltype);
     else
         return Label(res_s, size, position, align, p, embed, filltype);
