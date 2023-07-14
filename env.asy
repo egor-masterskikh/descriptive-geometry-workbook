@@ -76,7 +76,7 @@ while (!eof(fin)) {
 
 real
 baselinewidth = .5mm,
-thinlinewidth = baselinewidth / 2;
+thinlinewidth = .4 * baselinewidth;
 
 defaultpen(thinlinewidth);
 dotfactor = (1mm + linewidth()) / linewidth();
