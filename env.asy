@@ -158,30 +158,48 @@ void operator *(transform tf, Pairs ps) {
 Pair[] operator cast(Pairs ps) { return ps.arr; }
 
 
-arrowhead ahtype = SimpleHead;
 real ahsize = 3.5mm;
 real ahangle = 10;
 
 arrowbar MyArrow(
-    arrowhead arrowhead=ahtype,
-    real size=ahsize, real angle=ahangle,
-    filltype filltype=null, position position=EndPoint
-) { return Arrow(arrowhead, size, angle, filltype, position); }
+    position position=EndPoint, filltype filltype=null,
+    real size=ahsize, real angle=ahangle
+) { return Arrow(SimpleHead, size, angle, filltype, position); }
 
 arrowbar MyArrow = MyArrow();
 
 path MyArrowHead(
     path g, position position=EndPoint,
-    pen p=currentpen, arrowhead arrowhead=ahtype,
+    pen p=currentpen,
     real size=ahsize, real angle=ahangle
-) { return arrowhead.head(g, position, p, size, angle); }
+) { return SimpleHead.head(g, position, p, size, angle); }
 
 void drawMyArrowHead(
     picture pic=currentpicture,
     path g, position position=EndPoint,
-    pen p=currentpen, arrowhead arrowhead=ahtype,
+    pen p=currentpen,
     real size=ahsize, real angle=ahangle
-) { draw(pic, MyArrowHead(g, position, p, arrowhead, size, angle)); }
+) { draw(pic, MyArrowHead(g, position, p, size, angle)); }
+
+
+path3 MyArrowHead3(
+    path3 g, triple normal=Z, real position=1,
+    real size=ahsize, real angle=ahangle
+) {
+    position = reltime(g, position);
+    path3 r = subpath(g, position, 0);
+    triple x = point(r, 0);
+    real t = arctime(r, size);
+    path3 left = rotate(-angle, x, x + normal) * r;
+    path3 right = rotate(angle, x, x + normal) * r;
+    return subpath(left, t, 0)--subpath(right, 0, t);
+}
+
+void drawMyArrowHead3(
+    picture pic=currentpicture,
+    path3 g, triple normal=Z, real position=1,
+    real size=ahsize, real angle=ahangle
+) { draw(pic, MyArrowHead3(g, normal, position, size, angle)); }
 
 
 Label MyLabel(
@@ -227,66 +245,32 @@ real stickmarkerspace = .5mm;
 
 marker StickMarker(
     int i=1, int n=1,
-    real size=stickmarkersize,
-    real space=stickmarkerspace,
-    real angle=0,
-    pair offset=0,
-    bool rotated=true,
-    pen p=currentpen,
-    frame uniform=newframe,
-    bool above=true
+    real size=stickmarkersize, real space=stickmarkerspace,
+    real angle=0, pair offset=0,
+    bool rotated=true, pen p=currentpen,
+    frame uniform=newframe, bool above=true
 ) { return StickIntervalMarker(i, n, size, space, angle, offset, rotated, p, uniform, above); }
 
 real tildemarkersize = 1mm;
 
 marker TildeMarker(
     int i=1, int n=1,
-    real size=tildemarkersize,
-    real space=0,
-    real angle=0,
-    pair offset=0,
-    bool rotated=true,
-    pen p=currentpen,
-    frame uniform=newframe,
-    bool above=true
+    real size=tildemarkersize, real space=0,
+    real angle=0, pair offset=0,
+    bool rotated=true, pen p=currentpen,
+    frame uniform=newframe, bool above=true
 ) { return TildeIntervalMarker(i, n, size, space, angle, offset, rotated, p, uniform, above); }
 
 real crossmarkersize = 1mm;
 
 marker CrossMarker(
     int i=1, int n=3,
-    real size=crossmarkersize,
-    real space=0,
-    real angle=0,
-    pair offset=0,
-    bool rotated=true,
-    pen p=currentpen,
-    frame uniform=newframe,
-    bool above=true
+    real size=crossmarkersize, real space=0,
+    real angle=0, pair offset=0,
+    bool rotated=true, pen p=currentpen,
+    frame uniform=newframe, bool above=true
 ) { return CrossIntervalMarker(i, n, size, space, angle, offset, rotated, p, uniform, above); }
 
-
-// Return the pair (left, bottom) for the bounding box of paths.
-pair min(path[] paths) {
-    Pair glob_min, loc_min;
-    for (var p : paths) {
-        loc_min = Pair(min(p));
-        if (loc_min.x < glob_min.x) glob_min.x = loc_min.x;
-        if (loc_min.y < glob_min.y) glob_min.y = loc_min.y;
-    }
-    return (pair) glob_min;
-}
-
-// Return the pair (right, top) for the bounding box of paths.
-pair max(path[] paths) {
-    Pair glob_max, loc_max;
-    for (var p : paths) {
-        loc_max = Pair(max(p));
-        if (loc_max.x > glob_max.x) glob_max.x = loc_max.x;
-        if (loc_max.y > glob_max.y) glob_max.y = loc_max.y;
-    }
-    return (pair) glob_max;
-}
 
 real width(path[] paths) { return (max(paths) - min(paths)).x; }
 
@@ -316,20 +300,26 @@ triple findPoint(triple A, triple B, real x=nan, real y=nan, real z=nan) {
     return A + q * t;
 }
 
-
-void extensionLine(pair pFrom, real angle=0, real length, int bardir=1, Label L="") {
-    real barwidth = width(texpath(L));
+path ExtensionLine(
+    pair pFrom,   // точка, от которой будет вынос
+    real angle=0, // угол выноса
+    real length,  // длина выносной линии
+    int bardir=1, // направление полки относительно выносной линии (-1 или 1)
+    Label L=""
+) {
+    frame f;
+    label(f, L);
+    real barwidth = (max(f) - min(f)).x;
 
     pair
     barvec = scale(barwidth * sgn(bardir)) * right,
     extvec = scale(length) * rotate(angle) * right;
 
-    path
-    extline = shift(pFrom) * ((0, 0)--extvec),
-    barline = shift(point(extline, 1)) * ((0, 0)--barvec);
-
-    draw(extline--barline);
-    label(L, position=point(barline, .5), align=N);
+    return pFrom--(pFrom + extvec)--(pFrom + extvec + barvec);
 }
 
-triple O = (0, 0, 0);
+void drawExtensionLine(pair pFrom, real angle=0, real length, int bardir=1, Label L="") {
+    path line = ExtensionLine(pFrom, angle, length, bardir, L);
+    draw(line);
+    label(L, position=point(line, 1.5), align=N);
+}

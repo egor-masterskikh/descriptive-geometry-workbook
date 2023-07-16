@@ -197,7 +197,7 @@ dot(B2, L=MyLabel("B₂", align=N));
 dot(C2, L=MyLabel("C₂", align=E));
 dot(H2, L=MyLabel("1₂", align=NW));
 
-extensionLine(
+drawExtensionLine(
     pFrom=A4,
     angle=degrees(B4 - A4) + 25,
     length=length(B4 - A4) + fontsize,

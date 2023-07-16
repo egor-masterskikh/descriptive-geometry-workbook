@@ -182,7 +182,7 @@ draw(T1_tf2--U1_tf2--V1_tf2--cycle, p=linewidth(baselinewidth));
 draw(T1_tf2--H1_tf2, L=MyLabel("\Bar{h}₁", position=.6, align=W));
 pair pFrom = point(T1_tf2--point(U1_tf2--H1_tf2, .5), .5);
 dot(pFrom, filltype=Fill, p=linewidth(baselinewidth));
-extensionLine(
+drawExtensionLine(
     pFrom,
     angle=45,
     length=arclength(pFrom--extension(pFrom, pFrom + dir(45), T1_tf2, U1_tf2)) + fontsize,

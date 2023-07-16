@@ -101,7 +101,7 @@ drawMyArrowHead(E1_tf1--extension(E1_tf1, E2_tf1, (0, 0), right), position=.75);
 
 draw(D1_tf1--E1_tf1, p=linewidth(baselinewidth), marker=StickMarker());
 draw(D2_tf1--E2_tf1, p=linewidth(baselinewidth), marker=TildeMarker(offset=fontsize));
-extensionLine(
+drawExtensionLine(
     point(D2_tf1--E2_tf1, .46), angle=135,
     length=abs((E2_tf1 - D2_tf1).y) + 2 * fontsize,
     L=MyLabel("н.в. DE")
