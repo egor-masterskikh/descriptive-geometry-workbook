@@ -335,12 +335,13 @@ struct Path3Part {
     }
 }
 
+path3 operator cast(Path3Part part) { return part.p; }
+
 struct Path3 {
     Path3Part[] parts;
 
     void operator init(path3 p, path3 sf) {
         // моменты пересечения кривой с поверхностью и проекции кривой с проекцией поверхности
-
         real[][] times_ = transpose(intersections(p, surface(sf, planar=true)));
         real[] times;
         if (times_.length > 0) times = times_[0];
@@ -390,6 +391,7 @@ struct Path3 {
             bool visible = true;  // флаг видимости точки p_rp
 
             if (sf_rps.length > 0) {
+                // предполагается, что точка, соответствующая проекции точки p_rp, единственна для поверхности
                 triple sf_rp = sf_rps[0];
                 // currentprojection.normal направлена к наблюдателю
                 visible = dot(sf_rp - p_rp, -currentprojection.normal) > 0;
@@ -397,5 +399,18 @@ struct Path3 {
 
             this.parts.push(Path3Part(subpath(p, cur_t, next_t), visible));
         }
+    }
+}
+
+pen gostdashed = linetype(new real[] {2mm, 1mm}, offset=-1mm, scale=false);
+
+void draw(
+    picture pic=currentpicture, Path3 g,
+    light light=nolight, string name="",
+    render render=defaultrender
+) {
+    for (Path3Part part : g.parts) {
+        pen p = part.visible ? solid : gostdashed;
+        draw(pic=pic, part, p=p, light=light, name=name, render=render);
     }
 }
