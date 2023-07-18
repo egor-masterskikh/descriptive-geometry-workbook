@@ -323,3 +323,79 @@ void drawExtensionLine(pair pFrom, real angle=0, real length, int bardir=1, Labe
     draw(line);
     label(L, position=point(line, 1.5), align=N);
 }
+
+
+struct Path3Part {
+    path3 p;
+    bool visible;
+
+    void operator init(path3 p, bool visible=true) {
+        this.p = p;
+        this.visible = visible;
+    }
+}
+
+struct Path3 {
+    Path3Part[] parts;
+
+    void operator init(path3 p, path3 sf) {
+        // моменты пересечения кривой с поверхностью и проекции кривой с проекцией поверхности
+
+        real[][] times_ = transpose(intersections(p, surface(sf, planar=true)));
+        real[] times;
+        if (times_.length > 0) times = times_[0];
+
+        real[][] projtimes_ = transpose(intersections(project(p), project(sf)));
+        real[] projtimes;
+        if (projtimes_.length > 0) projtimes = projtimes_[0];
+
+        // добавляем момент пересечения проекции кривой и проекции поверхности
+        // только если он не совпадает с моментом пересечения кривой с поверхностью
+        bool unique;
+        for (int j = 0; j < projtimes.length; ++j) {
+            unique = true;
+            for (int i = 0; i < times.length; ++i)
+                if (times[i] == projtimes[j]) {
+                    unique = false;
+                    break;
+                }
+            if (unique) times.push(projtimes[j]);
+        }
+
+        times = sort(times);
+
+        if (times[0] != 0) times.insert(0, 0);
+
+        // проекционная линия (предполагается ортогональная проекция)
+        path3 projline = (
+            scale3(max(textwidth, textheight)) 
+            * shift(-currentprojection.normal / 2)
+            * (O--currentprojection.normal)
+        );
+
+        real cur_t, next_t;
+
+        for (int i = 0; i < times.length; ++i) {
+            cur_t = times[i];
+            next_t = (i != times.length - 1) ? times[i + 1] : length(p);
+
+            // точка на кривой справа от точки пересечения
+            triple p_rp = point(p, (cur_t + next_t) / 2);
+
+            // точки на поверхности, соответствующие проекции точки p_rp
+            triple[] sf_rps = intersectionpoints(
+                shift(p_rp) * projline,
+                surface(sf)
+            );
+            bool visible = true;  // флаг видимости точки p_rp
+
+            if (sf_rps.length > 0) {
+                triple sf_rp = sf_rps[0];
+                // currentprojection.normal направлена к наблюдателю
+                visible = dot(sf_rp - p_rp, -currentprojection.normal) > 0;
+            }
+
+            this.parts.push(Path3Part(subpath(p, cur_t, next_t), visible));
+        }
+    }
+}
