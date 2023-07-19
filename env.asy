@@ -183,7 +183,7 @@ void drawMyArrowHead(
 
 
 path3 MyArrowHead3(
-    path3 g, triple normal=Z, real position=1,
+    path3 g, triple normal=normal(g), real position=1,
     real size=ahsize, real angle=ahangle
 ) {
     position = reltime(g, position);
@@ -197,7 +197,7 @@ path3 MyArrowHead3(
 
 void drawMyArrowHead3(
     picture pic=currentpicture,
-    path3 g, triple normal=Z, real position=1,
+    path3 g, triple normal=normal(g), real position=1,
     real size=ahsize, real angle=ahangle
 ) { draw(pic, MyArrowHead3(g, normal, position, size, angle)); }
 
@@ -279,6 +279,10 @@ real height(path[] paths) { return (max(paths) - min(paths)).y; }
 
 transform shiftParallel(pair vec, real distance) {
     return shift(scale(distance) * unit(vec));
+}
+
+transform3 shiftParallel(triple vec, real distance) {
+    return shift(scale3(distance) * unit(vec));
 }
 
 transform shiftPerp(pair vec, real distance) {

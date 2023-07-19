@@ -45,7 +45,7 @@ triple A2_tf = planeproject(-Y) * A_tf;
 
 
 draw(plane1);
-label(project(MyLabel("Π₁", sl=false, align=-X - Y), -X, -Y), position=point(plane1, 2));
+label(project(MyLabel("Π₁", sl=false, align=-X - 2Y), -X, -Y), position=point(plane1, 2));
 
 draw(plane2);
 label(project(MyLabel("Π₂", sl=false, align=-X - Z), -X, Z), position=point(plane2, 2));
@@ -87,7 +87,7 @@ for (int i = 0; i < 3; ++i) {
         if (i == 1) {
             path3 Rline = cO1--rotate(-55, cO1, cO1 + normal(circ1)) * point(circ1, 0);
             draw(pic=curpic, Rline);
-            drawMyArrowHead3(pic=curpic, Rline);
+            drawMyArrowHead3(pic=curpic, Rline, normal=Z);
             label(
                 pic=curpic,
                 project(MyLabel("R", align=-X - .5Y), -X, -Y, P=curproj),
