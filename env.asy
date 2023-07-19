@@ -340,7 +340,7 @@ path3 operator cast(Path3Part part) { return part.p; }
 struct Path3 {
     Path3Part[] parts;
 
-    void operator init(path3 p, path3 sf) {
+    void operator init(path3 p, path3 sf, projection P=currentprojection) {
         // моменты пересечения кривой с поверхностью и проекции кривой с проекцией поверхности
         real[][] times_ = transpose(intersections(p, surface(sf, planar=true)));
         real[] times;
@@ -369,9 +369,7 @@ struct Path3 {
 
         // проекционная линия (предполагается ортогональная проекция)
         path3 projline = (
-            scale3(max(textwidth, textheight)) 
-            * shift(-currentprojection.normal / 2)
-            * (O--currentprojection.normal)
+            scale3(max(textwidth, textheight)) * shift(-P.normal / 2) * (O--P.normal)
         );
 
         real cur_t, next_t;
@@ -393,8 +391,8 @@ struct Path3 {
             if (sf_rps.length > 0) {
                 // предполагается, что точка, соответствующая проекции точки p_rp, единственна для поверхности
                 triple sf_rp = sf_rps[0];
-                // currentprojection.normal направлена к наблюдателю
-                visible = dot(sf_rp - p_rp, -currentprojection.normal) > 0;
+                // P.normal направлена к наблюдателю
+                visible = dot(sf_rp - p_rp, -P.normal) > 0;
             }
 
             this.parts.push(Path3Part(subpath(p, cur_t, next_t), visible));
