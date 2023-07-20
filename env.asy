@@ -22,20 +22,9 @@ texpreamble(
 \font\gostsl = name:gost230481typeaslanted at \fsize
 \font\gostsls = name:gost230481typeaslanted at .7\fsize  % script size
 
-\def\stacktype{L}
+\renewcommand\bar[1]{\stackinset{c}{0pt}{b}{.75mm}{¯}{#1}}
 
-\renewcommand\bar[1]{%
-    \setstackgap{L}{.75mm}%
-    \stackon{#1}{¯}%
-}
-
-\newcommand\Bar[1]{%
-    \setstackgap{L}{.75mm}%
-    \stackon{#1}{%
-        \setstackgap{L}{.5mm}%
-        \stackon{¯}{¯}%
-    }%
-}
+\newcommand\Bar[1]{\stackinset{c}{0pt}{b}{1.25mm}{¯}{\bar{#1}}}
 """
 );
 

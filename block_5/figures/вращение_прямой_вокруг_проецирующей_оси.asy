@@ -17,17 +17,17 @@ triple Xm = scale3(x) * X;
 triple
 A = (.75x, .65y, .35z),
 B = (.5x, .3y, .7z);
-path3 l = shiftParallel(A - B, 3 * fontsize) * A--shiftParallel(B - A, 3 * fontsize) * B;
+path3 q = shiftParallel(A - B, 3 * fontsize) * A--shiftParallel(B - A, 3 * fontsize) * B;
 
 real
-A_t = arctime(l, length(A - point(l, 0))),
-B_t = arctime(l, length(B - point(l, 0)));
+A_t = arctime(q, length(A - point(q, 0))),
+B_t = arctime(q, length(B - point(q, 0)));
 
-path3 l_tf1 = rotate(-longitude(dir(l)), B, B + Z) * l;
-triple A_tf1 = point(l_tf1, A_t);
+path3 q_tf1 = rotate(-longitude(dir(q)), B, B + Z) * q;
+triple A_tf1 = point(q_tf1, A_t);
 
-path3 l_tf2 = rotate(-colatitude(dir(l_tf1)), A_tf1, A_tf1 + Y) * l_tf1;
-triple B_tf2 = point(l_tf2, B_t);
+path3 q_tf2 = rotate(-colatitude(dir(q_tf1)), A_tf1, A_tf1 + Y) * q_tf1;
+triple B_tf2 = point(q_tf2, B_t);
 
 path3
 i = planeproject(-Z) * B--shiftParallel(Z, 3 * fontsize) * B,
@@ -46,11 +46,11 @@ for (int ix = 0; ix < 2; ++ix) {
     curproj = projections[ix];
     curlbldirs = labeldirs[ix];
 
-    draw(curpic, l, p=linewidth(baselinewidth));
-    draw(curpic, l_tf1, p=linewidth(baselinewidth));
-    draw(curpic, l_tf2, p=linewidth(baselinewidth));
+    draw(curpic, q, p=linewidth(baselinewidth));
+    draw(curpic, q_tf1, p=linewidth(baselinewidth));
+    draw(curpic, q_tf2, p=linewidth(baselinewidth));
 
-    path3 A_rotmark = A{cross(dir(l), Z)}..A_tf1;
+    path3 A_rotmark = A{cross(dir(q), Z)}..A_tf1;
     draw(curpic, A_rotmark);
 
     Label CurLabel(string s, bool sl=true, align align=NoAlign) {
@@ -68,11 +68,12 @@ for (int ix = 0; ix < 2; ++ix) {
         label(curpic, CurLabel("A₁", align=-Y + X), position=A);
         draw(curpic, A--planeproject(-Y) * A);
         label(curpic, CurLabel("B₁ ≡ i₁ ≡ \bar{B}₁", align=Y - .8X), position=B);
-        label(curpic, CurLabel("l₁", align=X), position=point(l, 0));
+        label(curpic, CurLabel("q₁", align=X), position=point(q, 0));
 
         draw(curpic, B--planeproject(-Y) * B);
 
-        label(curpic, CurLabel("Δ₁ ≡ \bar{l}₁", align=-Y + .25X), position=point(l_tf1, 1));
+        label(curpic, CurLabel("Δ₁ ≡ \bar{q}₁", align=-Y + .25X), position=point(q_tf1, 1));
+
         label(curpic, CurLabel("\bar{A}₁ ≡ \Bar{B}₁ ≡ (\Bar{A}₁)", align=-X - Y), position=A_tf1);
 
         drawMyArrowHead3(curpic, A_rotmark, position=.5);
@@ -89,16 +90,16 @@ for (int ix = 0; ix < 2; ++ix) {
         label(curpic, CurLabel("A₂", align=Z + X), position=A);
         draw(curpic, A--planeproject(-Z) * A);
         label(curpic, CurLabel("B₂ ≡ \bar{B}₂", align=4X), position=B);
-        label(curpic, CurLabel("l₂", align=X), position=point(l, 0));
+        label(curpic, CurLabel("q₂", align=X), position=point(q, 0));
         draw(curpic, i);
         label(curpic, CurLabel("i₂", align=-X + .25Z), position=point(i, 1));
 
         drawMyArrowHead3(curpic, A_rotmark, normal=Y, position=.6);
-        label(curpic, CurLabel("Σ₂", align=Z), position=point(A--A_tf1, .35));
-        label(curpic, CurLabel("\bar{l}₂", align=Z), position=point(l_tf1, 1));
+        label(curpic, CurLabel("Σ₂", align=Z), position=point(A_rotmark, .3));
+        label(curpic, CurLabel("\bar{q}₂", align=Z), position=point(q_tf1, 1));
         label(curpic, CurLabel("\bar{A}₂ ≡ j ≡ \Bar{A}₂", align=-X + .6Z), position=A_tf1);
 
-        path3 B_rotmark = B{cross(dir(l_tf1), Y)}..B_tf2;
+        path3 B_rotmark = B{cross(dir(q_tf1), Y)}..B_tf2;
         draw(curpic, B_rotmark);
         drawMyArrowHead3(curpic, B_rotmark, position=.75);
         path3 Rline = A_tf1--point(B_rotmark, .5);
@@ -109,7 +110,7 @@ for (int ix = 0; ix < 2; ++ix) {
         draw(curpic, A_tf1--planeproject(-Z) * A_tf1);
 
         dot(curpic, B_tf2, L=CurLabel("\Bar{B}₂", align=-X));
-        label(curpic, L=CurLabel("\Bar{l}₂", align=-X), position=point(A_tf1--B_tf2, .5));
+        label(curpic, L=CurLabel("\Bar{q}₂", align=-X), position=point(A_tf1--B_tf2, .5));
     }
 
     dot(curpic, A);
