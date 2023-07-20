@@ -295,7 +295,7 @@ triple findPoint(triple A, triple B, real x=nan, real y=nan, real z=nan) {
 
 path ExtensionLine(
     pair pFrom,   // точка, от которой будет вынос
-    real angle=0, // угол выноса
+    real angle=45, // угол выноса
     real length,  // длина выносной линии
     int bardir=1, // направление полки относительно выносной линии (-1 или 1)
     Label L=""
@@ -311,10 +311,37 @@ path ExtensionLine(
     return pFrom--(pFrom + extvec)--(pFrom + extvec + barvec);
 }
 
-void drawExtensionLine(pair pFrom, real angle=0, real length, int bardir=1, Label L="") {
+path3 ExtensionLine(
+    triple pFrom, real angle=45,
+    triple barvec=-X, triple normal=Z,
+    real length, Label L=""
+) {
+    frame f;
+    label(f, L);
+    real barwidth = (max(f) - min(f)).x;
+
+    barvec = scale3(barwidth) * unit(barvec);
+
+    triple extvec = scale3(length) * rotate(angle, normal) * unit(barvec);
+
+    return pFrom--(pFrom + extvec)--(pFrom + extvec + barvec);
+}
+
+void drawExtensionLine(pair pFrom, real angle=45, real length, int bardir=1, Label L="") {
     path line = ExtensionLine(pFrom, angle, length, bardir, L);
     draw(line);
     label(L, position=point(line, 1.5), align=N);
+}
+
+void drawExtensionLine(
+    picture pic=currentpicture,
+    triple pFrom, real angle=45,
+    triple barvec=-X, triple normal=Z,
+    real length, Label L=""
+) {
+    path3 line = ExtensionLine(pFrom, angle, barvec, normal, length, L);
+    draw(pic, line);
+    label(pic, L, position=point(line, 1.5));
 }
 
 
@@ -404,4 +431,8 @@ void draw(
         pen p = part.visible ? solid : gostdashed;
         draw(pic=pic, part, p=p, light=light, name=name, render=render);
     }
+}
+
+path3 arc(path3 axis, triple p1, triple p2) {
+    return p1{cross(point(axis, 0) - p1, dir(axis))}..p2;
 }
