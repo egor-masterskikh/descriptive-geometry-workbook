@@ -436,3 +436,24 @@ void draw(
 path3 arc(path3 axis, triple p1, triple p2) {
     return p1{cross(point(axis, 0) - p1, dir(axis))}..p2;
 }
+
+void extdot(
+    picture pic=currentpicture, triple v, material p=linewidth(baselinewidth),
+    light light=nolight, string name="", render render=defaultrender
+) {
+    // копия определения функции dot из модуля three_surface.asy
+    pen q = (pen)p;
+    real size = .5 * linewidth(dotsize(q) + q);
+    pic.add(new void(frame f, transform3 t, picture pic, projection P) {
+        triple V = t * v;
+        transform3 T = shift(v) * scale3(size);
+        draw(f, T * unitsphere, p, light, name, render, P);
+        if (pic != null)
+            dot(
+                pic, project(V, P.t), q,
+                filltype=Fill  // локальное изменение типа заполнения
+            );
+    }, true);
+    triple R = size * (1, 1, 1);
+    pic.addBox(v, v, -R, R);
+}

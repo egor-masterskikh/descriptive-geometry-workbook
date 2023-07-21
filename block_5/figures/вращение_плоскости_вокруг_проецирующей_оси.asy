@@ -157,6 +157,16 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
         label(curpic, CurLabel("\Bar{N}₁", align=-X), position=N_tf2);
         label(curpic, CurLabel("\Bar{1}₁", align=-X + .5Y), position=H_tf2);
         label(curpic, CurLabel("\Bar{h}₁", align=X), position=point(h_tf2, 1));
+
+        path3 line = point(h_tf2, intersect(
+            project(h_tf2, curproj), project(N_tf1--N_tf2, curproj)
+        )[0])--point(N_tf2--H_tf2, .5);
+        triple pFrom = point(line, .6);
+        extdot(curpic, pFrom);
+        drawExtensionLine(
+            curpic, pFrom, angle=-45, barvec=-X,
+            length=arclength(project(line, curproj)), L=CurLabel("н.в.", align=-Y)
+        );
     }
     else if (proj_i == 1) {
         drawMyArrowHead3(curpic, L_rotmark1, normal=Y, position=.5);
