@@ -111,7 +111,7 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
         label(curpic, CurLabel("\bar{W}₁", align=X - .25Y), position=W_tf);
         label(
             curpic,
-            CurLabel("Σ^W_1", align=.1 * (rotate(90, Z) * unit(cO - W_tf))),
+            CurLabel("Λ₁", align=.75 * (rotate(90, Z) * unit(cO - W_tf))),
             position=relpoint(cO--W_tf, .4)
         );
 
@@ -119,7 +119,7 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
     }
     else if (proj_i == 1) {
         label(curpic, CurLabel("W₂", align=Z), position=W);
-        label(curpic, CurLabel("Δ₂ ≡ h₂", align=.75Z - .25X), position=relpoint(h, 0));
+        label(curpic, CurLabel("Σ₂ ≡ h₂", align=.75Z - .25X), position=relpoint(h, 0));
         label(curpic, CurLabel("O₂", align=Z + .5X), position=cO);
         triple W_proj = planeproject(Y, O=cO) * W;
         draw(curpic, cO--W_proj);
