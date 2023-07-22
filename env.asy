@@ -25,6 +25,8 @@ texpreamble(
 \renewcommand\bar[1]{\stackinset{c}{0pt}{b}{.75mm}{¯}{#1}}
 
 \newcommand\Bar[1]{\stackinset{c}{0pt}{b}{1.25mm}{¯}{\bar{#1}}}
+
+\renewcommand\tilde[1]{\stackinset{c}{0pt}{b}{.75mm}{˜}{#1}}
 """
 );
 
@@ -149,6 +151,7 @@ Pair[] operator cast(Pairs ps) { return ps.arr; }
 
 real ahsize = 3.5mm;
 real ahangle = 10;
+real ahwidth = 2 * ahsize * Sin(ahangle);
 
 arrowbar MyArrow(
     position position=EndPoint, filltype filltype=null,
@@ -345,6 +348,62 @@ void drawExtensionLine(
 }
 
 
+/*
+A, B -- координаты точек, от которых будет сделан вынос
+normal -- нормаль к выносным линиям
+angle -- угол, соответствующий направлению выноса относительно базовой линии
+distance -- длина короткой выносной линии
+*/
+path3 DimLine(
+    picture pic=currentpicture, 
+    triple A, triple B, triple normal=Z,
+    real angle=90, real distance
+) {
+    distance = abs(distance);
+
+    triple
+    shortExtLineVec = scale3(distance) * rotate(angle, normal) * unit(B - A),
+    longExtLineVec = (
+        scale3(1 + length(B - A) * abs(Cos(angle)) / length(shortExtLineVec))
+        * shortExtLineVec
+    ),
+    dimLineVec = (
+        scale3(length(B - A) * Sin(angle)) * rotate(-90, normal)
+        * unit(shortExtLineVec)
+    );
+
+    path3
+    shortExtLine = (
+        shift(A) * scale3(1 + ahwidth / length(shortExtLineVec))
+        * (O--shortExtLineVec)
+    ),
+    longExtLine = (
+        shift(B) * scale3(1 + ahwidth / length(longExtLineVec))
+        * (O--longExtLineVec)
+    ),
+    dimLine = shift(A + shortExtLineVec) * (O--dimLineVec);
+
+    draw(pic, shortExtLine);
+    draw(pic,longExtLine);
+
+    return dimLine;
+}
+
+path3 drawDimLine(
+    picture pic=currentpicture,
+    triple A, triple B, triple normal=Z,
+    real angle=90, real distance,
+    Label L="", real position=.5
+) {
+    path3 dimLine = DimLine(pic, A, B, Y, angle, distance);
+    draw(pic, dimLine);
+    drawMyArrowHead3(pic, reverse(dimLine), normal=normal, position=1);
+    drawMyArrowHead3(pic, dimLine, normal=normal, position=1);
+    label(pic, L, position=point(dimLine, position));
+    return dimLine;
+}
+
+
 struct Path3Part {
     path3 p;
     bool visible;
@@ -437,6 +496,10 @@ path3 arc(path3 axis, triple p1, triple p2) {
     return p1{cross(point(axis, 0) - p1, dir(axis))}..p2;
 }
 
+triple bisector(triple u, triple v) {
+    return relpoint(arc(O, unit(u), unit(v)), .5);
+}
+
 void extdot(
     picture pic=currentpicture, triple v, material p=linewidth(baselinewidth),
     light light=nolight, string name="", render render=defaultrender
@@ -456,4 +519,39 @@ void extdot(
     }, true);
     triple R = size * (1, 1, 1);
     pic.addBox(v, v, -R, R);
+}
+
+triple min(... triple[] ps) {
+    triple min_p = (inf, inf, inf);
+    for (var p : ps)
+        if (length(p) < length(min_p)) min_p = p;
+    return min_p;
+}
+
+projection[] projections = {TopView, FrontView};
+triple[][] labeldirs = {{-X, -Y}, {-X, Z}};
+
+
+typedef Label CurLabel(
+    string s, bool sl=true, align align=NoAlign, filltype filltype=NoFill
+);
+
+CurLabel getCurLabel(triple lbldir1, triple lbldir2, projection P) {
+    return new Label(
+        string s, bool sl=true, align align=NoAlign, filltype filltype=NoFill
+    ) {
+        return project(
+            MyLabel(s=s, sl=sl, align=align, filltype=filltype),
+            lbldir1, lbldir2, P=P
+        );
+    };
+}
+
+
+void perpendicular(picture pic=currentpicture, triple A, triple B, triple C) {
+    triple
+    v1 = unit(A - B),
+    v2 = unit(C - B);
+    path3 perpmark = shift(B) * scale3(perpmarksize) * (v1--(v1 + v2)--v2);
+    draw(pic, perpmark);
 }

@@ -15,8 +15,8 @@ z = figheight - y;
 triple Xm = scale3(x) * X;
 
 triple
-A = (.75x, .65y, .35z),
-B = (.5x, .3y, .7z);
+A = (.8x, .65y, .35z),
+B = (.55x, .3y, .7z);
 path3 q = shiftParallel(A - B, 3 * fontsize) * A--shiftParallel(B - A, 3 * fontsize) * B;
 
 real
@@ -63,7 +63,7 @@ for (int ix = 0; ix < 2; ++ix) {
     if (ix == 0) {
         draw(curpic, O--Xm);
         drawMyArrowHead3(curpic, O--Xm, normal=Z);
-        label(curpic, CurLabel("X₁₂", align=-Y), position=Xm);
+        label(curpic, CurLabel("X₁₂", align=-Y - .5X), position=Xm);
 
         label(curpic, CurLabel("A₁", align=-Y + X), position=A);
         draw(curpic, A--planeproject(-Y) * A);
@@ -90,7 +90,7 @@ for (int ix = 0; ix < 2; ++ix) {
         label(curpic, CurLabel("A₂", align=Z + X), position=A);
         draw(curpic, A--planeproject(-Z) * A);
         label(curpic, CurLabel("B₂ ≡ \bar{B}₂", align=4X), position=B);
-        label(curpic, CurLabel("q₂", align=X), position=point(q, 0));
+        label(curpic, CurLabel("q₂", align=Z + .5X), position=point(q, 0));
         draw(curpic, i);
         label(curpic, CurLabel("i₂", align=-X + .25Z), position=point(i, 1));
 

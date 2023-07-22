@@ -8,7 +8,7 @@ triple[][] labeldirs = {{-X, -Y}, {-X, Z}};
 
 real
 figwidth = .7 * textwidth,
-figheight = .35 * textheight;
+figheight = .3 * textheight;
 
 real
 x = figwidth,
@@ -43,7 +43,7 @@ M_tf1 = point(Psi_tf1, 1),
 N_tf1 = point(Psi_tf1, 2),
 H_tf1 = point(Psi_tf1, H_t);
 
-path3 j = planeproject(-Y) * L_tf1--shiftParallel(Y, 3 * fontsize) * L_tf1;
+path3 j = planeproject(-Y) * L_tf1--L_tf1;
 
 path3 Psi_tf2 = rotate(-colatitude(normal(Psi_tf1)) + 180, point(j, 0), point(j, 1)) * Psi_tf1;
 triple
@@ -135,7 +135,11 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
         label(curpic, CurLabel("\bar{1}₁", align=X + .8Y), position=H_tf1);
         label(curpic, CurLabel("\bar{h}₁", align=-.5X), position=point(h_tf1, 1));
 
-        label(curpic, CurLabel("j₁", align=X), position=point(j, 1));
+        label(curpic, CurLabel("j₁", align=-X), position=point(subpath(
+            j,
+            intersect(project(j, curproj), project(M_rotmark2, curproj))[0],
+            intersect(project(j, curproj), project(N_rotmark2, curproj))[0]
+        ), .5));
 
         drawMyArrowHead3(curpic, normal=Z, position=.4, subpath(
             M_rotmark2,
@@ -192,7 +196,7 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
 
         label(curpic, CurLabel("i₂", align=X - .25Z), position=point(i, 1));
 
-        label(curpic, CurLabel("\bar{L}₂ ≡ j₂ ≡ \Bar{L}₂", align=Z), position=L_tf1);
+        label(curpic, CurLabel("\bar{L}₂ ≡ j₂ ≡ \Bar{L}₂", align=Z), position=L_tf1);
         label(curpic, CurLabel("\bar{N}₂", align=-Z + .75X), position=N_tf1);
 
         triple L1_tf1 = planeproject(-Z) * L_tf1;
@@ -208,7 +212,7 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
             length(N_rotmark2)
         ));
 
-        label(curpic, CurLabel("\Bar{1}₂ ≡ (\Bar{M}₂)", align=Z - .25X), position=M_tf2);
+        label(curpic, CurLabel("\Bar{1}₂ ≡ (\Bar{M}₂)", align=Z - .25X), position=M_tf2);
         label(curpic, CurLabel("\Bar{N}₂", align=-X), position=N_tf2);
     }
 
