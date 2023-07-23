@@ -129,8 +129,9 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
             position=point(cO--W_proj, .6)
         );
         drawDimLine(
-            curpic, W_proj, cO, normal=Y,
-            angle=colatitude(W_proj - cO) + 90, distance=3 * fontsize,
+            curpic, W, cO, distance=5 * fontsize,
+            normal=rotate(longitude(W - cO), Z) * Y,
+            angle=180 + latitude(W - cO),
             L=rotate(-90) * CurLabel("δZ_{WO}", align=.75X)
         );
 

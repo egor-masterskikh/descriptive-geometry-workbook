@@ -18,9 +18,9 @@ Ym = scale3(y) * Y,
 Zm = scale3(z) * Z;
 
 triple
-S = (.83x, .7y, .23z),
-T = (.6x, .85y, .85z),
-U = (.25x, .4y, .43z),
+S = (.86x, .46y, .23z),
+T = (.73x, .13y, .85z),
+U = (.26x, .15y, .4z),
 H = findPoint(T, U, z=S.z);
 
 triple h_dir = unit(H - S);
@@ -28,8 +28,8 @@ path3 h = S--H;
 
 triple T_proj = planeproject(Z, O=H) * T;
 triple cO = planeproject(rotate(90, Z) * h_dir, O=H) * T_proj;
-triple T_tf = rotate(180 - latitude(T - cO), H, cO) * T;
-triple T_tilde = rotate(90, cO, T_proj) * T;
+triple T_tf = rotate(180 - abs(latitude(T - cO)), cO, H) * T;
+triple T_tilde = rotate(-90, cO, T_proj) * T;
 
 triple U_proj = planeproject(Z, O=H) * U;
 triple U_tf = (
@@ -39,8 +39,6 @@ triple U_tf = (
 triple cO_tmp = intersectionpoint(U_proj--U_tf, h);
 
 path3 h_extline = H--shiftParallel(H - cO, 2 * fontsize) * H;
-
-triple[] points = {S, T, U, H, cO};
 
 picture[] pictures = {new picture, new picture};
 
@@ -61,7 +59,7 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
     draw(curpic, cO--T);
     draw(curpic, cO--T_tf);
 
-    for (var p: points)
+    for (var p: new triple[] {T, U, H, cO})
         draw(curpic, p--planeproject(projections[(proj_i + 1) % 2].normal) * p);
 
     CurLabel = getCurLabel(curlbldirs[0], curlbldirs[1], P=curproj);
@@ -72,11 +70,17 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
         label(curpic, CurLabel("X₁₂", align=-Y - .5X), position=Xm);
         // draw(curpic, O--Ym);
 
-        label(curpic, CurLabel("T₁", align=1.75 * bisector(T_proj - cO, U - T)), position=T);
-        label(curpic, CurLabel("U₁", align=-.5X + .5Y), position=U);
+        label(curpic, CurLabel("T₁", align=-.5Y + .5X), position=T);
+        label(curpic, CurLabel("U₁", align=-.5X - .5Y), position=U);
+        label(
+            curpic,
+            CurLabel("h₁", align=.5 * (rotate(90, Z) * h_dir)),
+            position=point(h_extline, 1)
+        );
         label(curpic, CurLabel("1₁", align=Y), position=H);
         drawExtensionLine(
-            curpic, cO, angle=-20, barvec=X, length=1.5 * fontsize,
+            curpic, cO, barvec=-X, length=3 * fontsize,
+            angle=1.6 * (longitude(bisector(T_tf - cO, H - cO)) - 180),
             L=CurLabel("O₁", align=-.25Y)
         );
 
@@ -84,35 +88,37 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
 
         draw(curpic, T--T_proj);
 
-        path3 Sigma_extline = T_proj--shiftParallel(T_proj - cO, 3 * fontsize) * T_proj;
-        draw(curpic, Sigma_extline);
+        path3 SigmaT_extline = T_tf--shiftParallel(T_tf - cO, 3 * fontsize) * T_tf;
+        draw(curpic, SigmaT_extline);
         label(
             curpic,
-            CurLabel("Σ^T_1", align=.75 * (rotate(100, Z) * dir(Sigma_extline))),
-            position=relpoint(Sigma_extline, 1)
+            CurLabel("Σ^T_1", align=.5 * (rotate(90, Z) * unit(T_tf - cO))),
+            position=relpoint(SigmaT_extline, 1)
         );
 
         draw(curpic, cO--T_proj--T_tilde--cycle);
-        perpendicular(curpic, T_proj, cO, H);
+        perpendicular(curpic, T_tf, cO, S);
         perpendicular(curpic, cO, T_proj, T_tilde);
+        // label(
+        //     curpic,
+        //     rotate(longitude(T - cO) + 90)
+        //     * CurLabel("R^T_1", align=.5 * unit(T_tilde - T_proj)),
+        //     position=point(cO--T_proj, .55)
+        // );
         label(
             curpic,
-            rotate(longitude(cO - T_proj) + 90)
-             * CurLabel("R^T_1", align=.01 * unit(T_tilde - T_proj)),
-            position=point(cO--T_proj, .4)
+            CurLabel("R^T", align=.75 * (rotate(-90, Z) * unit(T_tilde - cO))),
+            position=point(cO--T_tilde, .58)
         );
         label(
             curpic,
-            CurLabel("R^T", align=.01 * (rotate(90, Z) * unit(cO - T_tilde))),
-            position=point(cO--T_tilde, .7)
+            rotate(longitude(T_tilde - T))
+            * CurLabel("δZ_{OT}", align=.5 * unit(T_proj - cO)),
+            position=point(T_proj--T_tilde, .5)
         );
 
-        triple pFrom = point(T--T_tilde, .75);
-        extdot(curpic, pFrom);
-        drawExtensionLine(
-            curpic, pFrom, angle=-60, barvec=-X, length=1.6 * fontsize,
-            L=CurLabel("δZ_{OT}", align=-.5Y)
-        );
+        path3 S_projline = S--planeproject(Y) * S;
+        draw(curpic, subpath(S_projline, 0, .6 * intersect(S_projline, cO--T_tilde)[0]));
 
         path3 T_rotmark = arc(cO, T_tilde, T_tf);
         draw(curpic, T_rotmark);
@@ -131,17 +137,36 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
         drawMyArrowHead3(curpic, cO_tmp--U_tf, normal=Z, position=1);
         perpendicular(curpic, cO, cO_tmp, U_tf);
 
-        label(
-            curpic,
-            CurLabel("h₁", align=.5 * (rotate(90, Z) * h_dir)),
-            position=point(h_extline, 1)
-        );
-
         draw(curpic, S--T_tf--U_tf--cycle, p=linewidth(baselinewidth));
 
-        label(curpic, CurLabel("\tilde{T}", align=X + .5Y), position=T_tilde);
-        label(curpic, CurLabel("\bar{T}₁", align=-.75Y), position=T_tf);
-        label(curpic, CurLabel("\bar{U}₁", align=-.5Y), position=U_tf);
+        label(curpic, CurLabel("\tilde{T}", align=X), position=T_tilde);
+        label(
+            curpic,
+            CurLabel("\bar{T}₁", align=1.5 * bisector(T_tf - cO, H - T_tf)),
+            position=T_tf
+        );
+        label(
+            curpic,
+            CurLabel("\bar{U}₁", align=1.25 * bisector(H - U_tf, U_tf - cO_tmp)),
+            position=U_tf
+        );
+
+        path3 SigmaU_extline = U_tf--shiftParallel(U_tf - cO_tmp, 3 * fontsize) * U_tf;
+        draw(curpic, SigmaU_extline);
+        label(
+            curpic,
+            CurLabel("Σ^U_1", align=.5 * (rotate(90, Z) * unit(U_tf - cO_tmp))),
+            position=relpoint(SigmaU_extline, 1)
+        );
+
+        triple pFrom = point(
+            intersectionpoint(S--U_tf, cO--T_tf)--point(T_tf--U_tf, .5), .75
+        );
+        extdot(curpic, pFrom);
+        drawExtensionLine(
+            curpic, pFrom, barvec=-X, angle=-45, length=3.5 * fontsize,
+            L=CurLabel("н.в.", align=-.75Y)
+        );
 
         dot(curpic, T_proj);
         dot(curpic, T_tilde);
@@ -155,23 +180,24 @@ for (int proj_i = 0; proj_i < 2; ++proj_i) {
         label(curpic, CurLabel("U₂", align=Z - .5X), position=U);
         label(curpic, CurLabel("1₂", align=Z), position=H);
         label(curpic, CurLabel("h₂", align=.5Z), position=point(h_extline, 1));
-        
-        label(curpic, CurLabel("O₂", align=.5X - .5Z), position=cO);
+        label(curpic, CurLabel("O₂", align=-.5Z -.5X), position=cO);
+
+        draw(curpic, subpath(S--planeproject(Z) * S, 0, .75));
 
         drawDimLine(
-            curpic, S, T, distance=2.5 * fontsize,
+            curpic, S, T, distance=3.5 * fontsize,
             normal=rotate(longitude(T - S), Z) * Y,
-            angle=180 - latitude(planeproject(Y, O=S) * T - S),
+            angle=180 + latitude(T - S),
             L=rotate(-90) * CurLabel("δZ_{OT}", align=.5X), position=.5
         );
         label(
             curpic,
-            CurLabel("R^T_2", align=.5 * (rotate(-90, Y) * unit(cO - T))),
-            position=point(T--cO, .65)
+            CurLabel("R^T_2", align=rotate(90, Y) * unit(cO - T)),
+            position=point(T--cO, .55)
         );
     }
 
-    for (var p: points)
+    for (var p: new triple[] {S, T, U, H, cO})
         dot(curpic, p);
 }
 

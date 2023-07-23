@@ -368,7 +368,7 @@ path3 DimLine(
         * shortExtLineVec
     ),
     dimLineVec = (
-        scale3(length(B - A) * Sin(angle)) * rotate(-90, normal)
+        scale3(length(B - A) * abs(Sin(angle))) * rotate(90, normal)
         * unit(shortExtLineVec)
     );
 
@@ -395,7 +395,7 @@ path3 drawDimLine(
     real angle=90, real distance,
     Label L="", real position=.5
 ) {
-    path3 dimLine = DimLine(pic, A, B, Y, angle, distance);
+    path3 dimLine = DimLine(pic=pic, A, B, normal=normal, angle=angle, distance=distance);
     draw(pic, dimLine);
     drawMyArrowHead3(pic, reverse(dimLine), normal=normal, position=1);
     drawMyArrowHead3(pic, dimLine, normal=normal, position=1);
